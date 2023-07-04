@@ -35,7 +35,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         super.viewDidLoad()
         DispatchQueue.main.async {
             self.navigationController?.navigationBar.barTintColor = UIColor(named: "background")
-            self.view.backgroundColor = UIColor(named: "cellbackground")
+            self.view.backgroundColor = UIColor(named: "background")
             self.profileCryptoTable.backgroundColor = UIColor(named: "background")
 
         }
