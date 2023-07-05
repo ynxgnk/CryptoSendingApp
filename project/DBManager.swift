@@ -10,7 +10,7 @@ import SQLite
 
 enum Tables: String {
     case transfers = "transfers"
-    case users = "users"
+    case users = "users1" //tyt
 }
 
 class DBManager {
@@ -117,7 +117,7 @@ class DBManager {
                 let email = element[2] as! String
                 let balance = element[3] as! Int64
                 
-                let user = Customer(id: id, name: name, email: email, balance: balance)
+                let user = Customer(id1: id, name: name, email: email, balance: balance)
                 users.append(user)
             }
             

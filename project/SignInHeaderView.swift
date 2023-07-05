@@ -22,6 +22,7 @@ class SignInHeaderView: UIView {
        let label = UILabel()
         label.contentMode = .center
         label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .white
         label.text = "Sign Up to CryptoBase!"
         return label
     }()

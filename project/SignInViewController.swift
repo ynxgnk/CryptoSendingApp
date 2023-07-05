@@ -22,13 +22,14 @@ class SignInViewController: UIViewController {
        let label = UILabel()
         label.contentMode = .center
         label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .white
         label.text = "Sign In to CryptoBase!"
         return label
     }()
     
     private let createAccountButton: UIButton = {
         let button = UIButton()
-        button.setTitle(" Create Account", for: .normal)
+        button.setTitle("Create Account", for: .normal)
         button.setTitleColor(.link, for: .normal)
         return button
     }()
@@ -42,7 +43,8 @@ class SignInViewController: UIViewController {
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
         field.leftViewMode = .always
         field.placeholder = "Email Address"
-        field.backgroundColor = .secondarySystemBackground
+        field.textColor = .white
+        field.backgroundColor = UIColor(named: "cellbackground")
         field.layer.cornerRadius = 8
         field.layer.masksToBounds = true
         return field
@@ -57,7 +59,7 @@ class SignInViewController: UIViewController {
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.isSecureTextEntry = true
-        field.backgroundColor = .secondarySystemBackground
+        field.backgroundColor = UIColor(named: "cellbackground")
         field.layer.cornerRadius = 8
         field.layer.masksToBounds = true
         return field
@@ -74,7 +76,7 @@ class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "background")
         view.addSubview(logoImageView)
 //        logoImageView.backgroundColor = .red
         view.addSubview(signInLabel)
@@ -87,7 +89,7 @@ class SignInViewController: UIViewController {
         view.addSubview(createAccountButton)
         loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         createAccountButton.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside) /* 591 */
-//        loginButton.backgroundColor = .green
+        //        loginButton.backgroundColor = .green
         
     }
     
@@ -100,22 +102,22 @@ class SignInViewController: UIViewController {
     
     @objc private func didTapLoginButton() {
         guard let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text,
-                      !password.isEmpty else {
-                    return
-                }
-                            
-                AuthManager.shared.signIn(email: email, password: password) { [weak self] success in
-                    guard success else {
-                        return
-                    }
-                    
-                    DispatchQueue.main.async {
-                        UserDefaults.standard.set(email, forKey: "email")
-                        let vc = TabBarController()
-                        vc.modalPresentationStyle = .fullScreen
-                        self?.present(vc, animated: true)
-                    }
-                }
+              !password.isEmpty else {
+            return
+        }
+        
+        AuthManager.shared.signIn(email: email, password: password) { [weak self] success in
+            guard success else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                UserDefaults.standard.set(email, forKey: "email")
+                let vc = TabBarController()
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: true)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {

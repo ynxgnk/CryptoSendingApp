@@ -8,8 +8,8 @@
 import Foundation
 
 
-struct Customer{
-    let id: Int64
+struct Customer {
+    let id1: Int64 //tyt
     let name: String
     let email: String
     let balance: Int64

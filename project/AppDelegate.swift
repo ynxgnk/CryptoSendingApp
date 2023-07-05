@@ -16,27 +16,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        let databaseManager = DatabaseManager.shared
+            
+            databaseManager.getUsers { users in
+                // Handle the retrieved users here
+                Accounts.users = users
+                print("NUMBER \(users.count)")
+            }
         
-        let dbManager = DBManager()
-
-        Accounts.customers = dbManager.getUsers()
-        Accounts.transctions = dbManager.getTransfers()
         
-        if Accounts.customers.isEmpty {
-            dbManager.insertUser(name: "Mohamed Khater", email: "khater@mail.com", balance: 0)
-            dbManager.insertUser(name: "Mohamed Ali", email: "ali@mail.com", balance: 0)
-            dbManager.insertUser(name: "Fady Victor", email: "fady@mail.com", balance: 0)
-            dbManager.insertUser(name: "Ahmed Khater", email: "ahmed@mail.com", balance: 0)
-            dbManager.insertUser(name: "Weal", email: "wael@mail.com", balance: 0)
-            dbManager.insertUser(name: "Mohamed Nabile", email: "nabile@mail.com", balance: 0)
-            dbManager.insertUser(name: "Mohamed Fox", email: "fox@mail.com", balance: 0)
-            dbManager.insertUser(name: "Bassel Mohamed", email: "bassel@mail.com", balance: 0)
-            dbManager.insertUser(name: "Mohamed Ashraf", email: "ashraf@mail.com", balance: 0)
-            dbManager.insertUser(name: "George Adel", email: "george@mail.com", balance: 0)
+//        let dbManager = DBManager()
+//
+//        Accounts.customers = dbManager.getUsers()
+//        Accounts.transctions = dbManager.getTransfers()
+//        
+//        if Accounts.customers.isEmpty {
+//            dbManager.insertUser(name: "Mohamed Khater", email: "khater@mail.com", balance: 0)
+//            dbManager.insertUser(name: "Mohamed Ali", email: "ali@mail.com", balance: 0)
+//            dbManager.insertUser(name: "Fady Victor", email: "fady@mail.com", balance: 0)
+//            dbManager.insertUser(name: "Ahmed Khater", email: "ahmed@mail.com", balance: 0)
+//            dbManager.insertUser(name: "Weal", email: "wael@mail.com", balance: 0)
+//            dbManager.insertUser(name: "Mohamed Nabile", email: "nabile@mail.com", balance: 0)
+//            dbManager.insertUser(name: "Mohamed Fox", email: "fox@mail.com", balance: 0)
+//            dbManager.insertUser(name: "Bassel Mohamed", email: "bassel@mail.com", balance: 0)
+//            dbManager.insertUser(name: "Mohamed Ashraf", email: "ashraf@mail.com", balance: 0)
+//            dbManager.insertUser(name: "George Adel", email: "george@mail.com", balance: 0)
+//
+//            Accounts.customers = dbManager.getUsers()
 
-            Accounts.customers = dbManager.getUsers()
-
-        }
+//        }
             return true
         
     }

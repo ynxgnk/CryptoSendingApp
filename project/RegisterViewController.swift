@@ -19,7 +19,7 @@ class RegisterViewController: UIViewController {
             field.leftViewMode = .always
             field.placeholder = "Full Name"
             field.autocorrectionType = .no 
-            field.backgroundColor = .secondarySystemBackground
+            field.backgroundColor = UIColor(named: "cellbackground")
             field.layer.cornerRadius = 8
             field.layer.masksToBounds = true
             return field
@@ -34,7 +34,7 @@ class RegisterViewController: UIViewController {
             field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
             field.leftViewMode = .always
             field.placeholder = "Email Address"
-            field.backgroundColor = .secondarySystemBackground
+            field.backgroundColor = UIColor(named: "cellbackground")
             field.layer.cornerRadius = 8
             field.layer.masksToBounds = true
             return field
@@ -49,7 +49,7 @@ class RegisterViewController: UIViewController {
             field.autocapitalizationType = .none
             field.autocorrectionType = .no
             field.isSecureTextEntry = true
-            field.backgroundColor = .secondarySystemBackground
+            field.backgroundColor = UIColor(named: "cellbackground")
             field.layer.cornerRadius = 8
             field.layer.masksToBounds = true
             return field
@@ -61,7 +61,7 @@ class RegisterViewController: UIViewController {
         field.leftViewMode = .always
         field.placeholder = "ID"
         field.autocorrectionType = .no
-        field.backgroundColor = .secondarySystemBackground
+        field.backgroundColor = UIColor(named: "cellbackground")
         field.layer.cornerRadius = 8
         field.layer.masksToBounds = true
         return field
@@ -78,8 +78,8 @@ class RegisterViewController: UIViewController {
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            title = "Create Account"
-            view.backgroundColor = .systemBackground
+//            title = "Create Account"
+            view.backgroundColor = UIColor(named: "background")
             view.addSubview(headerView)
             view.addSubview(nameField)
             view.addSubview(emailField)
@@ -111,7 +111,7 @@ class RegisterViewController: UIViewController {
             }
                         
             //Create Account
-            AuthManager.shared.signUp(email: email, password: password, id: id) { [weak self] success in   /* 591 add weak self */
+            AuthManager.shared.signUp(email: email, password: password, id: id) { [weak self] success in   /* 591 add weak self */ //tyt
                 if success {
                     //Update database
                     
@@ -124,8 +124,8 @@ class RegisterViewController: UIViewController {
                         
                         UserDefaults.standard.set(email, forKey: "email")
                         UserDefaults.standard.set(name, forKey: "name")
-                        let currentId = UserDefaults.standard.set(id, forKey: "id")
-//                        print("CurrentID: |\(currentId)|")
+                        UserDefaults.standard.set(id, forKey: "id") //tyt
+                        print("HERE ID \(id)")
                         
                         DispatchQueue.main.async {
                             let vc = TabBarController()
@@ -139,7 +139,4 @@ class RegisterViewController: UIViewController {
             }
             //Update database
         }
-    
-
-
 }

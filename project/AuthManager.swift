@@ -22,16 +22,18 @@ final class AuthManager {
     public func signUp(
         email: String,
         password: String,
-        id: String,
+        id: String, //tyt
         completion: @escaping (Bool) -> Void
     ) {
         guard !email.trimmingCharacters(in: .whitespaces).isEmpty,
               !password.trimmingCharacters(in: .whitespaces).isEmpty,
-              password.count >= 6 else {
+              password.count >= 6,
+                !id.trimmingCharacters(in: .whitespaces).isEmpty, //tyt
+        id.count <= 3 else {
             return
         }
         
-        auth.createUser(withEmail: email, password: password) { result, error in //tyt
+        auth.createUser(withEmail: email, password: password) { result, error in 
             guard result != nil, error == nil else {
                 completion(false)
                 return

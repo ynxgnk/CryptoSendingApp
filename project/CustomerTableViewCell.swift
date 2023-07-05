@@ -98,10 +98,17 @@ class CustomerTableViewCell: UITableViewCell {
         fatalError()
     }
     
-    func setup(customer: Customer){ //tyt Customer
-        nameLabel.text = customer.name
-        emailLabel.text = customer.email + ","
-        idLabel.text = "ID: " + String(customer.id)
-        balanceLabel.text = "\(customer.balance)$"
+//    func setup(customer: Customer){
+//        nameLabel.text = customer.name
+//        emailLabel.text = customer.email + ","
+//        idLabel.text = "ID: " + String(customer.id1)
+//        balanceLabel.text = "\(customer.balance)$"
+//    }
+    
+    func setup(user: User) { //tyt
+        nameLabel.text = "Name: \(user.name)"
+        emailLabel.text = "Email: \(user.email)"
+        idLabel.text = "ID: \(user.id)"
+        balanceLabel.text = "Balance: \(user.balance)"
     }
 }

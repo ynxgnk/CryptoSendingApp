@@ -24,7 +24,7 @@ class CryptoViewController: UIViewController {
         layout.scrollDirection = .horizontal
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(NewsCollectionViewCell.self,
-                      forCellWithReuseIdentifier: NewsCollectionViewCell.identifier) //tyt CryptoScrollCollectionViewCell
+                      forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
         view.backgroundColor = UIColor(named: "background")
         return view
     }()
@@ -45,49 +45,68 @@ class CryptoViewController: UIViewController {
         return label
     }()
     
+    private let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.hidesWhenStopped = true
+//        spinner.backgroundColor = .red
+        return spinner
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //        view.addSubvirew(spinner)
+        //        spinner.startAnimating()
+        //        addConstraints()
+        
         navigationController?.navigationBar.barTintColor = UIColor(named: "background")
-        view.backgroundColor = UIColor(named: "background") 
-
-        cryptoTable.showsVerticalScrollIndicator = false
-//        cryptoTable.backgroundColor = .orange
-        view.addSubview(cryptoTable)
-        cryptoTable.delegate = self
-        cryptoTable.dataSource = self
+        view.backgroundColor = UIColor(named: "background")
         
         cryptoScrollCollectionView.showsHorizontalScrollIndicator = false
-//        cryptoScrollCollectionView.backgroundColor = .red
-        view.addSubview(cryptoScrollCollectionView)
+        cryptoTable.showsVerticalScrollIndicator = false
+        cryptoTable.delegate = self
+        cryptoTable.dataSource = self
         cryptoScrollCollectionView.delegate = self
         cryptoScrollCollectionView.dataSource = self
+        view.addSubview(cryptoTable)
+        view.addSubview(cryptoScrollCollectionView)
         
-        view.addSubview(cryptoLabel)
-        view.addSubview(newsLabel)
+        DispatchQueue.main.asyncAfter(deadline: .now()+2.2) {
+            self.view.addSubview(self.cryptoLabel)
+            self.view.addSubview(self.newsLabel)
+            self.spinner.stopAnimating()
+        }
         
-        fetchCryptoTableViewData()
-//        fetchCryptoCollectionViewData()
-        fetchTopNews()
-        
+            self.fetchCryptoTableViewData()
+            self.fetchTopNews()
+    }
+    
+    private func addConstraints() { /* 1352 */
+        NSLayoutConstraint.activate([ /* 1353 */
+            spinner.heightAnchor.constraint(equalToConstant: 350), /* 1354 */
+            spinner.widthAnchor.constraint(equalToConstant: 80), /* 1354 */
+            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor), /* 1354 */
+            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor), /* 1354 */
+                                    ])
     }
     
     private var viewModels = [CryptoTableViewCellViewModel]()
-    private var newsViewModels = [NewsTableViewCellViewModel]() //tyt
+    private var newsViewModels = [NewsTableViewCellViewModel]() 
     private var cryptoCoins = [CryptoCoinModel]()
-    private var articles = [NewsTitlesModel]() //tyt
+    private var articles = [NewsTitlesModel]()
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        cryptoLabel.frame = CGRect(
+        newsLabel.frame = CGRect(
             x: 30,
             y: 80,
             width: 300,
             height: 30
         )
         
-        newsLabel.frame = CGRect(
+        cryptoLabel.frame = CGRect(
             x: 30,
             y: 340,
             width: 300,

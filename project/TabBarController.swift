@@ -19,12 +19,33 @@ final class TabBarController: UITabBarController {
 //              let currentId = UserDefaults.standard.string(forKey: "id")
                else {
            
-            print("ERRROROROR")
+            print("EROROROROR")
             return
         }
         
-        let currentId = UserDefaults.standard.string(forKey: "id") ?? "NO ID"
-        print(currentId)
+        let currentBalance = UserDefaults.standard.string(forKey: "balance") ?? "No Balance"
+        print("balance: \(currentBalance)")
+
+        
+        let currentId = UserDefaults.standard.string(forKey: "id") ?? "Scammed"
+        print("currentID: \(currentId)")
+        
+//        guard let currentId = UserDefaults.standard.string(forKey: "id")
+//        else {
+//            print("NO CURRENTID")
+//            return
+//        }
+
+//        print("HERE IT IS !!!!!! "+currentId)
+
+//            DatabaseManager.shared.getUser(email: currentUserEmail, id: currentId) { userID in
+//                guard let userID = userID else {
+//                    print("ERROR: Failed to fetch user ID from Firebase")
+//                    return
+//                }
+
+////                print("HERE IT IS !!!!!! " + userID)
+        
 
         
         DispatchQueue.main.async {
@@ -35,7 +56,7 @@ final class TabBarController: UITabBarController {
         let cryptoVC = UINavigationController(rootViewController: CryptoViewController())
 //        let newsVC = UINavigationController(rootViewController: NewsViewController())
         let transferVC = UINavigationController(rootViewController: HomeViewController())
-        let profileVC = UINavigationController(rootViewController: ProfileViewController(currentEmail: currentUserEmail, id: currentId))
+        let profileVC = UINavigationController(rootViewController: ProfileViewController(currentEmail: currentUserEmail, id: currentId, balance: currentBalance))
         
         cryptoVC.tabBarItem.image = UIImage(systemName: "bitcoinsign.circle")
 //        newsVC.tabBarItem.image = UIImage(systemName: "house")

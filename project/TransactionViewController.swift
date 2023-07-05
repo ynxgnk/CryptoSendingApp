@@ -5,6 +5,8 @@
 //  Created by Nazar Kopeika on 02.07.2023.
 //
 
+
+
 import UIKit
 
 class TranscationViewController: UIViewController {
@@ -53,7 +55,7 @@ extension TranscationViewController: UITableViewDataSource{
         // Get sender ID
 //        let sender = Accounts.customers.filter({ $0.id == transcation.sender })[0]
         // Get Receiver ID
-        let receiver = Accounts.customers.filter({ $0.id == transcation.receiver })[0]
+        let receiver = Accounts.customers.filter({ $0.id1 == transcation.receiver })[0]
         
         cell.setup(receiver: receiver.name, amount: Int(transcation.amount))
         cell.layer.cornerRadius = 8
@@ -71,3 +73,5 @@ extension TranscationViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+
+

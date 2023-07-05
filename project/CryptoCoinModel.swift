@@ -15,7 +15,7 @@ struct CryptoCoinModel: Codable, Identifiable {
     let id, symbol, name: String
     let image: String
     let currentPrice: Double
-    var cryptoImageData: Data? //tyt
+    var cryptoImageData: Data? 
     let marketCapRank : Int
     let marketCap, fullyDilutedValuation : Double?
     let totalVolume, high24H, low24H : Double?

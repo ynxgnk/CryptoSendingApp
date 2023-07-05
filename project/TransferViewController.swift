@@ -36,8 +36,10 @@ class TransferViewController: UIViewController {
     }()
     
     let dbManager = DBManager()
+    let db = DatabaseManager() //tyt
     var pickerView = UIPickerView()
-    var selectedReceiver: Customer? //tyt Customer
+    var selectedReceiver: Customer?
+    var selectedReceiver1: User? //tyt
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +76,7 @@ class TransferViewController: UIViewController {
         }
         
         if let selectedReceiver = selectedReceiver {
-            dbManager.transferMoney(to: selectedReceiver.id, amount: Int64(amount)!) { [weak self] error in
+            dbManager.transferMoney(to: selectedReceiver.id1, amount: Int64(amount)!) { [weak self] error in
                 guard let self = self else { return }
                 
                 if let error = error {
@@ -85,6 +87,7 @@ class TransferViewController: UIViewController {
                 }
 
                 Accounts.customers = self.dbManager.getUsers()
+//                Accounts.users = self.db.getUsers() //tyt
                 Accounts.transctions = self.dbManager.getTransfers()
                 self.navigationController?.popViewController(animated: true)
             }
@@ -100,7 +103,8 @@ extension TransferViewController: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Accounts.customers.count
+//        return Accounts.customers.count
+        return Accounts.users.count //tyt
     }
 }
 
@@ -108,12 +112,15 @@ extension TransferViewController: UIPickerViewDataSource {
 // MARK: - UIPickerView Delegate
 extension TransferViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Accounts.customers[row].name
+//        return Accounts.customers[row].name
+        return Accounts.users[row].name //tyt
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         view.endEditing(true)
-        selectedReceiver = Accounts.customers[row]
-        receiverLabel.text = Accounts.customers[row].name
+//        selectedReceiver = Accounts.customers[row]
+//        receiverLabel.text = Accounts.customers[row].name
+        selectedReceiver1 = Accounts.users[row] //tyt
+        receiverLabel.text = Accounts.users[row].name //tyt
     }
 }

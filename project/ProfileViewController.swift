@@ -19,11 +19,13 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     }()
     
     let currentEmail: String
-    var id: String
+    let id: String
+    var balance: String
     
-    init(currentEmail: String, id: String) {
+    init(currentEmail: String, id: String, balance: String) {
         self.currentEmail = currentEmail
         self.id = id
+        self.balance = balance
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,6 +54,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     private func setUpTableHeader(
         profilePhotoRef: String? = nil,
         name: String? = nil
+//        id: String? = nil //tyt
     ) {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width/1.5))
         headerView.backgroundColor = UIColor(named: "background")
@@ -85,11 +88,12 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
             width: 100,
             height: 20
         )
+        headerView.addSubview(idLabel)
+        let user = User(name: name ?? "Noname", email: currentEmail, profilePictureRef: profilePhotoRef, id: id, balance: balance)
         idLabel.text = id
+        idLabel.textAlignment = .center
         idLabel.textColor = .white
         idLabel.font = .systemFont(ofSize: 20, weight: .bold)
-        idLabel.textAlignment = .center
-        headerView.addSubview(idLabel)
         
         //Email
         let emailLable = UILabel(frame: CGRect(
@@ -161,7 +165,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     private func fetchProfileData() {
-        DatabaseManager.shared.getUser(email: currentEmail) { [weak self] user in //tyt
+        DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in //tyt
             guard let user = user else {
                 return
             }
@@ -171,6 +175,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                 self?.setUpTableHeader(
                     profilePhotoRef: user.profilePictureRef,
                     name: user.name
+//                    id: user.id
                 )
             }
         }
@@ -195,6 +200,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                     DispatchQueue.main.async {
                         UserDefaults.standard.set(nil, forKey: "email")
                         UserDefaults.standard.set(nil, forKey: "name")
+                        UserDefaults.standard.set(nil, forKey: "id") //tyt
                         UserDefaults.standard.set(false, forKey: "premium")
                         
                         let signInVC = SignInViewController()

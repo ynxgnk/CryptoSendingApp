@@ -47,6 +47,7 @@
 		BA60BB382A42076E005B7DDD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60BB372A42076E005B7DDD /* User.swift */; };
 		BA60BB3A2A4207A7005B7DDD /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60BB392A4207A7005B7DDD /* DatabaseManager.swift */; };
 		BA60BB3D2A4209B9005B7DDD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60BB3C2A4209B9005B7DDD /* Extensions.swift */; };
+		BA6AA8E22A541DCB007872F3 /* TableLoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AA8E12A541DCB007872F3 /* TableLoadingFooterView.swift */; };
 		BA7779D22A42B8D600B1B78F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7779D12A42B8D600B1B78F /* ProfileViewController.swift */; };
 		BA7779D42A42C29600B1B78F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7779D32A42C29600B1B78F /* StorageManager.swift */; };
 		BA7779D62A42C38000B1B78F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7779D52A42C38000B1B78F /* SettingsViewController.swift */; };
@@ -99,6 +100,7 @@
 		BA60BB372A42076E005B7DDD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA60BB392A4207A7005B7DDD /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		BA60BB3C2A4209B9005B7DDD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BA6AA8E12A541DCB007872F3 /* TableLoadingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableLoadingFooterView.swift; sourceTree = "<group>"; };
 		BA7779D12A42B8D600B1B78F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BA7779D32A42C29600B1B78F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		BA7779D52A42C38000B1B78F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 		BA5315A62A514BC2003A0055 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				BA6AA8E02A541DBA007872F3 /* SpinnerView */,
 				BA5315BA2A514DA3003A0055 /* UsersCell */,
 				BA5315B72A514D83003A0055 /* TransactionCell */,
 				BA5315AE2A514C24003A0055 /* Model */,
@@ -353,6 +356,14 @@
 				BA7779CB2A42B80200B1B78F /* Controllers */,
 			);
 			name = Auth;
+			sourceTree = "<group>";
+		};
+		BA6AA8E02A541DBA007872F3 /* SpinnerView */ = {
+			isa = PBXGroup;
+			children = (
+				BA6AA8E12A541DCB007872F3 /* TableLoadingFooterView.swift */,
+			);
+			name = SpinnerView;
 			sourceTree = "<group>";
 		};
 		BA7779CB2A42B80200B1B78F /* Controllers */ = {
@@ -558,6 +569,7 @@
 				BA5315AB2A514BFE003A0055 /* TransactionViewController.swift in Sources */,
 				BA60BB342A42027F005B7DDD /* AuthManager.swift in Sources */,
 				BA7779D22A42B8D600B1B78F /* ProfileViewController.swift in Sources */,
+				BA6AA8E22A541DCB007872F3 /* TableLoadingFooterView.swift in Sources */,
 				BA193C392A3D9472007F7223 /* TabBarController.swift in Sources */,
 				BA193C4E2A3F5D6A007F7223 /* CryptoTableViewCell.swift in Sources */,
 				BA60BB302A41A63B005B7DDD /* SignInViewController.swift in Sources */,
