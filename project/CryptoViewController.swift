@@ -92,7 +92,7 @@ class CryptoViewController: UIViewController {
     }
     
     private var viewModels = [CryptoTableViewCellViewModel]()
-    private var newsViewModels = [NewsTableViewCellViewModel]() 
+    private var newsViewModels = [NewsTableViewCellViewModel]()
     private var cryptoCoins = [CryptoCoinModel]()
     private var articles = [NewsTitlesModel]()
     
@@ -212,7 +212,6 @@ class CryptoViewController: UIViewController {
 }
 
 //MARK: - TableView
-
 extension CryptoViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -259,7 +258,6 @@ extension CryptoViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 //MARK: - CollectionView
-
 extension CryptoViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         1

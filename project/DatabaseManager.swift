@@ -15,7 +15,7 @@ class DatabaseManager {
     
     private let database = Firestore.firestore()
     
-//    private init() {}
+    private init() {}
     
     public func insert(
         user: User,
@@ -38,34 +38,34 @@ class DatabaseManager {
             .setData(data) { error in
                 completion(error == nil)
             }
-     }
+    }
     
-    public func getUsers(completion: @escaping ([User]) -> Void) { //tyt
-            database
-                .collection("users")
-                .getDocuments { snapshot, error in
-                    guard let documents = snapshot?.documents, error == nil else {
-                        completion([])
-                        return
-                    }
-                    
-                    var users: [User] = []
-                    
-                    for document in documents {
-                        if let data = document.data() as? [String: Any],
-                           let email = data["email"] as? String,
-                           let name = data["name"] as? String,
-                           let id = data["id"] as? String,
-                           let balance = data["balance"] as? String {
-                            let ref = data["profile_photo"] as? String
-                            let user = User(name: name, email: email, profilePictureRef: ref, id: id, balance: balance)
-                            users.append(user)
-                        }
-                    }
-                    
-                    completion(users)
+    public func getUsers(completion: @escaping ([User]) -> Void) {
+        database
+            .collection("users")
+            .getDocuments { snapshot, error in
+                guard let documents = snapshot?.documents, error == nil else {
+                    completion([])
+                    return
                 }
-        }
+                
+                var users: [User] = []
+                
+                for document in documents {
+                    if let data = document.data() as? [String: Any],
+                       let email = data["email"] as? String,
+                       let name = data["name"] as? String,
+                       let id = data["id"] as? String,
+                       let balance = data["balance"] as? String {
+                        let ref = data["profile_photo"] as? String
+                        let user = User(name: name, email: email, profilePictureRef: ref, id: id, balance: balance)
+                        users.append(user)
+                    }
+                }
+                
+                completion(users)
+            }
+    }
     
     public func getUser(
         email: String,
@@ -120,9 +120,4 @@ class DatabaseManager {
             }
         }
     }
-    
-    
-    
-
-
 }

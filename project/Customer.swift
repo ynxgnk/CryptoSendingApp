@@ -9,7 +9,7 @@ import Foundation
 
 
 struct Customer {
-    let id1: Int64 //tyt
+    let id1: Int64 
     let name: String
     let email: String
     let balance: Int64

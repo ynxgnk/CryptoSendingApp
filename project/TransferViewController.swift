@@ -9,9 +9,6 @@ import UIKit
 
 class TransferViewController: UIViewController {
     
-//    @IBOutlet weak var receiverLabel: UITextField!
-//    @IBOutlet weak var amountLabel: UITextField!
-    
     private var receiverLabel: UITextField = {
         let field = UITextField()
         field.placeholder = " Receiver"
@@ -36,10 +33,9 @@ class TransferViewController: UIViewController {
     }()
     
     let dbManager = DBManager()
-    let db = DatabaseManager() //tyt
     var pickerView = UIPickerView()
     var selectedReceiver: Customer?
-    var selectedReceiver1: User? //tyt
+    var selectedReceiver1: User? 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,13 +51,12 @@ class TransferViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         receiverLabel.frame = CGRect(x: 50, y: 150, width: 300, height: 50)
-        receiverLabel.backgroundColor = .brown
+        receiverLabel.backgroundColor = UIColor(named: "cellbackground")
         
         amountLabel.frame = CGRect(x: 50, y: 220, width: 300, height: 50)
-        amountLabel.backgroundColor = .orange
+        amountLabel.backgroundColor = UIColor(named: "cellbackground")
         
         sendButton.frame = CGRect(x: 125, y: 400, width: 150, height: 50)
-//        sendButton.backgroundColor = .red
     }
     
     

@@ -17,15 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         let databaseManager = DatabaseManager.shared
-            
-            databaseManager.getUsers { users in
-                // Handle the retrieved users here
-                Accounts.users = users
-                print("NUMBER \(users.count)")
-            }
+        
+        databaseManager.getUsers { users in
+            // Handle the retrieved users here
+            Accounts.users = users
+            print("NUMBER \(users.count)")
+        }
         
         
-//        let dbManager = DBManager()
+        //        let dbManager = DBManager()
 //
 //        Accounts.customers = dbManager.getUsers()
 //        Accounts.transctions = dbManager.getTransfers()

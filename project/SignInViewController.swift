@@ -4,7 +4,6 @@
 //
 //  Created by Nazar Kopeika on 20.06.2023.
 //
-
 import UIKit
 
 class SignInViewController: UIViewController {
@@ -73,23 +72,34 @@ class SignInViewController: UIViewController {
         button.layer.cornerRadius = 8
         return button
     }()
+    
+    private let idTextField: UITextField = {
+        let field = UITextField()
+        field.keyboardType = .emailAddress
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        field.leftViewMode = .always
+        field.placeholder = "ID"
+        field.textColor = .white
+        field.backgroundColor = UIColor(named: "cellbackground")
+        field.layer.cornerRadius = 8
+        field.layer.masksToBounds = true
+        return field
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "background")
         view.addSubview(logoImageView)
-//        logoImageView.backgroundColor = .red
         view.addSubview(signInLabel)
-//        signInLabel.backgroundColor = .blue
         view.addSubview(emailTextField)
-//        emailTextField.backgroundColor = .systemPink
         view.addSubview(passwordTextField)
-//        passwordTextField.backgroundColor = .orange
         view.addSubview(loginButton)
+        view.addSubview(idTextField) //tyt1
         view.addSubview(createAccountButton)
         loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         createAccountButton.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside) /* 591 */
-        //        loginButton.backgroundColor = .green
         
     }
     
@@ -99,27 +109,59 @@ class SignInViewController: UIViewController {
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
+
+//    @objc private func didTapLoginButton() {
+//        guard let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text,
+//              !password.isEmpty, let id = idTextField.text, !id.isEmpty else { //tyt1
+//            return
+//        }
+//
+//        AuthManager.shared.signIn(email: email, password: password) { [weak self] success in
+//            guard success else {
+//                return
+//            }
+//
+//            DispatchQueue.main.async {
+//                UserDefaults.standard.set(email, forKey: "email")
+//                UserDefaults.standard.set(id, forKey: "id") //tyt1
+//                let vc = TabBarController()
+//                vc.modalPresentationStyle = .fullScreen
+//                self?.present(vc, animated: true)
+//            }
+//        }
+//    }
     
     @objc private func didTapLoginButton() {
-        guard let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text,
-              !password.isEmpty else {
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty,
+              let id = idTextField.text, !id.isEmpty else {
             return
         }
-        
+
         AuthManager.shared.signIn(email: email, password: password) { [weak self] success in
             guard success else {
                 return
             }
-            
-            DispatchQueue.main.async {
-                UserDefaults.standard.set(email, forKey: "email")
-                let vc = TabBarController()
-                vc.modalPresentationStyle = .fullScreen
-                self?.present(vc, animated: true)
+
+            DatabaseManager.shared.getUser(email: email, id: id) { [weak self] user in //tyt1 id
+                if let user = user, user.id == id {
+                    // ID match found, proceed with login
+                    DispatchQueue.main.async {
+                        UserDefaults.standard.set(email, forKey: "email")
+                        UserDefaults.standard.set(id, forKey: "id")
+                        let vc = TabBarController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc, animated: true)
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Woops", message: "Double check your ID.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self?.present(alert, animated: true)
+                }
             }
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         logoImageView.frame = CGRect(
@@ -150,16 +192,23 @@ class SignInViewController: UIViewController {
             height: 50
         )
         
+        idTextField.frame = CGRect(
+            x: (view.frame.size.width/2)-175,
+            y: 240+60+80+70,
+            width: 350,
+            height: 50
+        )
+        
         loginButton.frame = CGRect(
             x: (view.frame.size.width/2)-100,
-            y: 240+60+80+50+30,
+            y: 240+60+80+150,
             width: 200,
             height: 50
         )
         
         createAccountButton.frame = CGRect(
             x: (view.frame.size.width/2)-75,
-            y: 410+120,
+            y: 410+120+70,
             width: 150,
             height: 30
         )

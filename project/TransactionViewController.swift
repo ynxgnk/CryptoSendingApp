@@ -6,15 +6,12 @@
 //
 
 
-
 import UIKit
 
 class TranscationViewController: UIViewController {
-
-//    @IBOutlet weak var tableView: UITableView!
-    
+        
     private var tableView: UITableView = {
-       let table = UITableView()
+        let table = UITableView()
         table.register(TransctionTableViewCell.self,
                        forCellReuseIdentifier: TransctionTableViewCell.idenifier)
         return table
@@ -53,7 +50,7 @@ extension TranscationViewController: UITableViewDataSource{
         let transcation = Accounts.transctions[indexPath.row]
         
         // Get sender ID
-//        let sender = Accounts.customers.filter({ $0.id == transcation.sender })[0]
+        //        let sender = Accounts.customers.filter({ $0.id == transcation.sender })[0]
         // Get Receiver ID
         let receiver = Accounts.customers.filter({ $0.id1 == transcation.receiver })[0]
         
@@ -73,5 +70,3 @@ extension TranscationViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
-

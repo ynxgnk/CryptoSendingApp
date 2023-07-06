@@ -40,7 +40,6 @@ final class StorageManager {
     }
     
     public func downloadUrlForProfilePicture(
-        //        user: User,
         path: String,
         completion: @escaping (URL?) -> Void
     ) {

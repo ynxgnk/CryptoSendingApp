@@ -10,7 +10,7 @@ import SQLite
 
 enum Tables: String {
     case transfers = "transfers"
-    case users = "users1" //tyt
+    case users = "users" 
 }
 
 class DBManager {
@@ -66,24 +66,25 @@ class DBManager {
             compeletion(error)
         }
     }
+     
     
     public func transferMoney(to receiverId: Int64, amount: Int64, compeletion: (Error?) -> Void){
         do {
             let recevier = try db.prepare("SELECT balance FROM users WHERE id = \(receiverId)")
-            
+
             var receiverBalance: Int64 = 0
             for element in recevier{
                 receiverBalance = element[0] as! Int64
             }
-            
+
             let newReceiverBalance = receiverBalance + amount
-            
+
             addNewTransferRecord(receiver: receiverId, amount: amount)
-            
+
             _ = try db.run("UPDATE users SET balance = \(newReceiverBalance) WHERE id = \(receiverId)")
-            
+
             compeletion(nil)
-            
+
         } catch {
             compeletion(error)
         }

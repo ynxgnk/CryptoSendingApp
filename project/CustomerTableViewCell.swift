@@ -9,11 +9,6 @@ import UIKit
 
 class CustomerTableViewCell: UITableViewCell {
     static let identifier = "CustomerTableViewCell"
-
-//    @IBOutlet weak var idLabel: UILabel!
-//    @IBOutlet weak var nameLabel: UILabel!
-//    @IBOutlet weak var emailLabel: UILabel!
-//    @IBOutlet weak var balanceLabel: UILabel!
     
     private let idLabel: UILabel = {
        let label = UILabel()
@@ -67,45 +62,34 @@ class CustomerTableViewCell: UITableViewCell {
             width: 100,
             height: 20
         )
-//        idLabel.backgroundColor = .red
         
         nameLabel.frame = CGRect(
             x: 10,
-            y: 30,
+            y: 40,
             width: 200,
-            height: 30
+            height: 20
         )
-//        nameLabel.backgroundColor = .orange
         
         emailLabel.frame = CGRect(
             x: 10,
-            y: 60,
+            y: 70,
             width: 200,
-            height: 30
+            height: 20
         )
-//        emailLabel.backgroundColor = .blue
 
         balanceLabel.frame = CGRect(
             x: 250,
-            y: 30,
+            y: 70,
             width: 150,
-            height: 30
+            height: 20
         )
-//        balanceLabel.backgroundColor = .brown
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
     
-//    func setup(customer: Customer){
-//        nameLabel.text = customer.name
-//        emailLabel.text = customer.email + ","
-//        idLabel.text = "ID: " + String(customer.id1)
-//        balanceLabel.text = "\(customer.balance)$"
-//    }
-    
-    func setup(user: User) { //tyt
+    func setup(user: User) { 
         nameLabel.text = "Name: \(user.name)"
         emailLabel.text = "Email: \(user.email)"
         idLabel.text = "ID: \(user.id)"

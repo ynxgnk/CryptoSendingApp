@@ -8,9 +8,9 @@
 import UIKit
 
 class SignInHeaderView: UIView {
-
+    
     private let logoImageView: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
         imageView.layer.cornerRadius = 8
         imageView.contentMode = .scaleAspectFill
@@ -19,7 +19,7 @@ class SignInHeaderView: UIView {
     }()
     
     private let signInLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.contentMode = .center
         label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
@@ -45,5 +45,4 @@ class SignInHeaderView: UIView {
         logoImageView.frame = CGRect(x: (width-size)/4-20, y: 10, width: size, height: size)
         signInLabel.frame = CGRect(x: 0, y: logoImageView.bottom, width: width-40, height: height-size-30)
     }
-
 }

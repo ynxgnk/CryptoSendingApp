@@ -8,13 +8,11 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
-//    @IBOutlet weak var tableView: UITableView!
     
     private let tableView: UITableView = {
-       let table = UITableView()
+        let table = UITableView()
         table.register(CustomerTableViewCell.self,
-                           forCellReuseIdentifier: CustomerTableViewCell.identifier)
+                       forCellReuseIdentifier: CustomerTableViewCell.identifier)
         return table
     }()
     
@@ -78,8 +76,7 @@ class HomeViewController: UIViewController {
 // MARK: - UITableView DataSource
 extension HomeViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return Accounts.customers.count
-        return Accounts.users.count //tyt
+        return Accounts.users.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -88,8 +85,7 @@ extension HomeViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomerTableViewCell.identifier, for: indexPath) as! CustomerTableViewCell
-//        cell.setup(customer: Accounts.customers[indexPath.row])
-        cell.setup(user: Accounts.users[indexPath.row]) //tyt
+        cell.setup(user: Accounts.users[indexPath.row])
         cell.backgroundColor = UIColor(named: "cellbackground")
         return cell
     }

@@ -56,6 +56,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         name: String? = nil
 //        id: String? = nil //tyt
     ) {
+        
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width/1.5))
         headerView.backgroundColor = UIColor(named: "background")
         headerView.isUserInteractionEnabled = true
@@ -64,7 +65,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                 
         //Profile picture
         let profilePhoto = UIImageView(image: UIImage(systemName: "person.circle"))
-//        profilePhoto.tintColor = .white
         profilePhoto.contentMode = .scaleAspectFit
         profilePhoto.frame = CGRect(
             x: (view.width-(view.width/4))/2,
@@ -79,18 +79,42 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapProfilePhoto))
         profilePhoto.addGestureRecognizer(tap)
         
+        //Name
+        if let name = name {
+            title = name
+        }
+        
+        if let ref = profilePhotoRef {
+            //Fetch image
+            StorageManager.shared.downloadUrlForProfilePicture(path: ref) { url in
+                guard let url = url else {
+                    return
+                }
+                let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+                    guard let data = data else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        profilePhoto.image = UIImage(data: data)
+                    }
+                }
+                
+                task.resume()
+            }
+        }
+        
         //ID
         let idLabel = UILabel()
-        idLabel.backgroundColor = .red
         idLabel.frame = CGRect(
             x: (view.frame.size.width/2)-50,
-            y: 150+10,
+            y: 150+25,
             width: 100,
             height: 20
         )
         headerView.addSubview(idLabel)
-        let user = User(name: name ?? "Noname", email: currentEmail, profilePictureRef: profilePhotoRef, id: id, balance: balance)
-        idLabel.text = id
+        let user = User(name: name ?? "Noname", email: currentEmail, profilePictureRef: profilePhotoRef, id: id ?? "no", balance: balance)
+        idLabel.text = "ID: \(id)"
+        print("ID: \(id)")
         idLabel.textAlignment = .center
         idLabel.textColor = .white
         idLabel.font = .systemFont(ofSize: 20, weight: .bold)
@@ -119,36 +143,12 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         )
         settingsButton.addTarget(self, action: #selector(didTapSettings), for: .touchUpInside)
         headerView.addSubview(settingsButton)
-        
-        //Name
-        if let name = name {
-            title = name
-        }
-        
-        if let ref = profilePhotoRef {
-            //Fetch image
-            StorageManager.shared.downloadUrlForProfilePicture(path: ref) { url in
-                guard let url = url else {
-                    return
-                }
-                let task = URLSession.shared.dataTask(with: url) { data, _, _ in
-                    guard let data = data else {
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        profilePhoto.image = UIImage(data: data)
-                    }
-                }
-                
-                task.resume()
-            }
-        }
     }
     
     
     @objc private func didTapSettings() {
             let vc = SettingsViewController()
-            navigationController?.pushViewController(vc, animated: true) 
+            navigationController?.pushViewController(vc, animated: true)
         }
     
     @objc private func didTapProfilePhoto() {
@@ -165,7 +165,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     private func fetchProfileData() {
-        DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in //tyt
+        DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in //tyt1 id
             guard let user = user else {
                 return
             }
@@ -175,7 +175,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                 self?.setUpTableHeader(
                     profilePhotoRef: user.profilePictureRef,
                     name: user.name
-//                    id: user.id
                 )
             }
         }
@@ -201,7 +200,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                         UserDefaults.standard.set(nil, forKey: "email")
                         UserDefaults.standard.set(nil, forKey: "name")
                         UserDefaults.standard.set(nil, forKey: "id") //tyt
-                        UserDefaults.standard.set(false, forKey: "premium")
                         
                         let signInVC = SignInViewController()
                         signInVC.navigationItem.largeTitleDisplayMode = .always
@@ -216,53 +214,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         }))
         present(sheet, animated: true)
     }
-    
-//    private var cryptos: [CryptoTableViewCellViewModel] = []
-        
-//        private func fetchCryptos() {
-//
-//
-//            print("Fetching posts...")
-//
-//            DatabaseManager.shared.getPosts(for: currentEmail) { [weak self] cryptos in
-//                self?.cryptos = cryptos
-//                print("Found \(cryptos.count) cryptos")
-//                DispatchQueue.main.async {
-//                    self?.tableView.reloadData()
-//                }
-//            }
-//        }
-    
 }
-
-//extension ProfileViewController: UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//
-//    }
-//
-////    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-////        cryptos.count
-////    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let crypto = cryptos[indexPath.row]
-//               guard let cell = tableView.dequeueReusableCell(withIdentifier: CryptoTableViewCell.identifier, for: indexPath) as? CryptoTableViewCell else {
-//                   fatalError()
-//               }
-//        cell.configure(with: .init(cryptoImageUrl: crypto.cryptoImageUrl, cryptoTitle: crypto.cryptoTitle, cryptoSubtitle: crypto.cryptoSubtitle, cryptoPrice: crypto.cryptoPrice, cryptoPercent: crypto.cryptoPercent))
-//               return cell /* 590 */
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//    }
-    
-    
-//}
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationBarDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

@@ -9,9 +9,6 @@ import UIKit
 
 class TransctionTableViewCell: UITableViewCell {
     static let idenifier = "TransctionTableViewCell"
-
-//    @IBOutlet weak var receiverLabel: UILabel!
-//    @IBOutlet weak var amountLabel: UILabel!
     
     private let receiverLabel: UILabel = {
        let label = UILabel()
@@ -44,7 +41,6 @@ class TransctionTableViewCell: UITableViewCell {
             width: 200,
             height: 25
         )
-//        receiverLabel.backgroundColor = .black
         
         amountLabel.frame = CGRect(
             x: 200,
@@ -52,7 +48,6 @@ class TransctionTableViewCell: UITableViewCell {
             width: contentView.frame.size.width-210,
             height: 25
         )
-//        amountLabel.backgroundColor = .green
     }
     
     override func prepareForReuse() {
