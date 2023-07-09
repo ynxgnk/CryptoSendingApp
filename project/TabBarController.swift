@@ -60,4 +60,3 @@ final class TabBarController: UITabBarController {
             setViewControllers([cryptoVC, transferVC, profileVC], animated: true)
         }
     }
-

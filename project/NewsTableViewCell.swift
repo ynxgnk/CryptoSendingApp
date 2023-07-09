@@ -12,7 +12,6 @@ class NewsTableViewCell: UITableViewCell {
     
     private let newsImageView: UIImageView = {
        let view = UIImageView()
-//        view.image = UIImage(systemName: "car")
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         view.clipsToBounds = true
@@ -24,7 +23,6 @@ class NewsTableViewCell: UITableViewCell {
        let label = UILabel()
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 18, weight: .semibold)
-//        label.text = "Title"
         return label
     }()
     
@@ -32,7 +30,6 @@ class NewsTableViewCell: UITableViewCell {
        let label = UILabel()
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 18, weight: .regular)
-//        label.text = "Description"
         return label
     }()
     
@@ -45,15 +42,10 @@ class NewsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        contentView.clipsToBounds = true
         addSubview(newsImageView)
-//        newsImageView.backgroundColor = .orange
         addSubview(newsTitleLabel)
-//        newsTitleLabel.backgroundColor = .blue
         addSubview(newsDescriptionLabel)
-//        newsDescriptionLabel.backgroundColor = .green
         addSubview(newsAuthorLabel)
-//        newsAuthorLabel.backgroundColor = .red
     }
     
     override func prepareForReuse() {

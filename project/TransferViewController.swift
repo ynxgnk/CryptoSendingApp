@@ -35,7 +35,7 @@ class TransferViewController: UIViewController {
     let dbManager = DBManager()
     var pickerView = UIPickerView()
     var selectedReceiver: Customer?
-    var selectedReceiver1: User? 
+    var selectedReceiver1: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()

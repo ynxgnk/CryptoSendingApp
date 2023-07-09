@@ -10,19 +10,19 @@ import UIKit
 class SettingsTableViewCell: UITableViewCell {
     static let identifier = "SettingsTableViewCell"
     
-    private let settingsImage: UIImageView = {
+    let settingsImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-//        image.image = UIImage(systemName: "gear")
-        image.backgroundColor = .yellow
-        image.layer.cornerRadius = 30
+        image.image = UIImage(systemName: "gear")
+        image.backgroundColor = UIColor(named: "background")
+        image.layer.cornerRadius = 20
         return image
     }()
     
-    private let settingsName: UILabel = {
+    let settingsName: UILabel = {
        let label = UILabel()
-//        label.text = "Rate App"
-        label.font = .systemFont(ofSize: 17, weight: .regular)
+        label.text = "Rate App"
+        label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -43,14 +43,14 @@ class SettingsTableViewCell: UITableViewCell {
         settingsImage.frame = CGRect(
             x: 20,
             y: 30,
-            width: 60,
-            height: 60
+            width: 65,
+            height: 65
         )
         
         settingsName.frame = CGRect(
             x: 100,
             y: 40,
-            width: 100,
+            width: 150,
             height: 40
         )
         

@@ -18,8 +18,6 @@
 		BA193C4E2A3F5D6A007F7223 /* CryptoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA193C4D2A3F5D6A007F7223 /* CryptoTableViewCell.swift */; };
 		BA193C502A401ED6007F7223 /* CryptoAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA193C4F2A401ED6007F7223 /* CryptoAPICaller.swift */; };
 		BA193C522A401F22007F7223 /* CryptoCoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA193C512A401F22007F7223 /* CryptoCoinModel.swift */; };
-		BA193C542A401F50007F7223 /* CryptoCoinDetailsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA193C532A401F50007F7223 /* CryptoCoinDetailsSectionModel.swift */; };
-		BA193C562A4020EC007F7223 /* CryptoStatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA193C552A4020EC007F7223 /* CryptoStatisticsModel.swift */; };
 		BA193C582A4024B5007F7223 /* CryptoTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA193C572A4024B5007F7223 /* CryptoTableViewCellViewModel.swift */; };
 		BA193C5A2A402ADB007F7223 /* CryptoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA193C592A402ADB007F7223 /* CryptoDetailsViewController.swift */; };
 		BA193C5E2A4046D7007F7223 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA193C5D2A4046D7007F7223 /* NumberFormatter.swift */; };
@@ -51,6 +49,8 @@
 		BA7779D22A42B8D600B1B78F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7779D12A42B8D600B1B78F /* ProfileViewController.swift */; };
 		BA7779D42A42C29600B1B78F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7779D32A42C29600B1B78F /* StorageManager.swift */; };
 		BA7779D62A42C38000B1B78F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7779D52A42C38000B1B78F /* SettingsViewController.swift */; };
+		BA9454FB2A5805F300B7B375 /* CryptoDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9454FA2A5805F300B7B375 /* CryptoDetailsCollectionViewCell.swift */; };
+		BA9454FD2A591D0F00B7B375 /* CryptoDetailsCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9454FC2A591D0F00B7B375 /* CryptoDetailsCollectionViewCellViewModel.swift */; };
 		E04883466D1E73F1A8534AC8 /* Pods_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A75D3D75AB0F262EEB88D3B /* Pods_project.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,8 +69,6 @@
 		BA193C4D2A3F5D6A007F7223 /* CryptoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTableViewCell.swift; sourceTree = "<group>"; };
 		BA193C4F2A401ED6007F7223 /* CryptoAPICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAPICaller.swift; sourceTree = "<group>"; };
 		BA193C512A401F22007F7223 /* CryptoCoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinModel.swift; sourceTree = "<group>"; };
-		BA193C532A401F50007F7223 /* CryptoCoinDetailsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinDetailsSectionModel.swift; sourceTree = "<group>"; };
-		BA193C552A4020EC007F7223 /* CryptoStatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoStatisticsModel.swift; sourceTree = "<group>"; };
 		BA193C572A4024B5007F7223 /* CryptoTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		BA193C592A402ADB007F7223 /* CryptoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailsViewController.swift; sourceTree = "<group>"; };
 		BA193C5D2A4046D7007F7223 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
@@ -104,6 +102,8 @@
 		BA7779D12A42B8D600B1B78F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BA7779D32A42C29600B1B78F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		BA7779D52A42C38000B1B78F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		BA9454FA2A5805F300B7B375 /* CryptoDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA9454FC2A591D0F00B7B375 /* CryptoDetailsCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailsCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +160,7 @@
 			children = (
 				BA193C4D2A3F5D6A007F7223 /* CryptoTableViewCell.swift */,
 				BA193C5F2A406E52007F7223 /* NewsCollectionViewCell.swift */,
+				BA9454FA2A5805F300B7B375 /* CryptoDetailsCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -168,8 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				BA193C512A401F22007F7223 /* CryptoCoinModel.swift */,
-				BA193C532A401F50007F7223 /* CryptoCoinDetailsSectionModel.swift */,
-				BA193C552A4020EC007F7223 /* CryptoStatisticsModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -185,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				BA193C572A4024B5007F7223 /* CryptoTableViewCellViewModel.swift */,
+				BA9454FC2A591D0F00B7B375 /* CryptoDetailsCollectionViewCellViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -440,7 +440,7 @@
 				BA3EE1172A3D89C400FE846F /* Sources */,
 				BA3EE1182A3D89C400FE846F /* Frameworks */,
 				BA3EE1192A3D89C400FE846F /* Resources */,
-				50AD3B22DACED31BD8A04007 /* [CP] Embed Pods Frameworks */,
+				6921E986675C0957E0602B01 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -498,7 +498,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		50AD3B22DACED31BD8A04007 /* [CP] Embed Pods Frameworks */ = {
+		6921E986675C0957E0602B01 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -554,14 +554,13 @@
 				BA5315B02A514C35003A0055 /* Accounts.swift in Sources */,
 				BA60BB382A42076E005B7DDD /* User.swift in Sources */,
 				BA193C3D2A3ECFFC007F7223 /* NewsModel.swift in Sources */,
+				BA9454FB2A5805F300B7B375 /* CryptoDetailsCollectionViewCell.swift in Sources */,
 				BA193C5E2A4046D7007F7223 /* NumberFormatter.swift in Sources */,
-				BA193C562A4020EC007F7223 /* CryptoStatisticsModel.swift in Sources */,
 				BA3EE1232A3D89C400FE846F /* NewsViewController.swift in Sources */,
 				BA3EE11F2A3D89C400FE846F /* AppDelegate.swift in Sources */,
 				BA193C5A2A402ADB007F7223 /* CryptoDetailsViewController.swift in Sources */,
 				BA5315B22A514C43003A0055 /* Customer.swift in Sources */,
 				BA193C3B2A3D97A6007F7223 /* NewsTableViewCell.swift in Sources */,
-				BA193C542A401F50007F7223 /* CryptoCoinDetailsSectionModel.swift in Sources */,
 				BA193C502A401ED6007F7223 /* CryptoAPICaller.swift in Sources */,
 				BA5315B92A514D97003A0055 /* TransactionTableViewCell.swift in Sources */,
 				BA3EE1212A3D89C400FE846F /* SceneDelegate.swift in Sources */,
@@ -582,6 +581,7 @@
 				BA193C522A401F22007F7223 /* CryptoCoinModel.swift in Sources */,
 				BA5315BC2A514DB5003A0055 /* CustomerTableViewCell.swift in Sources */,
 				BA5315AD2A514C18003A0055 /* TransferViewController.swift in Sources */,
+				BA9454FD2A591D0F00B7B375 /* CryptoDetailsCollectionViewCellViewModel.swift in Sources */,
 				BA5315B42A514C4F003A0055 /* DBManager.swift in Sources */,
 				BA193C372A3D9424007F7223 /* NewsAPICaller.swift in Sources */,
 				BA193C422A3EDDFB007F7223 /* APIResponse.swift in Sources */,

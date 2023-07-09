@@ -12,7 +12,6 @@ class CryptoTableViewCell: UITableViewCell {
         
     private let cryptoImageView: UIImageView = {
         let view = UIImageView()
-//        view.image = UIImage(systemName: "car")
         view.layer.cornerRadius = 8
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
@@ -21,7 +20,6 @@ class CryptoTableViewCell: UITableViewCell {
     
     private let cryptoTitleLabel: UILabel = {
         let label = UILabel()
-//        label.text = "Bitcoin"
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 17, weight: .bold)
         return label
@@ -29,7 +27,6 @@ class CryptoTableViewCell: UITableViewCell {
     
     private let cryptoSubtitleLabel: UILabel = {
        let label = UILabel()
-//        label.text = "BTC"
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 15, weight: .regular)
         return label
@@ -37,7 +34,6 @@ class CryptoTableViewCell: UITableViewCell {
     
     private let cryptoPriceLabel: UILabel = {
        let label = UILabel()
-//        label.text = "100,23 $"
         label.textAlignment = .right
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 18, weight: .bold)
@@ -55,15 +51,10 @@ class CryptoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(cryptoImageView)
-//        cryptoImageView.backgroundColor = .orange
         contentView.addSubview(cryptoTitleLabel)
-//        cryptoTitleLabel.backgroundColor = .green
         contentView.addSubview(cryptoSubtitleLabel)
-//        cryptoSubtitleLabel.backgroundColor = .blue
         contentView.addSubview(cryptoPriceLabel)
-//        cryptoPriceLabel.backgroundColor = .red
         contentView.addSubview(cryptoPercentageLabel)
-//        cryptoPercentageLabel.backgroundColor = .brown
     }
     
     required init?(coder: NSCoder) {

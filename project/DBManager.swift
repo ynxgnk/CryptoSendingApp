@@ -10,7 +10,7 @@ import SQLite
 
 enum Tables: String {
     case transfers = "transfers"
-    case users = "users" 
+    case users = "users"
 }
 
 class DBManager {

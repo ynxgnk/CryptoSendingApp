@@ -179,36 +179,6 @@ class CryptoViewController: UIViewController {
             }
         }
     }
-    
-    /*
-    
-    private func fetchCryptoCollectionViewData() {
-        CryptoAPICaller.shared.fetchCryptoData { [weak self] result in
-            switch result {
-            case .success(let coins):
-                self?.cryptoCoins = coins.sorted(by: { $0.marketCapChangePercentage24H! > $1.marketCapChangePercentage24H! })
-                self?.viewModels = coins.compactMap({
-                    CryptoTableViewCellViewModel(
-                        cryptoImageUrl: URL(string: $0.image),
-                        cryptoTitle: $0.name,
-                        cryptoSubtitle: $0.symbol,
-                        cryptoPrice: String(describing: $0.currentPrice.toCurrency()),
-                        cryptoPercent: $0.priceChangePercentage24H
-                    )
-                })
-                
-                DispatchQueue.main.async {
-                    self?.cryptoScrollCollectionView.reloadData()
-                }
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    */
-    
 }
 
 //MARK: - TableView
@@ -232,7 +202,7 @@ extension CryptoViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        
+
         let cryptoDetailsVC = CryptoDetailsViewController()
         navigationController?.pushViewController(cryptoDetailsVC, animated: true)
     }
@@ -273,8 +243,8 @@ extension CryptoViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         cell.layer.cornerRadius = 20
         cell.backgroundColor = UIColor(named: "cellbackground")
-//        cell.configureTopMovers(with: viewModels[indexPath.section]) //tyt
-        cell.configure(with: newsViewModels[indexPath.section])
+        cell.configureNews(with: newsViewModels[indexPath.section])
+
         return cell
     }
     
@@ -282,6 +252,7 @@ extension CryptoViewController: UICollectionViewDelegate, UICollectionViewDataSo
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let article = articles[indexPath.row]
+
 
         guard let url = URL(string: article.url ?? "") else {
             return

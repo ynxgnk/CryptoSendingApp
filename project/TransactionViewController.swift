@@ -5,7 +5,6 @@
 //  Created by Nazar Kopeika on 02.07.2023.
 //
 
-
 import UIKit
 
 class TranscationViewController: UIViewController {
