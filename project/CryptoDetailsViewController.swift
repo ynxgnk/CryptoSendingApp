@@ -47,7 +47,7 @@ class CryptoDetailsViewController: UIViewController {
                     CryptoDetailsCollectionViewCellViewModel(
                         currentPrice: $0.currentPrice.toCurrency(),
                         currentPricePercentage: $0.priceChangePercentage24H.toCurrency(),
-                        marketCapPrice: $0.marketCap?.toCurrency() ?? "No MarketCap",
+                        marketCapPrice: $0.marketCap?.toCurrency() ?? "No Market Cap",
                         marketCapPercentage: $0.marketCapChangePercentage24H?.toCurrency() ?? "No Percentage",
                         rank: $0.marketCapRank.formatted(),
                         volume: $0.totalVolume?.toCurrency() ?? "No Volume",
