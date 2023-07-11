@@ -97,7 +97,7 @@ class SignInViewController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
-        view.addSubview(idTextField) //tyt1
+        view.addSubview(idTextField)
         view.addSubview(createAccountButton)
         loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         createAccountButton.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside) /* 591 */
@@ -113,7 +113,7 @@ class SignInViewController: UIViewController {
 
 //    @objc private func didTapLoginButton() {
 //        guard let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text,
-//              !password.isEmpty, let id = idTextField.text, !id.isEmpty else { //tyt1
+//              !password.isEmpty, let id = idTextField.text, !id.isEmpty else {
 //            return
 //        }
 //
@@ -124,7 +124,7 @@ class SignInViewController: UIViewController {
 //
 //            DispatchQueue.main.async {
 //                UserDefaults.standard.set(email, forKey: "email")
-//                UserDefaults.standard.set(id, forKey: "id") //tyt1
+//                UserDefaults.standard.set(id, forKey: "id")
 //                let vc = TabBarController()
 //                vc.modalPresentationStyle = .fullScreen
 //                self?.present(vc, animated: true)
@@ -144,7 +144,7 @@ class SignInViewController: UIViewController {
                 return
             }
 
-            DatabaseManager.shared.getUser(email: email, id: id) { [weak self] user in //tyt1 id
+            DatabaseManager.shared.getUser(email: email, id: id) { [weak self] user in
                 if let user = user, user.id == id {
                     // ID match found, proceed with login
                     DispatchQueue.main.async {

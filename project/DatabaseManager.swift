@@ -69,7 +69,7 @@ class DatabaseManager {
     
     public func getUser(
         email: String,
-        id: String, //tyt
+        id: String, 
         completion: @escaping (User?) -> Void
     ) {
         let documentId = email

@@ -94,7 +94,10 @@ class CryptoViewController: UIViewController {
     private var viewModels = [CryptoTableViewCellViewModel]()
     private var newsViewModels = [NewsTableViewCellViewModel]()
     private var cryptoCoins = [CryptoCoinModel]()
+    var cryptoCoin: CryptoCoinModel?
     private var articles = [NewsTitlesModel]()
+    private var selectedCryptoCoin: CryptoCoinModel? //tyt
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -131,7 +134,7 @@ class CryptoViewController: UIViewController {
         
     }
     
-    private func fetchTopNews() { //tyt
+    private func fetchTopNews() { 
         NewsAPICaller.shared.getTopNews { [weak self] result in
             switch result {
             case .success(let articles):
@@ -159,7 +162,7 @@ class CryptoViewController: UIViewController {
         CryptoAPICaller.shared.fetchCryptoData { [weak self] result in
             switch result {
             case .success(let coins):
-                self?.cryptoCoins = coins.sorted(by: { $0.currentPrice > $1.currentPrice })
+                self?.cryptoCoins = coins
                 self?.viewModels = coins.compactMap({
                     CryptoTableViewCellViewModel(
                         cryptoImageUrl: URL(string: $0.image),
@@ -178,7 +181,7 @@ class CryptoViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
-    }
+    }    
 }
 
 //MARK: - TableView
@@ -197,16 +200,24 @@ extension CryptoViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor(named: "cellbackground")
         cell.configure(with: viewModels[indexPath.section])
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-
-        let cryptoDetailsVC = CryptoDetailsViewController()
-        navigationController?.pushViewController(cryptoDetailsVC, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: false)
+//
+//        let cryptoDetailsVC = CryptoDetailsViewController()
+//        navigationController?.pushViewController(cryptoDetailsVC, animated: true)
+//    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCryptoCoin = cryptoCoins[indexPath.section]
+        let detailsVC = CryptoDetailsViewController(cryptoCoin: selectedCryptoCoin)
+        navigationController?.pushViewController(detailsVC, animated: true)
+
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
@@ -238,7 +249,7 @@ extension CryptoViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as? NewsCollectionViewCell else { // tyt CryptoScrollCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as? NewsCollectionViewCell else { // CryptoScrollCollectionViewCell
             fatalError()
         }
         cell.layer.cornerRadius = 20
@@ -250,9 +261,9 @@ extension CryptoViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        
-        let article = articles[indexPath.row]
+        selectedCryptoCoin = cryptoCoins[indexPath.row]
 
+        let article = articles[indexPath.row]
 
         guard let url = URL(string: article.url ?? "") else {
             return

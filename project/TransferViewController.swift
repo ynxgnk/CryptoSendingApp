@@ -82,7 +82,7 @@ class TransferViewController: UIViewController {
                 }
 
                 Accounts.customers = self.dbManager.getUsers()
-//                Accounts.users = self.db.getUsers() //tyt
+//                Accounts.users = self.db.getUsers()
                 Accounts.transctions = self.dbManager.getTransfers()
                 self.navigationController?.popViewController(animated: true)
             }
@@ -99,7 +99,7 @@ extension TransferViewController: UIPickerViewDataSource {
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 //        return Accounts.customers.count
-        return Accounts.users.count //tyt
+        return Accounts.users.count
     }
 }
 
@@ -108,14 +108,14 @@ extension TransferViewController: UIPickerViewDataSource {
 extension TransferViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 //        return Accounts.customers[row].name
-        return Accounts.users[row].name //tyt
+        return Accounts.users[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         view.endEditing(true)
 //        selectedReceiver = Accounts.customers[row]
 //        receiverLabel.text = Accounts.customers[row].name
-        selectedReceiver1 = Accounts.users[row] //tyt
-        receiverLabel.text = Accounts.users[row].name //tyt
+        selectedReceiver1 = Accounts.users[row]
+        receiverLabel.text = Accounts.users[row].name 
     }
 }

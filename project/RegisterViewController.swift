@@ -110,7 +110,7 @@ class RegisterViewController: UIViewController {
         }
         
         //Create Account
-        AuthManager.shared.signUp(email: email, password: password, id: id) { [weak self] success in   /* 591 add weak self */ //tyt
+        AuthManager.shared.signUp(email: email, password: password, id: id) { [weak self] success in   /* 591 add weak self */
             if success {
                 //Update database
                 
@@ -123,7 +123,7 @@ class RegisterViewController: UIViewController {
                     
                     UserDefaults.standard.set(email, forKey: "email")
                     UserDefaults.standard.set(name, forKey: "name")
-                    UserDefaults.standard.set(id, forKey: "id") //tyt
+                    UserDefaults.standard.set(id, forKey: "id")
                     print("HERE ID \(id)")
                     
                     DispatchQueue.main.async {

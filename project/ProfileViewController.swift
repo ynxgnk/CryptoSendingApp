@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     private func setUpTableHeader(
         profilePhotoRef: String? = nil,
         name: String? = nil
-//        id: String? = nil //tyt
+//        id: String? = nil
     ) {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width/1.5))
@@ -165,7 +165,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     private func fetchProfileData() {
-        DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in //tyt1 id
+        DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in
             guard let user = user else {
                 return
             }
@@ -199,7 +199,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                     DispatchQueue.main.async {
                         UserDefaults.standard.set(nil, forKey: "email")
                         UserDefaults.standard.set(nil, forKey: "name")
-                        UserDefaults.standard.set(nil, forKey: "id") //tyt
+                        UserDefaults.standard.set(nil, forKey: "id") 
                         
                         let signInVC = SignInViewController()
                         signInVC.navigationItem.largeTitleDisplayMode = .always

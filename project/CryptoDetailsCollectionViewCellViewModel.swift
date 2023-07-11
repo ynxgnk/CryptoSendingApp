@@ -8,6 +8,9 @@
 import Foundation
 
 final class CryptoDetailsCollectionViewCellViewModel {
+    let logoImage: URL?
+    var cryptoImageData: Data? = nil
+    
     let currentPrice: String
     let currentPricePercentage: String
     
@@ -25,7 +28,8 @@ final class CryptoDetailsCollectionViewCellViewModel {
     let marketCapChange: String
     let marketPriceChange24Percentage: String
     
-    init(currentPrice: String, currentPricePercentage: String, marketCapPrice: String, marketCapPercentage: String, rank: String, volume: String, high24: String, priceChange24: String, priceChange24Percentage: String, low24: String, marketCapChange: String, marketPriceChange24Percentage: String) {
+    init(logoImage: URL?,currentPrice: String, currentPricePercentage: String, marketCapPrice: String, marketCapPercentage: String, rank: String, volume: String, high24: String, priceChange24: String, priceChange24Percentage: String, low24: String, marketCapChange: String, marketPriceChange24Percentage: String) {
+        self.logoImage = logoImage
         self.currentPrice = currentPrice
         self.currentPricePercentage = currentPricePercentage
         self.marketCapPrice = marketCapPrice
