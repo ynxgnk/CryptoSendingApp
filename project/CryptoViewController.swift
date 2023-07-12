@@ -96,7 +96,7 @@ class CryptoViewController: UIViewController {
     private var cryptoCoins = [CryptoCoinModel]()
     var cryptoCoin: CryptoCoinModel?
     private var articles = [NewsTitlesModel]()
-    private var selectedCryptoCoin: CryptoCoinModel? //tyt
+    private var selectedCryptoCoin: CryptoCoinModel? 
 
     
     override func viewDidLayoutSubviews() {

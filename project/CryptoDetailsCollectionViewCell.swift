@@ -21,14 +21,14 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let overviewLabel: UILabel = {
        let label = UILabel()
         label.text = "Overview"
-        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.font = .systemFont(ofSize: 22, weight: .bold)
         return label
     }()
 
     private let currectPriceTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "Current Price"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = "Current Price:"
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
 
@@ -42,14 +42,14 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let currentPricePercentageLabel: UILabel = {
        let label = UILabel()
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
 
     private let marketCapLabel: UILabel = {
         let label = UILabel()
-        label.text = "Market Cap"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = "Market Cap:"
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
 
@@ -63,14 +63,14 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let marketCapPricePercentageLabel: UILabel = {
        let label = UILabel()
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
 
     private let rankTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "Rank"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = "Rank:"
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
 
@@ -83,8 +83,8 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
 
     private let volumeTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "Volume"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = "Volume:"
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
 
@@ -100,14 +100,14 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let additionalOverviewLabel: UILabel = {
         let label = UILabel()
         label.text = "Additional details"
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
         return label
     }()
 
     private let high24h: UILabel = {
         let label = UILabel()
-        label.text = "24H High"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = "24H High:"
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
 
@@ -120,8 +120,8 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
 
     private let priceChange24h: UILabel = {
         let label = UILabel()
-        label.text = "24H Price Change"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = "24H Price Change:"
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
 
@@ -141,8 +141,8 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
 
     private let low24h: UILabel = {
         let label = UILabel()
-        label.text = "24H Low"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = "24H Low:"
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
 
@@ -155,8 +155,8 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
 
     private let marketCapChange: UILabel = {
         let label = UILabel()
-        label.text = "24H Market CapChange"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = "24H Market CapChange:"
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
 
@@ -176,6 +176,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = UIColor(named: "cellbackground")
         contentView.frame = contentView.bounds
         addOverviewSubviews()
         addAdditionalSubviews()
@@ -189,27 +190,27 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
 
     private func addAdditionalSubviews() {
         contentView.addSubview(additionalOverviewLabel)
-        additionalOverviewLabel.backgroundColor = .red
+//        additionalOverviewLabel.backgroundColor = .red
         contentView.addSubview(high24h)
-        high24h.backgroundColor = .blue
+//        high24h.backgroundColor = .blue
         contentView.addSubview(priceHigh24h)
-        priceHigh24h.backgroundColor = .brown
+//        priceHigh24h.backgroundColor = .brown
         contentView.addSubview(priceChange24h)
-        priceChange24h.backgroundColor = .green
+//        priceChange24h.backgroundColor = .green
         contentView.addSubview(priceChange24hPrice)
-        priceChange24hPrice.backgroundColor = .link
+//        priceChange24hPrice.backgroundColor = .link
         contentView.addSubview(priceChange24hPercentage)
-        priceChange24hPercentage.backgroundColor = .systemPink
+//        priceChange24hPercentage.backgroundColor = .systemPink
         contentView.addSubview(low24h)
-        low24h.backgroundColor = .black
+//        low24h.backgroundColor = .black
         contentView.addSubview(priceLow24h)
-        priceLow24h.backgroundColor = .purple
+//        priceLow24h.backgroundColor = .purple
         contentView.addSubview(marketCapChange)
-        marketCapChange.backgroundColor = .gray
+//        marketCapChange.backgroundColor = .gray
         contentView.addSubview(marketPriceChange24hPrice)
-        marketPriceChange24hPrice.backgroundColor = .orange
+//        marketPriceChange24hPrice.backgroundColor = .orange
         contentView.addSubview(marketPriceChange24hPercentage)
-        marketPriceChange24hPercentage.backgroundColor = .red
+//        marketPriceChange24hPercentage.backgroundColor = .red
     }
 
     private func layoutAdditional() {
@@ -279,7 +280,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
         marketPriceChange24hPrice.frame = CGRect(
             x: 180,
             y: 520,
-            width: 100,
+            width: 150,
             height: 20
         )
 
@@ -293,29 +294,29 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
 
     private func addOverviewSubviews() {
         contentView.addSubview(logoImageView)
-        logoImageView.backgroundColor = .green
+//        logoImageView.backgroundColor = .green
         contentView.addSubview(overviewLabel)
-        overviewLabel.backgroundColor = .red
+//        overviewLabel.backgroundColor = .red
         contentView.addSubview(currectPriceTextLabel)
-        currectPriceTextLabel.backgroundColor = .blue
+//        currectPriceTextLabel.backgroundColor = .blue
         contentView.addSubview(currectPriceLabel)
-        currectPriceLabel.backgroundColor = .brown
+//        currectPriceLabel.backgroundColor = .brown
         contentView.addSubview(currentPricePercentageLabel)
-        currentPricePercentageLabel.backgroundColor = .green
+//        currentPricePercentageLabel.backgroundColor = .green
         contentView.addSubview(marketCapLabel)
-        marketCapLabel.backgroundColor = .systemPink
+//        marketCapLabel.backgroundColor = .systemPink
         contentView.addSubview(marketCapPriceLabel)
-        marketCapPriceLabel.backgroundColor = .black
+//        marketCapPriceLabel.backgroundColor = .black
         contentView.addSubview(marketCapPricePercentageLabel)
-        marketCapPricePercentageLabel.backgroundColor = .purple
+//        marketCapPricePercentageLabel.backgroundColor = .purple
         contentView.addSubview(rankTextLabel)
-        rankTextLabel.backgroundColor = .gray
+//        rankTextLabel.backgroundColor = .gray
         contentView.addSubview(rankLabel)
-        rankLabel.backgroundColor = .orange
+//        rankLabel.backgroundColor = .orange
         contentView.addSubview(volumeTextLabel)
-        volumeTextLabel.backgroundColor = .red
+//        volumeTextLabel.backgroundColor = .red
         contentView.addSubview(volumeLabel)
-        volumeLabel.backgroundColor = .brown
+//        volumeLabel.backgroundColor = .brown
     }
 
     private func layoutOverview() {
@@ -378,14 +379,14 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
         marketCapPriceLabel.frame = CGRect(
             x: 180,
             y: 220,
-            width: 100,
+            width: 180,
             height: 20
         )
 
         marketCapPricePercentageLabel.frame = CGRect(
             x: 180,
             y: 250,
-            width: 140,
+            width: 180,
             height: 20
         )
 
@@ -399,7 +400,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
         volumeLabel.frame = CGRect(
             x: 180,
             y: 310,
-            width: 100,
+            width: 150,
             height: 20
         )
     }
@@ -429,19 +430,24 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
         
         currectPriceLabel.text = viewModel.currentPrice
         currentPricePercentageLabel.text = viewModel.currentPricePercentage
+        currentPricePercentageLabel.textColor = Int(viewModel.currentPricePercentage) ?? 0 > 0 ? .systemGreen : .red
         rankLabel.text = viewModel.rank
         
         marketCapPriceLabel.text = viewModel.marketCapPrice
         marketCapPricePercentageLabel.text = viewModel.marketCapPercentage
+        marketCapPricePercentageLabel.textColor = Int(viewModel.marketCapPercentage) ?? 0 > 0 ? .systemGreen : .red
+
         volumeLabel.text = viewModel.volume
         
         priceHigh24h.text = viewModel.high24
         priceChange24hPrice.text = viewModel.priceChange24
-        priceChange24hPercentage.text = viewModel.priceChange24Percentage
-        
+        priceChange24hPercentage.text = String(describing: viewModel.priceChange24Percentage)
+        priceChange24hPercentage.textColor = Int(viewModel.priceChange24Percentage) ?? 0 > 0 ? .systemGreen : .red
+
         priceLow24h.text = viewModel.low24
         marketPriceChange24hPrice.text = viewModel.marketCapChange
-        marketCapPricePercentageLabel.text = viewModel.marketPriceChange24Percentage
+        marketPriceChange24hPercentage.text = viewModel.marketPriceChange24Percentage
+        marketPriceChange24hPercentage.textColor = Int(viewModel.marketPriceChange24Percentage) ?? 0 > 0 ? .systemGreen : .red
         
         if let data = viewModel.cryptoImageData {
             logoImageView.image = UIImage(data: data)

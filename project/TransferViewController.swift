@@ -71,7 +71,7 @@ class TransferViewController: UIViewController {
         }
         
         if let selectedReceiver = selectedReceiver {
-            dbManager.transferMoney(to: selectedReceiver.id1, amount: Int64(amount)!) { [weak self] error in
+            dbManager.transferMoney(to: selectedReceiver.id1, amount: Int(amount)!) { [weak self] error in
                 guard let self = self else { return }
                 
                 if let error = error {

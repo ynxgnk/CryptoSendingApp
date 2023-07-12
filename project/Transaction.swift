@@ -9,8 +9,8 @@ import Foundation
 
 
 struct Transction {
-    let id: Int64
-    let sender: Int64?
-    let receiver: Int64
-    let amount: Int64
+    let id: Int
+    let sender: Int?
+    let receiver: Int
+    let amount: Int
 }

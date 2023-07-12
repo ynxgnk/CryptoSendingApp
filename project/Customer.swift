@@ -9,8 +9,8 @@ import Foundation
 
 
 struct Customer {
-    let id1: Int64
+    let id1: Int
     let name: String
     let email: String
-    let balance: Int64
+    let balance: Int
 }

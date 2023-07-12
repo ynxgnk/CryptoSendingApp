@@ -468,17 +468,17 @@ class CryptoDetailsViewController: UIViewController {
                             return CryptoDetailsCollectionViewCellViewModel(
                                 logoImage: URL(string: cryptoCoin.image),
                                 currentPrice: cryptoCoin.currentPrice.toCurrency(),
-                                currentPricePercentage: cryptoCoin.priceChangePercentage24H.toCurrency(),
+                                currentPricePercentage: cryptoCoin.priceChangePercentage24H.toPercentageString(),
                                 marketCapPrice: cryptoCoin.marketCap?.toCurrency() ?? "No Market Cap",
-                                marketCapPercentage: cryptoCoin.marketCapChangePercentage24H?.toCurrency() ?? "No Percentage",
+                                marketCapPercentage: cryptoCoin.marketCapChangePercentage24H?.toPercentageString() ?? "No Percentage",
                                 rank: cryptoCoin.marketCapRank.formatted(),
                                 volume: cryptoCoin.totalVolume?.toCurrency() ?? "No Volume",
                                 high24: cryptoCoin.high24H?.toCurrency() ?? "No Price",
                                 priceChange24: cryptoCoin.priceChange24H.toCurrency(),
-                                priceChange24Percentage: cryptoCoin.priceChangePercentage24H.toCurrency(),
+                                priceChange24Percentage: cryptoCoin.priceChangePercentage24H.toPercentageString(),
                                 low24: cryptoCoin.low24H?.toCurrency() ?? "No Price",
                                 marketCapChange: cryptoCoin.marketCapChange24H?.toCurrency() ?? "No Price",
-                                marketPriceChange24Percentage: cryptoCoin.marketCapChangePercentage24H?.toCurrency() ?? "No Price"
+                                marketPriceChange24Percentage: cryptoCoin.marketCapChangePercentage24H?.toPercentageString() ?? "No Price"
                             )
                         }
                         return nil
