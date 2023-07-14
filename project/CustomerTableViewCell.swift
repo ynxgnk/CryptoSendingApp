@@ -94,5 +94,6 @@ class CustomerTableViewCell: UITableViewCell {
         emailLabel.text = "Email: \(user.email)"
         idLabel.text = "ID: \(user.id)"
         balanceLabel.text = "Balance: \(user.balance)"
+        print("BALANCE: \(user.balance)")
     }
 }

@@ -27,6 +27,9 @@ class TranscationViewController: UIViewController {
         view.backgroundColor = UIColor(named: "background")
         tableView.delegate = self
         tableView.dataSource = self
+        
+        Accounts.transctions = dbManager.getTransfers() // Replace with your data fetching logic
+        tableView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,7 +50,6 @@ extension TranscationViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TransctionTableViewCell.idenifier, for: indexPath) as! TransctionTableViewCell
-        
         let transcation = Accounts.transctions[indexPath.section]
         
         // Get sender ID
