@@ -11,45 +11,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        guard let _ = (scene as? UIWindowScene) else { return }
-//        guard let windowScene = (scene as? UIWindowScene) else { return } /* 6 */
-        
-//                window = UIWindow(frame: windowScene.coordinateSpace.bounds) /* 7 */
-//                window?.windowScene = windowScene /* 8 */
-//                window?.rootViewController = TabBarController() /* 9 */
-//                window?.makeKeyAndVisible() /* 10 */
-        
-        
-        /*
-        if AuthManager.shared.isSignedIn { /* 561 */
-                        TabBarView() /* 561 */
-                    } else { /* 561 */
-                        SignInView() /* 561 */
-                    }
-        */
-        
         guard let windowScene = (scene as? UIWindowScene) else { return }
-                
-                let window = UIWindow(windowScene: windowScene)
-    
-                let vc: UIViewController
-                if AuthManager.shared.isSignedIn {
-                    vc = TabBarController()
-                } else {
-                    let signInVC = SignInViewController()
-                    signInVC.navigationItem.largeTitleDisplayMode = .always
-                    
-                    let navVC = UINavigationController(rootViewController: signInVC)
-                    navVC.navigationBar.prefersLargeTitles = true
-
-                    vc = navVC
-                }
-                
-                window.rootViewController = vc
-                window.makeKeyAndVisible()
-                self.window = window 
+        
+        let window = UIWindow(windowScene: windowScene)
+        
+        let vc: UIViewController
+        if AuthManager.shared.isSignedIn {
+            vc = TabBarController()
+        } else {
+            let signInVC = SignInViewController()
+            signInVC.navigationItem.largeTitleDisplayMode = .always
+            
+            let navVC = UINavigationController(rootViewController: signInVC)
+            navVC.navigationBar.prefersLargeTitles = true
+            
+            vc = navVC
+        }
+        
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+        self.window = window
 //
     }
 

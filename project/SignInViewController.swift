@@ -135,7 +135,8 @@ class SignInViewController: UIViewController {
     @objc private func didTapLoginButton() {
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
-              let id = idTextField.text, !id.isEmpty else {
+              let idString = idTextField.text, !idString.isEmpty,
+              let id = Int(idString) else {
             return
         }
 
@@ -144,7 +145,7 @@ class SignInViewController: UIViewController {
                 return
             }
 
-            DatabaseManager.shared.getUser(email: email, id: id) { [weak self] user in
+            DatabaseManager.shared.getUser(email: email, id: Int64(id)) { [weak self] user in
                 if let user = user, user.id == id {
                     // ID match found, proceed with login
                     DispatchQueue.main.async {

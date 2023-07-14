@@ -19,10 +19,10 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     }()
     
     let currentEmail: String
-    let id: String
-    var balance: String
+    let id: Int64
+    var balance: Int64
     
-    init(currentEmail: String, id: String, balance: String) {
+    init(currentEmail: String, id: Int64, balance: Int64) {
         self.currentEmail = currentEmail
         self.id = id
         self.balance = balance
@@ -112,7 +112,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
             height: 20
         )
         headerView.addSubview(idLabel)
-        let user = User(name: name ?? "Noname", email: currentEmail, profilePictureRef: profilePhotoRef, id: id ?? "no", balance: balance)
+        let user = User(name: name ?? "Noname", email: currentEmail, profilePictureRef: profilePhotoRef, id: id, balance: balance)
         idLabel.text = "ID: \(id)"
         print("ID: \(id)")
         idLabel.textAlignment = .center

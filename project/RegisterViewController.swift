@@ -105,17 +105,18 @@ class RegisterViewController: UIViewController {
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty,
               let name = nameField.text, !name.isEmpty,
-              let id = idField.text, !id.isEmpty, id.count <= 3 else {
+              let idString = idField.text, !idString.isEmpty,
+              let id = Int(idString) else {
             return
         }
         
         //Create Account
-        AuthManager.shared.signUp(email: email, password: password, id: id) { [weak self] success in   /* 591 add weak self */
+        AuthManager.shared.signUp(email: email, password: password, id: idString) { [weak self] success in   /* 591 add weak self */
             if success {
                 //Update database
                 
-                let balanceZero: Double = 0
-                let newUser = User(name: name, email: email, profilePictureRef: nil, id: id, balance: String(describing: balanceZero))
+                let balanceZero: Int64 = 0
+                let newUser = User(name: name, email: email, profilePictureRef: nil, id: Int64(id), balance: balanceZero)
                 DatabaseManager.shared.insert(user: newUser) { inserted in
                     guard inserted else {
                         return
@@ -124,6 +125,7 @@ class RegisterViewController: UIViewController {
                     UserDefaults.standard.set(email, forKey: "email")
                     UserDefaults.standard.set(name, forKey: "name")
                     UserDefaults.standard.set(id, forKey: "id")
+                    
                     print("HERE ID \(id)")
                     
                     DispatchQueue.main.async {

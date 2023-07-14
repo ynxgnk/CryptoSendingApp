@@ -16,7 +16,9 @@ class TranscationViewController: UIViewController {
         return table
     }()
     
-    let dbManager = DBManager()
+//    let dbManager = DBManager()
+    let dbManager = DatabaseManager()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class TranscationViewController: UIViewController {
         view.backgroundColor = UIColor(named: "background")
         tableView.delegate = self
         tableView.dataSource = self
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -46,21 +49,33 @@ extension TranscationViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TransctionTableViewCell.idenifier, for: indexPath) as! TransctionTableViewCell
         
-        let transcation = Accounts.transctions[indexPath.row]
+        let transcation = Accounts.transctions[indexPath.section]
         
         // Get sender ID
         //        let sender = Accounts.customers.filter({ $0.id == transcation.sender })[0]
         // Get Receiver ID
-        let receiver = Accounts.customers.filter({ $0.id1 == transcation.receiver })[0]
+//        let receiver = Accounts.customers.filter({ $0.id1 == transcation.receiver })[0]
+        let receiver = Accounts.users.filter({ $0.id == transcation.receiver })[0]
         
         cell.setup(receiver: receiver.name, amount: Int(transcation.amount))
-        cell.layer.cornerRadius = 8
+        cell.layer.cornerRadius = 20
         cell.backgroundColor = UIColor(named: "cellbackground")
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.isHidden = true
+        headerView.backgroundColor = UIColor(named: "background")
+        return headerView
     }
 }
 

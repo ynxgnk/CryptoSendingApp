@@ -16,7 +16,8 @@ class HomeViewController: UIViewController {
         return table
     }()
     
-    let dbManager = DBManager()
+//    let dbManager = DBManager()
+    let dbManager = DatabaseManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,8 +85,11 @@ extension HomeViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomerTableViewCell.identifier, for: indexPath) as! CustomerTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomerTableViewCell.identifier, for: indexPath) as? CustomerTableViewCell else {
+            fatalError()
+        }
         cell.setup(user: Accounts.users[indexPath.row])
+        print("Number of accounts \(Accounts.users.count)")
         cell.backgroundColor = UIColor(named: "cellbackground")
         return cell
     }

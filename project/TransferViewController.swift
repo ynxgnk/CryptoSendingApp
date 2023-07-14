@@ -32,10 +32,11 @@ class TransferViewController: UIViewController {
         return button
     }()
     
-    let dbManager = DBManager()
+//    let dbManager = DBManager()
+    let dbManager = DatabaseManager() 
     var pickerView = UIPickerView()
-    var selectedReceiver: Customer?
-    var selectedReceiver1: User?
+//    var selectedReceiver: Customer?
+    var selectedReceiver: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +72,7 @@ class TransferViewController: UIViewController {
         }
         
         if let selectedReceiver = selectedReceiver {
-            dbManager.transferMoney(to: selectedReceiver.id1, amount: Int(amount)!) { [weak self] error in
+            dbManager.transferMoney(to: Int64(selectedReceiver.id), amount: Int64(amount) ?? 0) { [weak self] error in
                 guard let self = self else { return }
                 
                 if let error = error {
@@ -81,8 +82,13 @@ class TransferViewController: UIViewController {
                     return
                 }
 
-                Accounts.customers = self.dbManager.getUsers()
-//                Accounts.users = self.db.getUsers()
+//                Accounts.customers = self.dbManager.getUsers()
+                Accounts.users = self.dbManager.getUsersTransfers()
+                self.dbManager.getUsers1 { users in
+                    Accounts.users = users
+                    // Handle the retrieved users data or perform any additional operations
+                }
+//                Accounts.users = self.dbManager.getUsers1(completion: )
                 Accounts.transctions = self.dbManager.getTransfers()
                 self.navigationController?.popViewController(animated: true)
             }
@@ -115,7 +121,7 @@ extension TransferViewController: UIPickerViewDelegate {
         view.endEditing(true)
 //        selectedReceiver = Accounts.customers[row]
 //        receiverLabel.text = Accounts.customers[row].name
-        selectedReceiver1 = Accounts.users[row]
+        selectedReceiver = Accounts.users[row]
         receiverLabel.text = Accounts.users[row].name 
     }
 }

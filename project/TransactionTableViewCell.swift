@@ -52,8 +52,8 @@ class TransctionTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        receiverLabel.text = nil
         amountLabel.text = nil
+        receiverLabel.text = nil
     }
     
     
