@@ -27,7 +27,6 @@ class TranscationViewController: UIViewController {
         view.backgroundColor = UIColor(named: "background")
         tableView.delegate = self
         tableView.dataSource = self
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,7 +52,7 @@ extension TranscationViewController: UITableViewDataSource{
         
         // Get sender ID
         //        let sender = Accounts.customers.filter({ $0.id == transcation.sender })[0]
-        // Get Receiver ID
+        // Get Receiver Id
 //        let receiver = Accounts.customers.filter({ $0.id1 == transcation.receiver })[0]
         let receiver = Accounts.users.filter({ $0.id == transcation.receiver })[0]
         
