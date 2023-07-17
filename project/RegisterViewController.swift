@@ -115,7 +115,7 @@ class RegisterViewController: UIViewController {
             if success {
                 //Update database
                 
-                let balanceZero: Int64 = 0
+                let balanceZero: Int64 = 20
                 let newUser = User(name: name, email: email, profilePictureRef: nil, id: Int64(id), balance: balanceZero)
                 DatabaseManager.shared.insert(user: newUser) { inserted in
                     guard inserted else {

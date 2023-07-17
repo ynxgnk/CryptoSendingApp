@@ -34,6 +34,22 @@ class SignInViewController: UIViewController {
         return button
     }()
     
+    //ID field
+    private let idTextField: UITextField = {
+        let field = UITextField()
+        field.keyboardType = .emailAddress
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        field.leftViewMode = .always
+        field.placeholder = "ID"
+        field.textColor = .white
+        field.backgroundColor = UIColor(named: "cellbackground")
+        field.layer.cornerRadius = 8
+        field.layer.masksToBounds = true
+        return field
+    }()
+    
     //Email field
     private let emailTextField: UITextField = {
         let field = UITextField()
@@ -72,21 +88,6 @@ class SignInViewController: UIViewController {
         button.backgroundColor = .systemGreen
         button.layer.cornerRadius = 8
         return button
-    }()
-    
-    private let idTextField: UITextField = {
-        let field = UITextField()
-        field.keyboardType = .emailAddress
-        field.autocapitalizationType = .none
-        field.autocorrectionType = .no
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
-        field.leftViewMode = .always
-        field.placeholder = "ID"
-        field.textColor = .white
-        field.backgroundColor = UIColor(named: "cellbackground")
-        field.layer.cornerRadius = 8
-        field.layer.masksToBounds = true
-        return field
     }()
 
     override func viewDidLoad() {
@@ -182,21 +183,21 @@ class SignInViewController: UIViewController {
         
         emailTextField.frame = CGRect(
             x: (view.frame.size.width/2)-175,
-            y: 240+70,
+            y: 240+60+80,
             width: 350,
             height: 50
         )
         
         passwordTextField.frame = CGRect(
             x: (view.frame.size.width/2)-175,
-            y: 240+60+80,
+            y: 240+60+80+70,
             width: 350,
             height: 50
         )
         
         idTextField.frame = CGRect(
             x: (view.frame.size.width/2)-175,
-            y: 240+60+80+70,
+            y: 240+70,
             width: 350,
             height: 50
         )

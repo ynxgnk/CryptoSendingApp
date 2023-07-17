@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Transction {
     let id: Int64
     let sender: Int64?

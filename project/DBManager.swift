@@ -106,7 +106,7 @@ import SQLite
 //        }
 //    }
     
-//    public func getUsers() -> [User]{ //tyt Customer
+//    public func getUsers() -> [User]{ // Customer
 ////        var users: [Customer] = []
 //        var users: [User] = []
 //
@@ -114,10 +114,10 @@ import SQLite
 //            let stmt = try db.prepare("SELECT * FROM users")
 //
 //            for element in stmt{
-//                let id = element[0] as! String //tyt
+//                let id = element[0] as! String
 //                let name = element[1] as! String
 //                let email = element[2] as! String
-//                let balance = element[3] as! String //tyt
+//                let balance = element[3] as! String 
 //
 ////                let user = Customer(id1: id, name: name, email: email, balance: balance)
 //                let user = User(name: name, email: email, profilePictureRef: nil, id: id, balance: balance)

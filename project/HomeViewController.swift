@@ -15,8 +15,8 @@ class HomeViewController: UIViewController {
                        forCellReuseIdentifier: CustomerTableViewCell.identifier)
         return table
     }()
-    
-//    let dbManager = DBManager()
+
+    //    let dbManager = DBManager()
     let dbManager = DatabaseManager()
     
     override func viewDidLoad() {
@@ -71,8 +71,8 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.reloadData()
     }
-}
 
+}
 
 // MARK: - UITableView DataSource
 extension HomeViewController: UITableViewDataSource{

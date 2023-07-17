@@ -8,7 +8,7 @@
 import UIKit
 
 class TransferViewController: UIViewController {
-    
+        
     private var receiverLabel: UITextField = {
         let field = UITextField()
         field.placeholder = " Receiver"
@@ -33,7 +33,7 @@ class TransferViewController: UIViewController {
     }()
     
 //    let dbManager = DBManager()
-    let dbManager = DatabaseManager() 
+    var dbManager = DatabaseManager()
     var pickerView = UIPickerView()
 //    var selectedReceiver: Customer?
     var selectedReceiver: User?
@@ -81,6 +81,7 @@ class TransferViewController: UIViewController {
                     self.present(alert, animated: true, completion: nil)
                     return
                 }
+                
 
 //                Accounts.customers = self.dbManager.getUsers()
                 Accounts.users = self.dbManager.getUsersTransfers()

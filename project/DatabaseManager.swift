@@ -10,20 +10,22 @@ import SQLite
 import FirebaseFirestore
 import FirebaseDatabase
 
-//enum Tables: String { //tyt
+//enum Tables: String {
 //    case transfers = "transfers"
 //    case users = "users"
 //}
 
 class DatabaseManager {
-    private var db: Connection! //tyt
+    private var db: Connection!
     static let shared = DatabaseManager()
     private let database = Firestore.firestore()
+//    private let usersCollection = "users" // Replace "users" with the actual collection name
+
     
-    init(){ //tyt
+    init(){
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            let fileURL = documentDirectory.appendingPathComponent("db1").appendingPathExtension("sqlite2") //tyt bez 1 i 3
+            let fileURL = documentDirectory.appendingPathComponent("db1").appendingPathExtension("sqlite2") // bez 1 i 3
             let db = try Connection(fileURL.path)
             self.db = db
             
@@ -36,9 +38,24 @@ class DatabaseManager {
             print(error)
         }
     }
-//    private init() {}
-    
-    public func transferMoney(from senderId: Int64, to receiverId: Int64, amount: Int64, compeletion: (Error?) -> Void){ //tyt
+
+//    func getBalance(for userId: Int64) -> Int64? { //tyt
+//            do {
+//                let usersTable = Table("users")
+//                let id = Expression<Int64>("id")
+//                let balance = Expression<Int64>("balance")
+//
+//                if let result = try db.pluck(usersTable.select(balance).filter(id == userId))?[balance] {
+//                    return result
+//                }
+//            } catch {
+//                print(error)
+//            }
+//
+//            return nil
+//        }
+
+    public func transferMoney(from senderId: Int64, to receiverId: Int64, amount: Int64, compeletion: (Error?) -> Void){
         do {
             let sender = try db.prepare("SELECT balance FROM users WHERE id = \(senderId)")
             let recevier = try db.prepare("SELECT balance FROM users WHERE id = \(receiverId)")
@@ -73,7 +90,7 @@ class DatabaseManager {
         }
     }
 
-    public func transferMoney(to receiverId: Int64, amount: Int64, compeletion: (Error?) -> Void){ //tyt
+    public func transferMoney(to receiverId: Int64, amount: Int64, compeletion: (Error?) -> Void){
         do {
             let recevier = try db.prepare("SELECT balance FROM users WHERE id = \(receiverId)")
 
@@ -95,7 +112,7 @@ class DatabaseManager {
         }
     }
 
-    private func addNewTransferRecord(sender: Int64? = nil, receiver: Int64, amount: Int64){ //tyt
+    private func addNewTransferRecord(sender: Int64? = nil, receiver: Int64, amount: Int64){ 
         do {
             if let sender = sender {
                 let stmt = try db.prepare("INSERT INTO transfers (senderId, receiverId, amount) VALUES (?, ?, ?)")
@@ -111,7 +128,7 @@ class DatabaseManager {
         }
     }
 
-    public func getUsersTransfers() -> [User]{ //tyt Customer
+    public func getUsersTransfers() -> [User]{ // Customer
 //        var users: [Customer] = []
         var users: [User] = []
 
@@ -119,10 +136,10 @@ class DatabaseManager {
             let stmt = try db.prepare("SELECT * FROM users")
 
             for element in stmt{
-                let id = element[0] as! Int64 //tyt
+                let id = element[0] as! Int64
                 let name = element[1] as! String
                 let email = element[2] as! String
-                let balance = element[3] as! Int64 //tyt
+                let balance = element[3] as! Int64
 
 //                let user = Customer(id1: id, name: name, email: email, balance: balance)
                 let user = User(name: name, email: email, profilePictureRef: nil, id: id, balance: balance)
@@ -158,7 +175,7 @@ class DatabaseManager {
             }
     }
     
-    public func getTransfers() -> [Transction]{ //tyt
+    public func getTransfers() -> [Transction]{ //
         var transfers: [Transction] = []
         do {
             let stmt = try db.prepare("SELECT * FROM transfers")
@@ -207,7 +224,7 @@ class DatabaseManager {
             }
     }
     
-//    public func getUser(
+//    public func getUser( base
 //        email: String,
 //        id: Int64,
 //        completion: @escaping (User?) -> Void
@@ -239,7 +256,8 @@ class DatabaseManager {
 //            }
 //    }
     
-    public func getUser(email: String, id: Int64, completion: @escaping (User?) -> Void) {
+    
+    public func getUser(email: String, id: Int64, completion: @escaping (User?) -> Void) { 
         let documentId = email
             .replacingOccurrences(of: ".", with: "_")
             .replacingOccurrences(of: "@", with: "_")
@@ -260,6 +278,41 @@ class DatabaseManager {
                 completion(user)
             }
     }
+     
+    
+//    func getUser(email: String, id: Int64, completion: @escaping (User?) -> Void) {
+//        let usersCollection = database.collection("users")
+//        let query = usersCollection.whereField("email", isEqualTo: email)
+//
+//        query.getDocuments { (snapshot, error) in
+//            guard let documents = snapshot?.documents, error == nil else {
+//                completion(nil)
+//                return
+//            }
+//
+//            for document in documents {
+//                let data = document.data()
+//
+//                guard let name = data["name"] as? String,
+//                      let email = data["email"] as? String,
+//                      let profilePictureRef = data["profilePictureRef"] as? String,
+//                      let userId = data["id"] as? Int64,
+//                      let balance = data["balance"] as? Int64 else {
+//                    completion(nil)
+//                    return
+//                }
+//
+//                if userId == id {
+//                    let user = User(name: name, email: email, profilePictureRef: profilePictureRef, id: userId, balance: balance)
+//                    completion(user)
+//                    return
+//                }
+//            }
+//
+//            completion(nil)
+//        }
+//    }
+
     
     func updateProfilePhoto(
         email: String,
@@ -289,20 +342,20 @@ class DatabaseManager {
     }
 }
 
-extension DatabaseManager { //tyt
+extension DatabaseManager {
     private func createUserTable(){
-        let users1 = Table("users") //tyt bez 1
+        let users1 = Table("users") // bez 1
         let id = Expression<Int>("id")
         let name = Expression<String>("name")
         let email = Expression<String>("email")
-        let balance = Expression<Int>("balance")
+        let balance1 = Expression<Int>("balance")
         
         do {
             try db.run(users1.create{ table in
                 table.column(id, primaryKey: true)
                 table.column(name)
                 table.column(email, unique: true)
-                table.column(balance)
+                table.column(balance1)
             })
         } catch {
             print(error)
@@ -310,7 +363,7 @@ extension DatabaseManager { //tyt
     }
     
     private func createTransferTable() {
-        let transfers1 = Table("transfers") //tyt bez 1
+        let transfers1 = Table("transfers") // bez 1
         let id = Expression<Int>("id")
         let senderId = Expression<Int?>("senderId")
         let receiverId = Expression<Int>("receiverId")

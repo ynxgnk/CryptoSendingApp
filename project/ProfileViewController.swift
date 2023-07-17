@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         }
         view.addSubview(profileCryptoTable)
         setUpSignOutButton()
-        setUpTableHeader()
+        setUpTableHeader(balance: balance)
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,8 +53,9 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     private func setUpTableHeader(
         profilePhotoRef: String? = nil,
-        name: String? = nil
+        name: String? = nil,
 //        id: String? = nil
+        balance: Int64
     ) {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width/1.5))
@@ -112,7 +113,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
             height: 20
         )
         headerView.addSubview(idLabel)
-        let user = User(name: name ?? "Noname", email: currentEmail, profilePictureRef: profilePhotoRef, id: id, balance: balance)
         idLabel.text = "ID: \(id)"
         print("ID: \(id)")
         idLabel.textAlignment = .center
@@ -143,6 +143,39 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         )
         settingsButton.addTarget(self, action: #selector(didTapSettings), for: .touchUpInside)
         headerView.addSubview(settingsButton)
+        
+        //Balance
+        
+         
+        let balanceLabel = UILabel(frame: CGRect(
+            x: profilePhoto.left-180,
+            y: 5,
+            width: 200,
+            height: 17)
+        )
+        headerView.addSubview(balanceLabel)
+        balanceLabel.text = "Balance: \(balance) $"
+        print("BALANCE1: \(balance)")
+        balanceLabel.textAlignment = .center
+        balanceLabel.textColor = .white
+        balanceLabel.font = .systemFont(ofSize: 16, weight: .bold)
+         
+         
+        
+//        let balanceLabel = UILabel(frame: CGRect(
+//                x: profilePhoto.left-180,
+//                y: 5,
+//                width: 200,
+//                height: 17)
+//            )
+//            headerView.addSubview(balanceLabel)
+//            balanceLabel.textAlignment = .center
+//            balanceLabel.textColor = .white
+//            balanceLabel.font = .systemFont(ofSize: 16, weight: .bold)
+//
+//            // Fetch balance from the class property
+//            balanceLabel.text = "Balance: \(balance) $"
+//            print("BALANCE1: \(balance)")
     }
     
     
@@ -164,21 +197,42 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         present(picker, animated: true)
     }
     
+    
     private func fetchProfileData() {
         DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in
             guard let user = user else {
                 return
             }
             self?.user = user
-            
+
             DispatchQueue.main.async {
                 self?.setUpTableHeader(
                     profilePhotoRef: user.profilePictureRef,
-                    name: user.name
+                    name: user.name,
+                    balance: user.balance
                 )
             }
         }
     }
+     
+    
+//    private func fetchProfileData() {
+//        DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in
+//            guard let user = user else {
+//                return
+//            }
+//            self?.user = user
+//            self?.balance = user.balance // Assign the balance to the property
+//
+//            DispatchQueue.main.async {
+//                self?.setUpTableHeader(
+//                    profilePhotoRef: user.profilePictureRef,
+//                    name: user.name,
+//                    balance: user.balance // Pass the balance to the setUpTableHeader method
+//                )
+//            }
+//        }
+//    }
     
     private func setUpSignOutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(

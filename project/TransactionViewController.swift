@@ -53,10 +53,10 @@ extension TranscationViewController: UITableViewDataSource{
         let transcation = Accounts.transctions[indexPath.section]
         
         // Get sender ID
-        //        let sender = Accounts.customers.filter({ $0.id == transcation.sender })[0]
+//                let sender = Accounts.users.filter({ $0.id == transcation.sender })[0]
         // Get Receiver Id
 //        let receiver = Accounts.customers.filter({ $0.id1 == transcation.receiver })[0]
-        let receiver = Accounts.users.filter({ $0.id == transcation.receiver })[0]
+        let receiver = Accounts.users.reversed().filter({ $0.id == transcation.receiver })[0]
         
         cell.setup(receiver: receiver.name, amount: Int(transcation.amount))
         cell.layer.cornerRadius = 20
