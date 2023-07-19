@@ -13,24 +13,28 @@ class CustomerTableViewCell: UITableViewCell {
     private let idLabel: UILabel = {
        let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     
     private let nameLabel: UILabel = {
        let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     
     private let emailLabel: UILabel = {
        let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     
     private let balanceLabel: UILabel = {
        let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     

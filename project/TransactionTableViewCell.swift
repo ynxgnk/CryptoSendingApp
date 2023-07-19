@@ -13,12 +13,14 @@ class TransctionTableViewCell: UITableViewCell {
     private let receiverLabel: UILabel = {
        let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     
     private let amountLabel: UILabel = {
        let label = UILabel()
         label.textAlignment = .right
+        label.textColor = .white
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         return label
     }()

@@ -115,8 +115,8 @@ class RegisterViewController: UIViewController {
             if success {
                 //Update database
                 
-                let balanceZero: Int64 = 20
-                let newUser = User(name: name, email: email, profilePictureRef: nil, id: Int64(id), balance: balanceZero)
+                //                let balanceZero: Int64 = 0
+                let newUser = User(name: name, email: email, profilePictureRef: nil, id: Int64(id), balance: 0)
                 DatabaseManager.shared.insert(user: newUser) { inserted in
                     guard inserted else {
                         return
@@ -139,5 +139,6 @@ class RegisterViewController: UIViewController {
             }
         }
         //Update database
+
     }
 }

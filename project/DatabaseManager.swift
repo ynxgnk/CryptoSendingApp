@@ -10,17 +10,15 @@ import SQLite
 import FirebaseFirestore
 import FirebaseDatabase
 
-//enum Tables: String {
-//    case transfers = "transfers"
-//    case users = "users"
-//}
+enum Tables: String {
+    case transfers = "transfers"
+    case users = "users"
+}
 
 class DatabaseManager {
     private var db: Connection!
     static let shared = DatabaseManager()
     private let database = Firestore.firestore()
-//    private let usersCollection = "users" // Replace "users" with the actual collection name
-
     
     init(){
         do {
@@ -39,143 +37,144 @@ class DatabaseManager {
         }
     }
 
-//    func getBalance(for userId: Int64) -> Int64? { //tyt
-//            do {
-//                let usersTable = Table("users")
-//                let id = Expression<Int64>("id")
-//                let balance = Expression<Int64>("balance")
-//
-//                if let result = try db.pluck(usersTable.select(balance).filter(id == userId))?[balance] {
-//                    return result
-//                }
-//            } catch {
-//                print(error)
-//            }
-//
-//            return nil
-//        }
-
     public func transferMoney(from senderId: Int64, to receiverId: Int64, amount: Int64, compeletion: (Error?) -> Void){
         do {
             let sender = try db.prepare("SELECT balance FROM users WHERE id = \(senderId)")
             let recevier = try db.prepare("SELECT balance FROM users WHERE id = \(receiverId)")
-
+            
             var senderBalance: Int64 = 0
             for element in sender {
                 senderBalance = element[0] as! Int64
             }
-
+            
             var receiverBalance: Int64 = 0
             for element in recevier{
                 receiverBalance = element[0] as! Int64
             }
-
+            
             let newSenderBalance = senderBalance - amount
             let newReceiverBalance = receiverBalance + amount
-
+            
             if newSenderBalance < 0 {
                 compeletion(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Transfer can't be done because you don't have enough balance."]))
                 return
             }
-
+            
             addNewTransferRecord(sender: senderId, receiver: receiverId, amount: amount)
-
+            
             _ = try db.run("UPDATE users SET balance = \(newSenderBalance) WHERE id = \(senderId)")
             _ = try db.run("UPDATE users SET balance = \(newReceiverBalance) WHERE id = \(receiverId)")
-
+            
             compeletion(nil)
-
+            
         } catch {
             compeletion(error)
         }
     }
-
+    
     public func transferMoney(to receiverId: Int64, amount: Int64, compeletion: (Error?) -> Void){
         do {
             let recevier = try db.prepare("SELECT balance FROM users WHERE id = \(receiverId)")
-
+            
             var receiverBalance: Int64 = 0
             for element in recevier{
                 receiverBalance = element[0] as! Int64
             }
-
+            
             let newReceiverBalance = receiverBalance + amount
-
+            
             addNewTransferRecord(receiver: receiverId, amount: amount)
-
+            
             _ = try db.run("UPDATE users SET balance = \(newReceiverBalance) WHERE id = \(receiverId)")
-
+            
             compeletion(nil)
-
+            
         } catch {
             compeletion(error)
         }
     }
-
-    private func addNewTransferRecord(sender: Int64? = nil, receiver: Int64, amount: Int64){ 
+    
+    private func addNewTransferRecord(sender: Int64? = nil, receiver: Int64, amount: Int64){
         do {
             if let sender = sender {
                 let stmt = try db.prepare("INSERT INTO transfers (senderId, receiverId, amount) VALUES (?, ?, ?)")
                 try stmt.run([sender, receiver, amount])
-
+                
             }else{
                 let stmt = try db.prepare("INSERT INTO transfers (receiverId, amount) VALUES (?, ?)")
                 try stmt.run([receiver, amount])
             }
-
+            
         } catch {
             print(error)
         }
     }
-
+    
     public func getUsersTransfers() -> [User]{ // Customer
-//        var users: [Customer] = []
+        //        var users: [Customer] = []
         var users: [User] = []
-
+        
         do {
             let stmt = try db.prepare("SELECT * FROM users")
-
+            
             for element in stmt{
                 let id = element[0] as! Int64
                 let name = element[1] as! String
                 let email = element[2] as! String
                 let balance = element[3] as! Int64
-
-//                let user = Customer(id1: id, name: name, email: email, balance: balance)
+                
+                //                let user = Customer(id1: id, name: name, email: email, balance: balance)
                 let user = User(name: name, email: email, profilePictureRef: nil, id: id, balance: balance)
                 users.append(user)
             }
-
+            
         } catch {
             print(error)
         }
         return users
     }
     
-    public func insert(
-        user: User,
-        completion: @escaping (Bool) -> Void
-    ) {
-        let documentId = user.email
-            .replacingOccurrences(of: ".", with: "_")
-            .replacingOccurrences(of: "@", with: "_")
-        
-        let data = [
-            "email": user.email,
-            "name": user.name,
-            "id": user.id,
-            "balance": user.balance
-        ] as [String : Any]
-        
-        database
-            .collection("users")
-            .document(documentId)
-            .setData(data) { error in
-                completion(error == nil)
-            }
-    }
+//    public func insert(
+//        user: User,
+//        completion: @escaping (Bool) -> Void
+//    ) {
+//        let documentId = user.email
+//            .replacingOccurrences(of: ".", with: "_")
+//            .replacingOccurrences(of: "@", with: "_")
+//
+//        let data = [
+//            "email": user.email,
+//            "name": user.name,
+//            "id": user.id,
+//            "balance": user.balance
+//        ] as [String : Any]
+//
+//        database
+//            .collection("users")
+//            .document(documentId)
+//            .setData(data) { error in
+//                completion(error == nil)
+//            }
+//    }
     
-    public func getTransfers() -> [Transction]{ //
+    func insert(user: User, completion: @escaping (Bool) -> Void) {
+            database.collection("users").document("\(user.id)").setData([
+                "name": user.name,
+                "email": user.email,
+                "profilePictureRef": user.profilePictureRef ?? "",
+                "balance": user.balance
+            ]) { error in
+                if let error = error {
+                    print("Failed to insert user: \(error)")
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }
+        }
+
+    
+    public func getTransfers() -> [Transction]{ 
         var transfers: [Transction] = []
         do {
             let stmt = try db.prepare("SELECT * FROM transfers")
@@ -205,9 +204,9 @@ class DatabaseManager {
                     completion([])
                     return
                 }
-                
+
                 var users: [User] = []
-                
+
                 for document in documents {
                     if let data = document.data() as? [String: Any],
                        let email = data["email"] as? String,
@@ -219,43 +218,32 @@ class DatabaseManager {
                         users.append(user)
                     }
                 }
-                
+
                 completion(users)
             }
     }
     
-//    public func getUser( base
-//        email: String,
-//        id: Int64,
-//        completion: @escaping (User?) -> Void
-//    ) {
-//        let documentId = email
-//            .replacingOccurrences(of: ".", with: "_")
-//            .replacingOccurrences(of: "@", with: "_")
+//    public func getUsers1() -> [User]{
+//           var users: [User] = []
 //
-//        database
-//            .collection("users")
-//            .document(documentId)
-//            .getDocument { snapshot, error in
-//                guard let data = snapshot?.data() as? [String: String],
-//                      let name = data["name"],
-//                      error == nil else {
-//                    return
-//                }
+//           do {
+//               let stmt = try db.prepare("SELECT * FROM users")
 //
-//                guard let data1 = snapshot?.data() as? [Int64: Int64],
-//                      let id = data["id"],
-//                      let balance = data["balance"],
-//                      error == nil else {
-//                    return
-//                }
+//               for element in stmt{
+//                   let id = element[0] as! Int64
+//                   let name = element[1] as! String
+//                   let email = element[2] as! String
+//                   let balance = element[3] as! Int64
 //
-//                var ref = data["profile_photo"]
-//                let user = User(name: name, email: email, profilePictureRef: ref, id: Int64(id) ?? 0, balance: Int64(balance) ?? 0)
-//                completion(user)
-//            }
-//    }
-    
+//                   let user = User(name: name, email: email, profilePictureRef: nil, id: id, balance: balance)
+//                   users.append(user)
+//               }
+//
+//           } catch {
+//               print(error)
+//           }
+//           return users
+//       }
     
     public func getUser(email: String, id: Int64, completion: @escaping (User?) -> Void) { 
         let documentId = email
@@ -278,41 +266,6 @@ class DatabaseManager {
                 completion(user)
             }
     }
-     
-    
-//    func getUser(email: String, id: Int64, completion: @escaping (User?) -> Void) {
-//        let usersCollection = database.collection("users")
-//        let query = usersCollection.whereField("email", isEqualTo: email)
-//
-//        query.getDocuments { (snapshot, error) in
-//            guard let documents = snapshot?.documents, error == nil else {
-//                completion(nil)
-//                return
-//            }
-//
-//            for document in documents {
-//                let data = document.data()
-//
-//                guard let name = data["name"] as? String,
-//                      let email = data["email"] as? String,
-//                      let profilePictureRef = data["profilePictureRef"] as? String,
-//                      let userId = data["id"] as? Int64,
-//                      let balance = data["balance"] as? Int64 else {
-//                    completion(nil)
-//                    return
-//                }
-//
-//                if userId == id {
-//                    let user = User(name: name, email: email, profilePictureRef: profilePictureRef, id: userId, balance: balance)
-//                    completion(user)
-//                    return
-//                }
-//            }
-//
-//            completion(nil)
-//        }
-//    }
-
     
     func updateProfilePhoto(
         email: String,

@@ -12,6 +12,7 @@ class TransferViewController: UIViewController {
     private var receiverLabel: UITextField = {
         let field = UITextField()
         field.placeholder = " Receiver"
+        field.textColor = .white
         field.layer.cornerRadius = 8
         return field
     }()
@@ -19,6 +20,7 @@ class TransferViewController: UIViewController {
     private var amountLabel: UITextField = {
         let field = UITextField()
         field.layer.cornerRadius = 8
+        field.textColor = .white
         field.placeholder = " Amount"
         return field
     }()
@@ -71,17 +73,18 @@ class TransferViewController: UIViewController {
             return
         }
         
+        print("Amount: \(amount)")
         if let selectedReceiver = selectedReceiver {
             dbManager.transferMoney(to: Int64(selectedReceiver.id), amount: Int64(amount) ?? 0) { [weak self] error in
                 guard let self = self else { return }
-                
+
                 if let error = error {
                     let alert = UIAlertController(title: "Woops", message: error.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                     return
                 }
-                
+
 
 //                Accounts.customers = self.dbManager.getUsers()
                 Accounts.users = self.dbManager.getUsersTransfers()
@@ -94,6 +97,7 @@ class TransferViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+        
     }
 }
 

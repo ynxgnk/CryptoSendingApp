@@ -11,14 +11,12 @@ import FirebaseCore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
         let databaseManager = DatabaseManager.shared
         
-        databaseManager.getUsers1 { users in
+        databaseManager.getUsers1() { users in
             // Handle the retrieved users here
             Accounts.users = users
             print("NUMBER \(users.count)")

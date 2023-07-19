@@ -94,9 +94,8 @@ class CryptoViewController: UIViewController {
     private var viewModels = [CryptoTableViewCellViewModel]()
     private var newsViewModels = [NewsTableViewCellViewModel]()
     private var cryptoCoins = [CryptoCoinModel]()
-    var cryptoCoin: CryptoCoinModel?
     private var articles = [NewsTitlesModel]()
-    private var selectedCryptoCoin: CryptoCoinModel? 
+    private var selectedCryptoCoin: CryptoCoinModel?
 
     
     override func viewDidLayoutSubviews() {
@@ -203,13 +202,6 @@ extension CryptoViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: false)
-//
-//        let cryptoDetailsVC = CryptoDetailsViewController()
-//        navigationController?.pushViewController(cryptoDetailsVC, animated: true)
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCryptoCoin = cryptoCoins[indexPath.section]

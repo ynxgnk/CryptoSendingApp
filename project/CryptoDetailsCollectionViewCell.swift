@@ -7,8 +7,8 @@
 
 import UIKit
 
-class CryptoDetailsCollectionViewCell: UITableViewCell {
-    static let identifier = "CryptoDetailsCollectionViewCell"
+class CryptoDetailsTableViewCell: UITableViewCell {
+    static let identifier = "CryptoDetailsTableViewCell"
     
     private let logoImageView: UIImageView = {
         let view = UIImageView()
@@ -21,6 +21,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let overviewLabel: UILabel = {
        let label = UILabel()
         label.text = "Overview"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 22, weight: .bold)
         return label
     }()
@@ -28,6 +29,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let currectPriceTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Current Price:"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
@@ -35,6 +37,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let currectPriceLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -42,6 +45,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let currentPricePercentageLabel: UILabel = {
        let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -49,6 +53,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let marketCapLabel: UILabel = {
         let label = UILabel()
         label.text = "Market Cap:"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -56,6 +61,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let marketCapPriceLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -63,6 +69,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let marketCapPricePercentageLabel: UILabel = {
        let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -70,6 +77,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let rankTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Rank:"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
@@ -77,6 +85,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let rankLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -84,6 +93,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let volumeTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Volume:"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
@@ -91,6 +101,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let volumeLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -100,6 +111,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let additionalOverviewLabel: UILabel = {
         let label = UILabel()
         label.text = "Additional details"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 18, weight: .bold)
         return label
     }()
@@ -107,6 +119,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let high24h: UILabel = {
         let label = UILabel()
         label.text = "24H High:"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
@@ -114,6 +127,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let priceHigh24h: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -121,6 +135,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let priceChange24h: UILabel = {
         let label = UILabel()
         label.text = "24H Price Change:"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
@@ -128,6 +143,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let priceChange24hPrice: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -135,6 +151,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let priceChange24hPercentage: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -142,6 +159,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let low24h: UILabel = {
         let label = UILabel()
         label.text = "24H Low:"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
@@ -149,6 +167,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let priceLow24h: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -156,6 +175,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let marketCapChange: UILabel = {
         let label = UILabel()
         label.text = "24H Market CapChange:"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
@@ -163,6 +183,7 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let marketPriceChange24hPrice: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -170,13 +191,14 @@ class CryptoDetailsCollectionViewCell: UITableViewCell {
     private let marketPriceChange24hPercentage: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = UIColor(named: "cellbackground")
+        contentView.backgroundColor = UIColor(named: "background")
         contentView.frame = contentView.bounds
         addOverviewSubviews()
         addAdditionalSubviews()

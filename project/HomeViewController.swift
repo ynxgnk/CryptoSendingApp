@@ -71,7 +71,6 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.reloadData()
     }
-
 }
 
 // MARK: - UITableView DataSource

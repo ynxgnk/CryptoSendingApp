@@ -21,6 +21,7 @@ class CryptoTableViewCell: UITableViewCell {
     private let cryptoTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 17, weight: .bold)
         return label
     }()
@@ -28,6 +29,7 @@ class CryptoTableViewCell: UITableViewCell {
     private let cryptoSubtitleLabel: UILabel = {
        let label = UILabel()
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 15, weight: .regular)
         return label
     }()
@@ -36,6 +38,7 @@ class CryptoTableViewCell: UITableViewCell {
        let label = UILabel()
         label.textAlignment = .right
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 18, weight: .bold)
         return label
     }()
@@ -44,6 +47,7 @@ class CryptoTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .right
         label.numberOfLines = 1
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
     }()

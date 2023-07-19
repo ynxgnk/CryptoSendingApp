@@ -15,8 +15,8 @@ final class TabBarController: UITabBarController {
     }
     
     private func setUpControllers() {
-        guard let currentUserEmail = UserDefaults.standard.string(forKey: "email")
-//              let currentID = UserDefaults.standard.string(forKey: "id")
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "email"),
+              let currentID = UserDefaults.standard.string(forKey: "id")
         else {
             print("EROROROROR")
             return
@@ -27,7 +27,7 @@ final class TabBarController: UITabBarController {
         let currentBalance = UserDefaults.standard.integer(forKey: "balance")
         print("balance: \(currentBalance)")
         
-        let currentID = UserDefaults.standard.integer(forKey: "id")
+//        let currentID = UserDefaults.standard.integer(forKey: "id")
         print("id: \(currentID)")
             
             DispatchQueue.main.async {
