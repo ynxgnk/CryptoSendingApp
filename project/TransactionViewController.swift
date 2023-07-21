@@ -16,9 +16,7 @@ class TranscationViewController: UIViewController {
         return table
     }()
     
-//    let dbManager = DBManager()
     let dbManager = DatabaseManager()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +26,7 @@ class TranscationViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        Accounts.transctions = dbManager.getTransfers() // Replace with your data fetching logic
+//        Accounts.transctions = dbManager.getTransfers() // Replace with your data fetching logic
         tableView.reloadData()
     }
     

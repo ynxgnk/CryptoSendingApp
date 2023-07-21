@@ -16,10 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         let databaseManager = DatabaseManager.shared
         
-        databaseManager.getUsers1() { users in
-            // Handle the retrieved users here
-            Accounts.users = users
-            print("NUMBER \(users.count)")
+        databaseManager.getUsers() { users, error in
+            if let error = error {
+                // Handle the error here, if needed
+                print("Error fetching users: \(error.localizedDescription)")
+            } else {
+                // Use the retrieved users here
+                Accounts.users = users
+                print("NUMBER \(users.count)")
+            }
         }
         return true
         

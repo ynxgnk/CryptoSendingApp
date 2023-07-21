@@ -20,18 +20,23 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     let currentEmail: String
     let id: Int64
-    var balance: Int64
+//    var balance: Int64
     
-    init(currentEmail: String, id: Int64, balance: Int64) {
+    init(currentEmail: String, id: Int64) {
         self.currentEmail = currentEmail
         self.id = id
-        self.balance = balance
+//        self.balance = balance
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+//    func updateBalance(_ balance: Int64) {
+//            self.balance = balance
+//            setUpTableHeader(balance: balance)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +48,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         }
         view.addSubview(profileCryptoTable)
         setUpSignOutButton()
-        setUpTableHeader(balance: balance)
+        setUpTableHeader()
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,9 +58,9 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     private func setUpTableHeader(
         profilePhotoRef: String? = nil,
-        name: String? = nil,
+        name: String? = nil
 //        id: String? = nil
-        balance: Int64
+//        balance: Int64
     ) {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width/1.5))
@@ -146,7 +151,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         
         //Balance
         
-         
         let balanceLabel = UILabel(frame: CGRect(
             x: profilePhoto.left-180,
             y: 5,
@@ -154,28 +158,12 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
             height: 17)
         )
         headerView.addSubview(balanceLabel)
-        balanceLabel.text = "Balance: \(balance) $"
-        print("BALANCE1: \(balance)")
+//        balanceLabel.text = "Balance: \(balance) $"
+//        print("BALANCE1: \(balance)")
         balanceLabel.textAlignment = .center
         balanceLabel.textColor = .white
         balanceLabel.font = .systemFont(ofSize: 16, weight: .bold)
-         
-         
         
-//        let balanceLabel = UILabel(frame: CGRect(
-//                x: profilePhoto.left-180,
-//                y: 5,
-//                width: 200,
-//                height: 17)
-//            )
-//            headerView.addSubview(balanceLabel)
-//            balanceLabel.textAlignment = .center
-//            balanceLabel.textColor = .white
-//            balanceLabel.font = .systemFont(ofSize: 16, weight: .bold)
-//
-//            // Fetch balance from the class property
-//            balanceLabel.text = "Balance: \(balance) $"
-//            print("BALANCE1: \(balance)")
     }
     
     
@@ -208,31 +196,12 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
             DispatchQueue.main.async {
                 self?.setUpTableHeader(
                     profilePhotoRef: user.profilePictureRef,
-                    name: user.name,
-                    balance: user.balance
+                    name: user.name
+//                    balance: user.balance 
                 )
             }
         }
     }
-     
-    
-//    private func fetchProfileData() {
-//        DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in
-//            guard let user = user else {
-//                return
-//            }
-//            self?.user = user
-//            self?.balance = user.balance // Assign the balance to the property
-//
-//            DispatchQueue.main.async {
-//                self?.setUpTableHeader(
-//                    profilePhotoRef: user.profilePictureRef,
-//                    name: user.name,
-//                    balance: user.balance // Pass the balance to the setUpTableHeader method
-//                )
-//            }
-//        }
-//    }
     
     private func setUpSignOutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -253,7 +222,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                     DispatchQueue.main.async {
                         UserDefaults.standard.set(nil, forKey: "email")
                         UserDefaults.standard.set(nil, forKey: "name")
-                        UserDefaults.standard.set(nil, forKey: "id") 
+                        UserDefaults.standard.set(nil, forKey: "id")
                         
                         let signInVC = SignInViewController()
                         signInVC.navigationItem.largeTitleDisplayMode = .always

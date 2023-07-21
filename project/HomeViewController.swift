@@ -16,8 +16,11 @@ class HomeViewController: UIViewController {
         return table
     }()
 
-    //    let dbManager = DBManager()
     let dbManager = DatabaseManager()
+    
+    var currentUserEmail: String?
+        var currentID: Int64 = 0
+        var currentBalance: Int64 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,10 +70,10 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-        tableView.reloadData()
-    }
+            super.viewWillAppear(animated)
+            navigationController?.navigationBar.prefersLargeTitles = true
+            tableView.reloadData()
+        }
 }
 
 // MARK: - UITableView DataSource

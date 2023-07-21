@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransctionTableViewCell: UITableViewCell {
+class `TransctionTableViewCell`: UITableViewCell {
     static let idenifier = "TransctionTableViewCell"
     
     private let receiverLabel: UILabel = {

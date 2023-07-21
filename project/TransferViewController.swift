@@ -1,6 +1,6 @@
 //
 //  TransferViewController.swift
-//  
+//
 //
 //  Created by Nazar Kopeika on 02.07.2023.
 //
@@ -34,10 +34,8 @@ class TransferViewController: UIViewController {
         return button
     }()
     
-//    let dbManager = DBManager()
     var dbManager = DatabaseManager()
     var pickerView = UIPickerView()
-//    var selectedReceiver: Customer?
     var selectedReceiver: User?
     
     override func viewDidLoad() {
@@ -67,7 +65,7 @@ class TransferViewController: UIViewController {
         guard let receiver = receiverLabel.text, !receiver.isEmpty,
               let amount = amountLabel.text, !amount.isEmpty
         else {
-            let alert = UIAlertController(title: "Woops", message: "Please fill all fileds", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Woops", message: "Please fill all fields", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
@@ -84,16 +82,29 @@ class TransferViewController: UIViewController {
                     self.present(alert, animated: true, completion: nil)
                     return
                 }
-
-
-//                Accounts.customers = self.dbManager.getUsers()
-                Accounts.users = self.dbManager.getUsersTransfers()
-                self.dbManager.getUsers1 { users in
-                    Accounts.users = users
-                    // Handle the retrieved users data or perform any additional operations
+                
+                self.dbManager.getUsers { users, error in
+                    if let error = error {
+                        // Handle the error here, if needed
+                        print("Error fetching users: \(error.localizedDescription)")
+                    } else {
+                        // Use the fetched users here
+                        Accounts.users = users
+                    }
                 }
-//                Accounts.users = self.dbManager.getUsers1(completion: )
-                Accounts.transctions = self.dbManager.getTransfers()
+                self.dbManager.getTransfers { transfers, error in
+                    if let error = error {
+                        // Handle the error here, if needed
+                        print("Error fetching transfers: \(error.localizedDescription)")
+                    } else {
+                        // Use the fetched transfers here
+                        if let transfers = transfers {
+                            Accounts.transctions = transfers
+                        } else {
+                            print("No transfers found.")
+                        }
+                    }
+                }
                 self.navigationController?.popViewController(animated: true)
             }
         }
@@ -109,7 +120,6 @@ extension TransferViewController: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return Accounts.customers.count
         return Accounts.users.count
     }
 }
@@ -118,15 +128,12 @@ extension TransferViewController: UIPickerViewDataSource {
 // MARK: - UIPickerView Delegate
 extension TransferViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return Accounts.customers[row].name
         return Accounts.users[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         view.endEditing(true)
-//        selectedReceiver = Accounts.customers[row]
-//        receiverLabel.text = Accounts.customers[row].name
         selectedReceiver = Accounts.users[row]
-        receiverLabel.text = Accounts.users[row].name 
+        receiverLabel.text = Accounts.users[row].name
     }
 }

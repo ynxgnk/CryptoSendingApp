@@ -56,16 +56,14 @@ class CryptoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        view.addSubvirew(spinner)
-        //        spinner.startAnimating()
-        //        addConstraints()
-        
         navigationController?.navigationBar.barTintColor = UIColor(named: "background")
         view.backgroundColor = UIColor(named: "background")
         
         cryptoScrollCollectionView.showsHorizontalScrollIndicator = false
         cryptoTable.showsVerticalScrollIndicator = false
         cryptoTable.delegate = self
+        navigationController?.navigationBar.isHidden = true // Hide the navigation bar initially
+
         cryptoTable.dataSource = self
         cryptoScrollCollectionView.delegate = self
         cryptoScrollCollectionView.dataSource = self

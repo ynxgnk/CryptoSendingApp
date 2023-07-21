@@ -9,7 +9,7 @@
 //
 //
 //struct Customer {
-//    let id1: Int
+//    let id: Int
 //    let name: String
 //    let email: String
 //    let balance: Int

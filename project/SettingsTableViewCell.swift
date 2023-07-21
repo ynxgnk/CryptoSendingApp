@@ -14,7 +14,7 @@ class SettingsTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.image = UIImage(systemName: "gear")
-        image.backgroundColor = UIColor(named: "background")
+        image.backgroundColor = UIColor(named: "cellbackground")
         image.layer.cornerRadius = 20
         return image
     }()
@@ -22,6 +22,7 @@ class SettingsTableViewCell: UITableViewCell {
     let settingsName: UILabel = {
        let label = UILabel()
         label.text = "Rate App"
+        label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.isUserInteractionEnabled = true
         return label

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Transction {
+public struct Transction {
     let id: Int64
     let sender: Int64?
     let receiver: Int64
