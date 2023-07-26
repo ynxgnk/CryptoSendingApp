@@ -27,7 +27,6 @@ class TranscationViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-//        Accounts.transctions = dbManager.getTransfers() // Replace with your data fetching logic
         fetchTransactions() // Call the function to fetch transactions
         tableView.reloadData()
     }

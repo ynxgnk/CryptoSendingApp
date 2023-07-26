@@ -112,7 +112,7 @@ class SignInViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc private func didTapLoginButton() {
+    @objc private func didTapLoginButton() { //default
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
               let idString = idTextField.text, !idString.isEmpty,
@@ -143,7 +143,7 @@ class SignInViewController: UIViewController {
             }
         }
     }
-
+  
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         logoImageView.frame = CGRect(

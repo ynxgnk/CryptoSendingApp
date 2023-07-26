@@ -13,5 +13,4 @@ struct User {
     let profilePictureRef: String?
     var id: Int64
     var balance: Int64 
-    
 }

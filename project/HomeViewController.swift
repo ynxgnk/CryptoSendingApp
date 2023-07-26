@@ -17,7 +17,6 @@ class HomeViewController: UIViewController {
     }()
 
     let dbManager = DatabaseManager()
-    
     var currentUserEmail: String?
         var currentID: Int64 = 0
         var currentBalance: Int64 = 0
@@ -28,6 +27,7 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.backgroundColor = UIColor(named: "background")
         view.backgroundColor = UIColor(named: "background")
         setUpSendButton()
+        
         setUpHistoryButton()
         tableView.backgroundColor = UIColor(named: "background")
         tableView.delegate = self
@@ -69,26 +69,11 @@ class HomeViewController: UIViewController {
         tableView.frame = view.bounds
     }
     
-//    override func viewWillAppear(_ animated: Bool) { //default
-//            super.viewWillAppear(animated)
-//            navigationController?.navigationBar.prefersLargeTitles = true
-//            tableView.reloadData()
-//        }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-
-        dbManager.getUsersTransfers { [weak self] users in
-            guard let self = self else { return }
-
-            // Update Accounts.users with the fetched users
-            Accounts.users = users
-            self.tableView.reloadData()
-            print("NUMBER \(Accounts.users.count)")
+    override func viewWillAppear(_ animated: Bool) { //default
+            super.viewWillAppear(animated)
+            navigationController?.navigationBar.prefersLargeTitles = true
+            tableView.reloadData()
         }
-    }
-    
 }
 
 // MARK: - UITableView DataSource
@@ -115,7 +100,7 @@ extension HomeViewController: UITableViewDataSource{
 
 // MARK: - UITableView Delegate
 extension HomeViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { //default
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

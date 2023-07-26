@@ -73,7 +73,10 @@ class TransferViewController: UIViewController {
         
         print("Amount: \(amount)")
         if let selectedReceiver = selectedReceiver {
-            dbManager.transferMoney(to: selectedReceiver.id, amount: Int64(amount) ?? 0) { [weak self] error in
+            let selected = selectedReceiver.email
+                .replacingOccurrences(of: ".", with: "_")
+                .replacingOccurrences(of: "@", with: "_")
+            dbManager.transferMoney(to: selected, amount: Int64(amount) ?? 0) { [weak self] error in
                 guard let self = self else { return }
 
                 if let error = error {

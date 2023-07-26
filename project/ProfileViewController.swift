@@ -49,6 +49,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         view.addSubview(profileCryptoTable)
         setUpSignOutButton()
         setUpTableHeader()
+        fetchProfileData() 
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,10 +61,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     private func setUpTableHeader(
         profilePhotoRef: String? = nil,
         name: String? = nil
-//        id: String? = nil
 //        balance: Int64
     ) {
-        
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width/1.5))
         headerView.backgroundColor = UIColor(named: "background")
         headerView.isUserInteractionEnabled = true
@@ -86,6 +86,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         profilePhoto.addGestureRecognizer(tap)
         
         //Name
+        
         if let name = name {
             title = name
         }
@@ -185,8 +186,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         present(picker, animated: true)
     }
     
-    
-    private func fetchProfileData() {
+    private func fetchProfileData() { //default
         DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in
             guard let user = user else {
                 return

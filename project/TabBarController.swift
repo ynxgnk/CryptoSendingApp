@@ -15,19 +15,19 @@ final class TabBarController: UITabBarController {
     }
     
     private func setUpControllers() {
-//        guard let currentUserEmail = UserDefaults.standard.string(forKey: "email"),
-//              let currentID = UserDefaults.standard.string(forKey: "id")
-//        else {
-//            print("EROROROROR")
-//            return
-//        }
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "email"),
+              let currentID = UserDefaults.standard.string(forKey: "id")
+        else {
+            print("EROROROROR")
+            return
+        }
         
-        let currentUserEmail = UserDefaults.standard.string(forKey: "email") ?? "No email"
+//        let currentUserEmail = UserDefaults.standard.string(forKey: "email") ?? "No email"
 
 //        let currentBalance = UserDefaults.standard.integer(forKey: "balance")
 //        print("balance: \(currentBalance)")
         
-        let currentID = UserDefaults.standard.integer(forKey: "id")
+//        let currentID = UserDefaults.standard.integer(forKey: "id")
         print("id: \(currentID)")
             
             DispatchQueue.main.async {
@@ -37,7 +37,7 @@ final class TabBarController: UITabBarController {
             
             let cryptoVC = UINavigationController(rootViewController: CryptoViewController())
             let transferVC = UINavigationController(rootViewController: HomeViewController())
-            let profileVC = UINavigationController(rootViewController: ProfileViewController(currentEmail: currentUserEmail, id: Int64(currentID)))
+            let profileVC = UINavigationController(rootViewController: ProfileViewController(currentEmail: currentUserEmail, id: Int64(currentID) ?? 0))
             
             cryptoVC.tabBarItem.image = UIImage(systemName: "bitcoinsign.circle")
             transferVC.tabBarItem.image = UIImage(systemName: "paperplane")
