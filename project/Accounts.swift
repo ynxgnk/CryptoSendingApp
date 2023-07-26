@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class Accounts {
     public static var transctions = [Transction]()
     public static var users = [User]() 

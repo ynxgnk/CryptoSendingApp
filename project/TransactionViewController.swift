@@ -17,6 +17,7 @@ class TranscationViewController: UIViewController {
     }()
     
     let dbManager = DatabaseManager()
+    private var transactions: [Transction] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +28,24 @@ class TranscationViewController: UIViewController {
         tableView.dataSource = self
         
 //        Accounts.transctions = dbManager.getTransfers() // Replace with your data fetching logic
+        fetchTransactions() // Call the function to fetch transactions
         tableView.reloadData()
     }
+    
+    private func fetchTransactions() {
+            dbManager.getTransfers { [weak self] (transfers, error) in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    // Handle the error if needed
+                    print("Error fetching transactions: \(error)")
+                } else {
+                    // Update the data source and reload the table view
+                    self.transactions = transfers ?? []
+                    self.tableView.reloadData()
+                }
+            }
+        }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

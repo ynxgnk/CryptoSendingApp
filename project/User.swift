@@ -11,7 +11,7 @@ struct User {
     let name: String
     let email: String
     let profilePictureRef: String?
-    let id: Int64
+    var id: Int64
     var balance: Int64 
     
 }

@@ -93,23 +93,18 @@ class CustomerTableViewCell: UITableViewCell {
         fatalError()
     }
     
-    func setup(user: User) {
+    func setup(user: User) { //is working
         nameLabel.text = "Name: \(user.name)"
         emailLabel.text = "Email: \(user.email)"
         idLabel.text = "ID: \(user.id)"
-        
-        DatabaseManager.shared.getUserBalance(for: user.id) { [weak self] balance, error in
+
+        DatabaseManager.shared.getUser(email: user.email, id: user.id) { [weak self] fetchedUser in
             guard let self = self else { return }
-            
-            if let error = error {
-                // Handle the error if needed
-                print("Error fetching balance from Firestore: \(error)")
-            } else {
-                // Update the balanceLabel with the fetched balance
-                if let balance = balance {
-                    DispatchQueue.main.async {
-                        self.balanceLabel.text = "Balance: \(balance)"
-                    }
+
+            if let fetchedUser = fetchedUser {
+                // Update the user object with the fetched user's data
+                DispatchQueue.main.async {
+                    self.balanceLabel.text = "Balance: \(fetchedUser.balance)"
                 }
             }
         }

@@ -197,7 +197,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                 self?.setUpTableHeader(
                     profilePhotoRef: user.profilePictureRef,
                     name: user.name
-//                    balance: user.balance 
+//                    balance: user.balance
                 )
             }
         }

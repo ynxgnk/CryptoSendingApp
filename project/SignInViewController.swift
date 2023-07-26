@@ -111,27 +111,6 @@ class SignInViewController: UIViewController {
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
-
-//    @objc private func didTapLoginButton() {
-//        guard let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text,
-//              !password.isEmpty, let id = idTextField.text, !id.isEmpty else {
-//            return
-//        }
-//
-//        AuthManager.shared.signIn(email: email, password: password) { [weak self] success in
-//            guard success else {
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                UserDefaults.standard.set(email, forKey: "email")
-//                UserDefaults.standard.set(id, forKey: "id")
-//                let vc = TabBarController()
-//                vc.modalPresentationStyle = .fullScreen
-//                self?.present(vc, animated: true)
-//            }
-//        }
-//    }
     
     @objc private func didTapLoginButton() {
         guard let email = emailTextField.text, !email.isEmpty,

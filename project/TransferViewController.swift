@@ -73,7 +73,7 @@ class TransferViewController: UIViewController {
         
         print("Amount: \(amount)")
         if let selectedReceiver = selectedReceiver {
-            dbManager.transferMoney(to: Int64(selectedReceiver.id), amount: Int64(amount) ?? 0) { [weak self] error in
+            dbManager.transferMoney(to: selectedReceiver.id, amount: Int64(amount) ?? 0) { [weak self] error in
                 guard let self = self else { return }
 
                 if let error = error {
@@ -86,7 +86,7 @@ class TransferViewController: UIViewController {
                 self.dbManager.getUsers { users, error in
                     if let error = error {
                         // Handle the error here, if needed
-                        print("Error fetching users: \(error.localizedDescription)")
+                        print("ERROR1 fetching users: \(error.localizedDescription)")
                     } else {
                         // Use the fetched users here
                         Accounts.users = users
@@ -95,13 +95,13 @@ class TransferViewController: UIViewController {
                 self.dbManager.getTransfers { transfers, error in
                     if let error = error {
                         // Handle the error here, if needed
-                        print("Error fetching transfers: \(error.localizedDescription)")
+                        print("Error fetching transfers ERROR3: \(error.localizedDescription)")
                     } else {
                         // Use the fetched transfers here
                         if let transfers = transfers {
                             Accounts.transctions = transfers
                         } else {
-                            print("No transfers found.")
+                            print("No transfers found. ERROR2")
                         }
                     }
                 }

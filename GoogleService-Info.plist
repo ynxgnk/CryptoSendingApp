@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>649712892935-mhh87b6gikcb29803kiibqr9dmq7tv5i.apps.googleusercontent.com</string>
+	<string>158024394174-0tb3ovu072t8tipjhcgb3gg3mpvcg9sc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.649712892935-mhh87b6gikcb29803kiibqr9dmq7tv5i</string>
+	<string>com.googleusercontent.apps.158024394174-0tb3ovu072t8tipjhcgb3gg3mpvcg9sc</string>
 	<key>API_KEY</key>
-	<string>AIzaSyASTbQOiO0LVsLjVMHSIJ0rTp2LLsq766E</string>
+	<string>AIzaSyBYdYoDRLU63VwH5f7SanhE899cZxEVK7w</string>
 	<key>GCM_SENDER_ID</key>
-	<string>649712892935</string>
+	<string>158024394174</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.nazar.project</string>
 	<key>PROJECT_ID</key>
-	<string>project-39c2f</string>
+	<string>cryptosendingapp</string>
 	<key>STORAGE_BUCKET</key>
-	<string>project-39c2f.appspot.com</string>
+	<string>cryptosendingapp.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:649712892935:ios:bac47c229c5333c3877ea2</string>
+	<string>1:158024394174:ios:fd248584fc5e1b87f685ef</string>
 </dict>
 </plist>

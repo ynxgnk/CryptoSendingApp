@@ -69,11 +69,26 @@ class HomeViewController: UIViewController {
         tableView.frame = view.bounds
     }
     
+//    override func viewWillAppear(_ animated: Bool) { //default
+//            super.viewWillAppear(animated)
+//            navigationController?.navigationBar.prefersLargeTitles = true
+//            tableView.reloadData()
+//        }
+
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            navigationController?.navigationBar.prefersLargeTitles = true
-            tableView.reloadData()
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+
+        dbManager.getUsersTransfers { [weak self] users in
+            guard let self = self else { return }
+
+            // Update Accounts.users with the fetched users
+            Accounts.users = users
+            self.tableView.reloadData()
+            print("NUMBER \(Accounts.users.count)")
         }
+    }
+    
 }
 
 // MARK: - UITableView DataSource
