@@ -25,7 +25,7 @@ final class SearchNewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "background")
-        navigationController?.navigationBar.barTintColor = UIColor(named: "background")
+        navigationController?.navigationBar.barTintColor = .green
         view.addSubview(searchTable)
         searchTable.backgroundColor = UIColor(named: "background")
         
@@ -37,10 +37,20 @@ final class SearchNewsViewController: UIViewController {
     }
     
     private func createSearchBar() {
-        navigationItem.searchController = searchVC
+//        navigationItem.searchController = searchVC
         searchVC.searchBar.delegate = self
         searchVC.searchBar.placeholder = "Search for news..."
         searchVC.searchBar.searchBarStyle = .minimal
+        
+//        searchVC.searchBar.delegate = self
+//            searchVC.searchBar.placeholder = "Search for news..."
+//            searchVC.searchBar.searchBarStyle = .minimal
+//            searchVC.searchBar.autocapitalizationType = .none
+//            searchVC.searchBar.autocorrectionType = .no
+//            searchVC.searchBar.spellCheckingType = .no
+            
+            // Set the UISearchBar as the tableHeaderView
+            searchTable.tableHeaderView = searchVC.searchBar
     }
     
     override func viewDidLayoutSubviews() {

@@ -29,8 +29,19 @@ class CryptoViewController: UIViewController {
         return view
     }()
     
+    private let searchButton: UIButton = {
+       let button = UIButton()
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        return button
+    }()
+    
+    @objc private func didTapSearchNewsButton() {
+        let vc = SearchNewsViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     private let newsLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "News"
         label.font = .systemFont(ofSize: 35, weight: .bold)
         label.textColor = .white
@@ -56,6 +67,8 @@ class CryptoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchButton.addTarget(self, action: #selector(didTapSearchNewsButton), for: .touchUpInside)
+        
         navigationController?.navigationBar.barTintColor = UIColor(named: "background")
         view.backgroundColor = UIColor(named: "background")
         
@@ -73,6 +86,7 @@ class CryptoViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now()+2.2) {
             self.view.addSubview(self.cryptoLabel)
             self.view.addSubview(self.newsLabel)
+            self.view.addSubview(self.searchButton)
             self.spinner.stopAnimating()
         }
         
@@ -98,11 +112,17 @@ class CryptoViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         newsLabel.frame = CGRect(
             x: 30,
             y: 80,
-            width: 300,
+            width: 100,
+            height: 30
+        )
+        
+        searchButton.frame = CGRect(
+            x: 125,
+            y: 82,
+            width: 30,
             height: 30
         )
         

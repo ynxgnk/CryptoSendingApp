@@ -109,7 +109,7 @@ class RegisterViewController: UIViewController {
               let id = Int(idString) else {
             return
         }
-        
+
         //Create Account
         AuthManager.shared.signUp(email: email, password: password, id: idString) { [weak self] success in   /* 591 add weak self */
             if success {

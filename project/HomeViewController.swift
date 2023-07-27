@@ -16,27 +16,42 @@ class HomeViewController: UIViewController {
         return table
     }()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
         navigationController?.navigationBar.backgroundColor = UIColor(named: "background")
         view.backgroundColor = UIColor(named: "background")
-        setUpSendButton()
-        
+//        setUpSendButton()
+//        setUpUpdateButton()
+        setUpRightBarButtonItems()
         setUpHistoryButton()
         tableView.backgroundColor = UIColor(named: "background")
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    private func setUpSendButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+    private func setUpRightBarButtonItems() {
+        let sendButton = UIBarButtonItem(
             title: "Send",
             style: .done,
             target: self,
             action: #selector(didTapSendButton)
         )
+        
+        let updateButton = UIBarButtonItem(
+            image: UIImage(systemName: "arrow.clockwise"),
+            style: .done,
+            target: self,
+            action: #selector(didTapUpdateButton)
+        )
+        
+        navigationItem.rightBarButtonItems = [updateButton, sendButton]
+    }
+    
+    @objc private func didTapUpdateButton() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     @objc private func didTapSendButton() {
@@ -63,6 +78,13 @@ class HomeViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+        
+//        updateButton.frame = CGRect(
+//            x: 270,
+//            y: -20,
+//            width: 150,
+//            height: 150
+//        )
     }
     
     override func viewWillAppear(_ animated: Bool) { //default
