@@ -16,10 +16,6 @@ class HomeViewController: UIViewController {
         return table
     }()
 
-    let dbManager = DatabaseManager()
-    var currentUserEmail: String?
-        var currentID: Int64 = 0
-        var currentBalance: Int64 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()

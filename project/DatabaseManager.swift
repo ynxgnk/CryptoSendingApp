@@ -284,7 +284,7 @@ public class DatabaseManager {
          }
  }
 
-    private func updateBalance(for userId: String, newBalance: Int64, completion: @escaping (Error?) -> Void) {
+    func updateBalance(for userId: String, newBalance: Int64, completion: @escaping (Error?) -> Void) {
         let documentId = String(userId)
         
         let userReference = database.collection(Tables.users.rawValue).document(documentId)

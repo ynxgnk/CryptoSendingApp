@@ -20,36 +20,30 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     let currentEmail: String
     let id: Int64
-//    var balance: Int64
+    var balance: Int64
     
-    init(currentEmail: String, id: Int64) {
+    init(currentEmail: String, id: Int64, balance: Int64) {
         self.currentEmail = currentEmail
         self.id = id
-//        self.balance = balance
+        self.balance = balance
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
-//    func updateBalance(_ balance: Int64) {
-//            self.balance = balance
-//            setUpTableHeader(balance: balance)
-//    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
             self.navigationController?.navigationBar.barTintColor = UIColor(named: "background")
             self.view.backgroundColor = UIColor(named: "background")
             self.profileCryptoTable.backgroundColor = UIColor(named: "background")
-
         }
         view.addSubview(profileCryptoTable)
         setUpSignOutButton()
-        setUpTableHeader()
-        fetchProfileData() 
+        setUpTableHeader(balance: balance)
+        fetchProfileData()
 
     }
     
@@ -60,15 +54,15 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     private func setUpTableHeader(
         profilePhotoRef: String? = nil,
-        name: String? = nil
-//        balance: Int64
+        name: String? = nil,
+        balance: Int64
     ) {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width/1.5))
         headerView.backgroundColor = UIColor(named: "background")
         headerView.isUserInteractionEnabled = true
         headerView.clipsToBounds = true
         profileCryptoTable.tableHeaderView = headerView
-                
+        
         //Profile picture
         let profilePhoto = UIImageView(image: UIImage(systemName: "person.circle"))
         profilePhoto.contentMode = .scaleAspectFit
@@ -86,9 +80,9 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         profilePhoto.addGestureRecognizer(tap)
         
         //Name
-        
         if let name = name {
             title = name
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         if let ref = profilePhotoRef {
@@ -151,22 +145,51 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         headerView.addSubview(settingsButton)
         
         //Balance
-        
         let balanceLabel = UILabel(frame: CGRect(
-            x: profilePhoto.left-180,
+            x: profilePhoto.left-173,
             y: 5,
             width: 200,
             height: 17)
         )
+        balanceLabel.tag = 100 // Set a unique tag for the label
         headerView.addSubview(balanceLabel)
-//        balanceLabel.text = "Balance: \(balance) $"
+        balanceLabel.text = "Balance: \(balance) $"
 //        print("BALANCE1: \(balance)")
         balanceLabel.textAlignment = .center
         balanceLabel.textColor = .white
         balanceLabel.font = .systemFont(ofSize: 16, weight: .bold)
         
+        //Update Balance
+        let updateButton = UIButton()
+        updateButton.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
+        updateButton.frame = CGRect(
+            x: settingsButton.left-30,
+            y: -62,
+            width: 150,
+            height: 150
+        )
+        updateButton.addTarget(self, action: #selector(didTapUpdateButton), for: .touchUpInside)
+        headerView.addSubview(updateButton)
     }
     
+    @objc private func didTapUpdateButton() {
+        // Fetch the updated balance from Firebase
+           DatabaseManager.shared.getUser(email: currentEmail, id: id) { [weak self] user in
+               guard let user = user else {
+                   return
+               }
+               // Update the balance property with the new value from Firebase
+               self?.balance = user.balance
+
+               // Get the balanceLabel from the headerView using the tag
+               if let balanceLabel = self?.profileCryptoTable.tableHeaderView?.viewWithTag(100) as? UILabel {
+                   DispatchQueue.main.async {
+                       // Update the balanceLabel text with the new balance value
+                       balanceLabel.text = "Balance: \(self?.balance ?? 0) $"
+                   }
+               }
+           }
+    }
     
     @objc private func didTapSettings() {
             let vc = SettingsViewController()
@@ -196,8 +219,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
             DispatchQueue.main.async {
                 self?.setUpTableHeader(
                     profilePhotoRef: user.profilePictureRef,
-                    name: user.name
-//                    balance: user.balance
+                    name: user.name,
+                    balance: user.balance
                 )
             }
         }
