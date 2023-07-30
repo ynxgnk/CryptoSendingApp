@@ -90,8 +90,8 @@ class CryptoViewController: UIViewController {
             self.spinner.stopAnimating()
         }
         
-            self.fetchCryptoTableViewData()
-            self.fetchTopNews()
+        self.fetchCryptoTableViewData()
+        self.fetchTopNews()
     }
     
     private func addConstraints() { /* 1352 */

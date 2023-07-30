@@ -8,7 +8,7 @@
 import UIKit
 
 class TranscationViewController: UIViewController {
-        
+    
     private var tableView: UITableView = {
         let table = UITableView()
         table.register(TransctionTableViewCell.self,
@@ -31,27 +31,26 @@ class TranscationViewController: UIViewController {
         tableView.reloadData()
     }
     
-    private func fetchTransactions() {
-            dbManager.getTransfers { [weak self] (transfers, error) in
-                guard let self = self else { return }
-                
-                if let error = error {
-                    // Handle the error if needed
-                    print("Error fetching transactions: \(error)")
-                } else {
-                    // Update the data source and reload the table view
-                    self.transactions = transfers ?? []
-                    self.tableView.reloadData()
+        private func fetchTransactions() { //default
+                dbManager.getTransfers { [weak self] (transfers, error) in
+                    guard let self = self else { return }
+    
+                    if let error = error {
+                        // Handle the error if needed
+                        print("Error fetching transactions: \(error)")
+                    } else {
+                        // Update the data source and reload the table view
+                        self.transactions = transfers ?? []
+                        self.tableView.reloadData()
+                    }
                 }
             }
-        }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+        override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+            tableView.frame = view.bounds
+        }
     }
-}
-
 
 extension TranscationViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,13 +64,13 @@ extension TranscationViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TransctionTableViewCell.idenifier, for: indexPath) as! TransctionTableViewCell
         let transcation = Accounts.transctions[indexPath.section]
-        
+
         // Get sender ID
 //                let sender = Accounts.users.filter({ $0.id == transcation.sender })[0]
         // Get Receiver Id
 //        let receiver = Accounts.customers.filter({ $0.id1 == transcation.receiver })[0]
-        let receiver = Accounts.users.reversed().filter({ $0.id == transcation.receiver })[0]
-        
+        let receiver = Accounts.users.reversed().filter({ String($0.id) == transcation.receiver })[0] //default receiver
+
         cell.setup(receiver: receiver.name, amount: Int(transcation.amount))
         cell.layer.cornerRadius = 20
         cell.backgroundColor = UIColor(named: "cellbackground")

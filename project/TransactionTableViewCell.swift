@@ -15,7 +15,7 @@ class `TransctionTableViewCell`: UITableViewCell {
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.textColor = .white
         return label
-    }()
+    }() 
     
     private let amountLabel: UILabel = {
        let label = UILabel()

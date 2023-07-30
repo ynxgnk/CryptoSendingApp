@@ -18,160 +18,94 @@ public class DatabaseManager {
     private let database = Firestore.firestore()
     static let shared = DatabaseManager()
     
- public func transferMoney(from senderId: String, to receiverId: String, amount: Int64, completion: @escaping (Error?) -> Void) { //tyt
-     getUserBalance(for: senderId) { senderBalance, senderError in
-         guard senderError == nil else {
-             completion(senderError)
-             return
-         }
-
-         guard let senderBalance = senderBalance else {
-             completion(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Sender not found"]))
-             return
-         }
-
-         if senderBalance < amount {
-             completion(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Transfer can't be done because you don't have enough balance."]))
-             return
-         }
-
-         self.updateBalance(for: senderId, newBalance: senderBalance - amount) { senderUpdateError in
-             if let senderUpdateError = senderUpdateError {
-                 completion(senderUpdateError)
-                 return
-             }
-
-             self.getUserBalance(for: receiverId) { receiverBalance, receiverError in
-                 guard receiverError == nil else {
-                     completion(receiverError)
-                     return
-                 }
-
-                 let newReceiverBalance = (receiverBalance ?? 0) + amount
-
-                 self.updateBalance(for: receiverId, newBalance: newReceiverBalance) { receiverUpdateError in
-                     if let receiverUpdateError = receiverUpdateError {
-                         // Revert sender's balance update in case of receiver's balance update error
-                         self.updateBalance(for: senderId, newBalance: senderBalance) { _ in
-                             completion(receiverUpdateError)
-                         }
-                     } else {
-                         self.addNewTransferRecord(sender: senderId, receiver: receiverId, amount: amount)
-                         completion(nil)
-                     }
-                 }
-             }
-         }
-     }
- }
+    public func transferMoney(from senderId: String, to receiverId: String, amount: Int64, id: Int64, completion: @escaping (Error?) -> Void) { // with senderId
+            getUserBalance(for: senderId) { senderBalance, senderError in
+                guard senderError == nil else {
+                    completion(senderError)
+                    return
+                }
     
-    //    public func transferMoney(from senderId: Int64, to receiverId: Int64, amount: Int64, completion: @escaping (Error?) -> Void) { // with senderId
-    //        getUserBalance(for: senderId) { senderBalance, senderError in
-    //            guard senderError == nil else {
-    //                completion(senderError)
-    //                return
-    //            }
-    //
-    //            guard let senderBalance = senderBalance else {
-    //                completion(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Sender not found"]))
-    //                return
-    //            }
-    //
-    //            if senderBalance < amount {
-    //                completion(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Transfer can't be done because you don't have enough balance."]))
-    //                return
-    //            }
-    //
-    //            // Deduct the amount from the sender's balance
-    //            let updatedSenderBalance = senderBalance - amount
-    //
-    //            // Update the sender's balance in both the `users` collection and the `balances` collection
-    //            self.updateBalance(for: senderId, newBalance: updatedSenderBalance) { senderUpdateError in
-    //                if let senderUpdateError = senderUpdateError {
-    //                    completion(senderUpdateError)
-    //                    return
-    //                }
-    //
-    //                // Fetch the receiver's current balance
-    //                self.getUserBalance(for: receiverId) { receiverBalance, receiverError in
-    //                    guard receiverError == nil else {
-    //                        completion(receiverError)
-    //                        return
-    //                    }
-    //
-    //                    // Add the transferred amount to the receiver's balance
-    //                    let newReceiverBalance = (receiverBalance ?? 0) + amount
-    //
-    //                    // Update the receiver's balance in both the `users` collection and the `balances` collection
-    //                    self.updateBalance(for: receiverId, newBalance: newReceiverBalance) { receiverUpdateError in
-    //                        if let receiverUpdateError = receiverUpdateError {
-    //                            // Revert sender's balance update in case of receiver's balance update error
-    //                            self.updateBalance(for: senderId, newBalance: senderBalance) { _ in
-    //                                completion(receiverUpdateError)
-    //                            }
-    //                        } else {
-    //                            // Add the transaction record
-    //                            self.addNewTransferRecord(sender: senderId, receiver: receiverId, amount: amount)
-    //                            completion(nil)
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
+                guard let senderBalance = senderBalance else {
+                    completion(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Sender not found"]))
+                    return
+                }
     
-    public func getTransfers(completion: @escaping ([Transction]?, Error?) -> Void) {
+                if senderBalance < amount {
+                    completion(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Transfer can't be done because you don't have enough balance."]))
+                    return
+                }
+    
+                // Deduct the amount from the sender's balance
+                let updatedSenderBalance = senderBalance - amount
+    
+                // Update the sender's balance in both the `users` collection and the `balances` collection
+                self.updateBalance(for: senderId, newBalance: updatedSenderBalance) { senderUpdateError in
+                    if let senderUpdateError = senderUpdateError {
+                        completion(senderUpdateError)
+                        return
+                    }
+    
+                    // Fetch the receiver's current balance
+                    self.getUserBalance(for: receiverId) { receiverBalance, receiverError in
+                        guard receiverError == nil else {
+                            completion(receiverError)
+                            return
+                        }
+    
+                        // Add the transferred amount to the receiver's balance
+                        let newReceiverBalance = (receiverBalance ?? 0) + amount
+    
+                        // Update the receiver's balance in both the `users` collection and the `balances` collection
+                        self.updateBalance(for: receiverId, newBalance: newReceiverBalance) { receiverUpdateError in
+                            if let receiverUpdateError = receiverUpdateError {
+                                // Revert sender's balance update in case of receiver's balance update error
+                                self.updateBalance(for: senderId, newBalance: senderBalance) { _ in
+                                    completion(receiverUpdateError)
+                                }
+                            } else {
+                                // Add the transaction record
+                                self.addNewTransferRecord(id: id ,sender: senderId, receiver: receiverId, amount: amount)
+                                completion(nil)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+    public func getTransfers(completion: @escaping ([Transction]?, Error?) -> Void) { //default
         database.collection(Tables.transfers.rawValue).getDocuments { snapshot, error in
             if let error = error {
                 completion(nil, error)
                 return
             }
-            
+
             guard let documents = snapshot?.documents else {
                 completion([], nil)
                 return
             }
-            
+
             var transfers: [Transction] = []
             for document in documents {
                 if let data = document.data() as? [String: Any],
                    let id = data["id"] as? Int64,
-                   let sender = data["sender"] as? Int64,
-                   let receiver = data["receiver"] as? Int64,
+                   let sender = data["sender"] as? String,
+                   let receiver = data["receiver"] as? String,
                    let amount = data["amount"] as? Int64 {
                     let transfer = Transction(id: id, sender: sender, receiver: receiver, amount: amount)
                     transfers.append(transfer)
                 }
             }
-            
+
             completion(transfers, nil)
         }
     }
-    
- public func transferMoney(to receiverId: String, amount: Int64, completion: @escaping (Error?) -> Void) { //tyt
-     getUserBalance(for: receiverId) { receiverBalance, receiverError in
-         guard receiverError == nil else {
-             completion(receiverError)
-             return
-         }
-         
-         let newReceiverBalance = (receiverBalance ?? 0) + amount
-         
-         self.updateBalance(for: receiverId, newBalance: newReceiverBalance) { receiverUpdateError in
-             if let receiverUpdateError = receiverUpdateError {
-                 completion(receiverUpdateError)
-             } else {
-                 self.addNewTransferRecord(receiver: receiverId, amount: amount) //tyt
-                 completion(nil)
-             }
-         }
-     }
- }
-    
-    private func addNewTransferRecord(sender: String? = nil, receiver: String, amount: Int64) {
+
+    private func addNewTransferRecord(id: Int64, sender: String, receiver: String, amount: Int64) {
         let transferData: [String: Any] = [
-            "senderId": sender as Any,
-            "receiverId": receiver,
+            "id": id,
+            "sender": sender,
+            "receiver": receiver,
             "amount": amount
         ]
         
@@ -189,34 +123,7 @@ public class DatabaseManager {
             completion(users)
         }
     }
-    
-//    internal func getUsers(completion: @escaping ([User], Error?) -> Void) { //default
-//        database.collection(Tables.users.rawValue).getDocuments { snapshot, error in
-//            guard let documents = snapshot?.documents else {
-//                completion([], error)
-//                return
-//            }
-//
-//            var users: [User] = []
-//
-//            for document in documents {
-//                if let data = document.data() as? [String: Any],
-//                   let name = data["name"] as? String,
-//                   let email = data["email"] as? String,
-//                   let idString = document.documentID as String?,
-//                   let id = Int64(idString),
-//                   let balance = data["balance"] as? Int64 {
-//                    let user = User(name: name, email: email, profilePictureRef: nil, id: id, balance: balance)
-//
-//                    users.append(user)
-//                    print("NUM \(users.count)")
-//                }
-//            }
-//
-//            completion(users, nil)
-//        }
-//    }
-    
+
     internal func getUsers(completion: @escaping ([User], Error?) -> Void) { //new , table of users is shown but without id and balance isnt updating
         database.collection(Tables.users.rawValue).getDocuments { snapshot, error in
             guard let documents = snapshot?.documents else {
@@ -317,7 +224,7 @@ public class DatabaseManager {
 
     public func getUserBalance(for userId: String, completion: @escaping (Int64?, Error?) -> Void) {
         let documentId = String(userId)
-        let balanceReference = database.collection(Tables.users.rawValue).document(documentId)
+        let balanceReference = database.collection(Tables.users.rawValue).document(userId)
         
         balanceReference.getDocument { snapshot, error in
             if let data = snapshot?.data(),
@@ -329,29 +236,6 @@ public class DatabaseManager {
         }
     }
 
-    
-//    private func updateBalance(for userId: Int64, newBalance: Int64, completion: @escaping (Error?) -> Void) { //default //tyt
-//        let documentId = String(userId)
-//
-//        let balanceReference = database.collection(Tables.users.rawValue).document(documentId).collection("balances").document("current")
-//        balanceReference.setData(["balance": newBalance]) { error in
-//            completion(error)
-//        }
-//    }
-//
-//    public func getUserBalance(for userId: Int64, completion: @escaping (Int64?, Error?) -> Void) { //default //tyt
-//        let documentId = String(userId)
-//        let balanceReference = database.collection(Tables.users.rawValue).document(documentId).collection("balances").document("current")
-//        balanceReference.getDocument { snapshot, error in
-//            if let data = snapshot?.data(),
-//               let balance = data["balance"] as? Int64 {
-//                completion(balance, nil)
-//            } else {
-//                completion(nil, error)
-//            }
-//        }
-//    }
-    
     internal func getUser(email: String, id: Int64, completion: @escaping (User?) -> Void) { //default
         let documentId = email
             .replacingOccurrences(of: ".", with: "_")

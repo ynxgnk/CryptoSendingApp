@@ -50,6 +50,9 @@
 		BA7779D62A42C38000B1B78F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7779D52A42C38000B1B78F /* SettingsViewController.swift */; };
 		BA9454FB2A5805F300B7B375 /* CryptoDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9454FA2A5805F300B7B375 /* CryptoDetailsCollectionViewCell.swift */; };
 		BA9454FD2A591D0F00B7B375 /* CryptoDetailsCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9454FC2A591D0F00B7B375 /* CryptoDetailsCollectionViewCellViewModel.swift */; };
+		BAE3C4E62A74ED1300B08AD4 /* LastTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE3C4E52A74ED1300B08AD4 /* LastTransactionViewController.swift */; };
+		BAE3C4E82A74F0E800B08AD4 /* LastTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE3C4E72A74F0E800B08AD4 /* LastTransactionTableViewCell.swift */; };
+		BAE3C4EB2A7553DE00B08AD4 /* LastTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE3C4EA2A7553DE00B08AD4 /* LastTransactionViewModel.swift */; };
 		BAEC9EA92A6D04EC00771487 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAEC9EA82A6D04EC00771487 /* GoogleService-Info.plist */; };
 		E04883466D1E73F1A8534AC8 /* Pods_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A75D3D75AB0F262EEB88D3B /* Pods_project.framework */; };
 /* End PBXBuildFile section */
@@ -103,6 +106,9 @@
 		BA7779D52A42C38000B1B78F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BA9454FA2A5805F300B7B375 /* CryptoDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA9454FC2A591D0F00B7B375 /* CryptoDetailsCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailsCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		BAE3C4E52A74ED1300B08AD4 /* LastTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTransactionViewController.swift; sourceTree = "<group>"; };
+		BAE3C4E72A74F0E800B08AD4 /* LastTransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTransactionTableViewCell.swift; sourceTree = "<group>"; };
+		BAE3C4EA2A7553DE00B08AD4 /* LastTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTransactionViewModel.swift; sourceTree = "<group>"; };
 		BAEC9EA82A6D04EC00771487 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -301,6 +307,7 @@
 		BA5315A62A514BC2003A0055 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				BAE3C4E92A7553A700B08AD4 /* ViewModels */,
 				BA6AA8E02A541DBA007872F3 /* SpinnerView */,
 				BA5315BA2A514DA3003A0055 /* UsersCell */,
 				BA5315B72A514D83003A0055 /* TransactionCell */,
@@ -316,6 +323,7 @@
 				BA5315A82A514BEF003A0055 /* HomeViewController.swift */,
 				BA5315AA2A514BFE003A0055 /* TransactionViewController.swift */,
 				BA5315AC2A514C18003A0055 /* TransferViewController.swift */,
+				BAE3C4E52A74ED1300B08AD4 /* LastTransactionViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -335,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				BA5315B82A514D97003A0055 /* TransactionTableViewCell.swift */,
+				BAE3C4E72A74F0E800B08AD4 /* LastTransactionTableViewCell.swift */,
 			);
 			name = TransactionCell;
 			sourceTree = "<group>";
@@ -418,6 +427,14 @@
 				BA7779D52A42C38000B1B78F /* SettingsViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BAE3C4E92A7553A700B08AD4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BAE3C4EA2A7553DE00B08AD4 /* LastTransactionViewModel.swift */,
+			);
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		CE64835A8CA654E6446383B9 /* Pods */ = {
@@ -559,10 +576,12 @@
 				BA3EE1232A3D89C400FE846F /* NewsViewController.swift in Sources */,
 				BA3EE11F2A3D89C400FE846F /* AppDelegate.swift in Sources */,
 				BA193C5A2A402ADB007F7223 /* CryptoDetailsViewController.swift in Sources */,
+				BAE3C4EB2A7553DE00B08AD4 /* LastTransactionViewModel.swift in Sources */,
 				BA5315B22A514C43003A0055 /* Customer.swift in Sources */,
 				BA193C3B2A3D97A6007F7223 /* NewsTableViewCell.swift in Sources */,
 				BA193C502A401ED6007F7223 /* CryptoAPICaller.swift in Sources */,
 				BA5315B92A514D97003A0055 /* TransactionTableViewCell.swift in Sources */,
+				BAE3C4E62A74ED1300B08AD4 /* LastTransactionViewController.swift in Sources */,
 				BA3EE1212A3D89C400FE846F /* SceneDelegate.swift in Sources */,
 				BA60BB362A42068D005B7DDD /* SignInHeaderView.swift in Sources */,
 				BA5315AB2A514BFE003A0055 /* TransactionViewController.swift in Sources */,
@@ -575,6 +594,7 @@
 				BA7779D62A42C38000B1B78F /* SettingsViewController.swift in Sources */,
 				BA193C602A406E52007F7223 /* NewsCollectionViewCell.swift in Sources */,
 				BA193C582A4024B5007F7223 /* CryptoTableViewCellViewModel.swift in Sources */,
+				BAE3C4E82A74F0E800B08AD4 /* LastTransactionTableViewCell.swift in Sources */,
 				BA5315B62A514C5B003A0055 /* Transaction.swift in Sources */,
 				BA5315A92A514BEF003A0055 /* HomeViewController.swift in Sources */,
 				BA193C402A3ED4F7007F7223 /* NewsTableViewCellViewModel.swift in Sources */,

@@ -21,8 +21,6 @@ class HomeViewController: UIViewController {
         view.addSubview(tableView)
         navigationController?.navigationBar.backgroundColor = UIColor(named: "background")
         view.backgroundColor = UIColor(named: "background")
-//        setUpSendButton()
-//        setUpUpdateButton()
         setUpRightBarButtonItems()
         setUpHistoryButton()
         tableView.backgroundColor = UIColor(named: "background")
