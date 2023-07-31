@@ -104,7 +104,7 @@ class CustomerTableViewCell: UITableViewCell {
             if let fetchedUser = fetchedUser {
                 // Update the user object with the fetched user's data
                 DispatchQueue.main.async {
-                    self.balanceLabel.text = "Balance: \(fetchedUser.balance)"
+                    self.balanceLabel.text = "Balance: \(fetchedUser.balance)$"
                 }
             }
         }

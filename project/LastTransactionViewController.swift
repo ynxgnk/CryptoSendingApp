@@ -5,6 +5,8 @@
 //  Created by Nazar Kopeika on 29.07.2023.
 //
 
+/*
+
 import UIKit
 import FirebaseFirestore 
 
@@ -121,3 +123,5 @@ class LastTransactionViewController: UIViewController {
 //        return cell
 //    }
 //}
+
+*/

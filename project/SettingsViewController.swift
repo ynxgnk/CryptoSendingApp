@@ -12,12 +12,12 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     private let settingsTable: UITableView = {
-       let table = UITableView()
+        let table = UITableView()
         table.register(SettingsTableViewCell.self,
                        forCellReuseIdentifier: SettingsTableViewCell.identifier)
         return table
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "background")
@@ -27,7 +27,7 @@ class SettingsViewController: UIViewController {
         settingsTable.delegate = self
         settingsTable.dataSource = self
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         settingsTable.frame = CGRect(
@@ -35,10 +35,10 @@ class SettingsViewController: UIViewController {
             y: 50,
             width: view.frame.size.width,
             height: 600
-            )
+        )
         
     }
-
+    
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -53,7 +53,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifier, for: indexPath) as? SettingsTableViewCell else {
-             fatalError()
+            fatalError()
         }
         
         if indexPath.section == 0 {

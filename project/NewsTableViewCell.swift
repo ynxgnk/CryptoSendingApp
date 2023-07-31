@@ -11,7 +11,7 @@ class NewsTableViewCell: UITableViewCell {
     static let identifier = "NewsTableViewCell"
     
     private let newsImageView: UIImageView = {
-       let view = UIImageView()
+        let view = UIImageView()
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         view.clipsToBounds = true
@@ -20,14 +20,14 @@ class NewsTableViewCell: UITableViewCell {
     }()
     
     private let newsTitleLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         return label
     }()
     
     private let newsDescriptionLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 18, weight: .regular)
         return label
@@ -91,5 +91,5 @@ class NewsTableViewCell: UITableViewCell {
             }.resume()
         }
     }
-
+    
 }

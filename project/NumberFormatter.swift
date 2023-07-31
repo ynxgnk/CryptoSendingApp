@@ -36,7 +36,7 @@ extension Double{
         guard let numberAsString = numberFormatter.string(for: self) else { return ""}
         return numberAsString + " %"
     }
-     
+    
     func asNumberString() -> String{
         return String(format: "%.2f", self)
     }
@@ -48,7 +48,7 @@ extension Double{
         switch num{
         case 1000000000000...: // trillions
             let formatted = num / 1000000000000
-//            print(num)
+            //            print(num)
             let stringFormatted = formatted.asNumberString()
             return "\(sign)\(stringFormatted)Tr"
         case 1_000_000_000...:

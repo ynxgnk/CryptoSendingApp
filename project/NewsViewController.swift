@@ -21,11 +21,9 @@ class NewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = UIColor(named: "background")
-        view.backgroundColor = UIColor(named: "background") 
+        view.backgroundColor = UIColor(named: "background")
         title = "News"
         view.addSubview(newsTable)
-//        newsTable.delegate = self
-//        newsTable.dataSource = self
         view.backgroundColor = UIColor(named: "background")
         fetchTopNews()
         addSearchButton()
@@ -41,7 +39,7 @@ class NewsViewController: UIViewController {
     }
     
     private func addSearchButton() {
-    let _ = navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
+        let _ = navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
         
     }
     
@@ -74,20 +72,20 @@ class NewsViewController: UIViewController {
             }
         }
     }
-
-
+    
+    
 }
 
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModels.count
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as? NewsTableViewCell else {
             fatalError()
@@ -98,29 +96,29 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = UIColor(named: "cellbackground")
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 170
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         let article = articles[indexPath.row]
-
+        
         guard let url = URL(string: article.url ?? "") else {
             return
         }
-
+        
         let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
-
+        
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clear

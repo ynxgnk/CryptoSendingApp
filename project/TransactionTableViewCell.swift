@@ -15,7 +15,21 @@ class `TransctionTableViewCell`: UITableViewCell {
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.textColor = .white
         return label
-    }() 
+    }()
+    
+    private let senderLabel: UILabel = {
+       let label = UILabel()
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let idLabel: UILabel = {
+       let label = UILabel()
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = .white
+        return label
+    }()
     
     private let amountLabel: UILabel = {
        let label = UILabel()
@@ -29,6 +43,9 @@ class `TransctionTableViewCell`: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(receiverLabel)
         contentView.addSubview(amountLabel)
+        contentView.addSubview(senderLabel)
+        contentView.addSubview(idLabel)
+
     }
     
     required init?(coder: NSCoder) {
@@ -39,15 +56,29 @@ class `TransctionTableViewCell`: UITableViewCell {
         super.layoutSubviews()
         receiverLabel.frame = CGRect(
             x: 10,
-            y: 20,
-            width: 200,
+            y: 65,
+            width: 300,
+            height: 25
+        )
+
+        senderLabel.frame = CGRect(
+            x: 10,
+            y: 35,
+            width: 300,
             height: 25
         )
         
+        idLabel.frame = CGRect(
+            x: 10,
+            y: 5,
+            width: 70,
+            height: 25
+        )
+
         amountLabel.frame = CGRect(
-            x: 200,
-            y: 20,
-            width: contentView.frame.size.width-210,
+            x: 300,
+            y: 65,
+            width: 80,
             height: 25
         )
     }
@@ -56,11 +87,16 @@ class `TransctionTableViewCell`: UITableViewCell {
         super.prepareForReuse()
         amountLabel.text = nil
         receiverLabel.text = nil
+        senderLabel.text = nil
+        idLabel.text = nil
     }
     
     
-    func setup(receiver: String, amount: Int){
-        receiverLabel.text = receiver
-        amountLabel.text = "+ \(amount)$"
+    func setup(id: Int64, sender: String, receiver: String, amount: Int){
+        receiverLabel.text = "Receiver: \(receiver)"
+        amountLabel.text = "+\(amount)$"
+        senderLabel.text = "Sender: \(sender)"
+        idLabel.text = "ID: \(id)"
+        
     }
 }

@@ -23,7 +23,7 @@ final class CryptoAPICaller {
         guard let url = Constants.API_URL else {
             return
         }
-
+        
         let task = URLSession.shared.dataTask(with: url) { data , _, error in
             if let error = error {
                 completion(.failure(error))
@@ -48,7 +48,7 @@ final class CryptoAPICaller {
         
         task.resume()
     }
-
+    
     public func fetchCryptoDetailsData(for coinId: String, completion: @escaping (Result<CryptoCoinModel, Error>) -> Void) {
         let urlString = "\(Constants.API_DETAILS_URL)\(coinId)"
         guard let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else {
@@ -71,8 +71,4 @@ final class CryptoAPICaller {
         
         task.resume()
     }
-
-
-
-    
 }

@@ -10,17 +10,17 @@ import UIKit
 class CryptoDetailsViewController: UIViewController {
     
     private let detailsTableView: UITableView = {
-       let table = UITableView()
+        let table = UITableView()
         table.register(CryptoDetailsTableViewCell.self,
                        forCellReuseIdentifier: CryptoDetailsTableViewCell.identifier)
         return table
     }()
-
+    
     private var cryptoCoins = [CryptoCoinModel]()
     private var viewModels1 = [CryptoDetailsCollectionViewCellViewModel]()
     private var cryptoCoin: CryptoCoinModel?
     private var selectedCryptoCoin: CryptoCoinModel?
-
+    
     init(cryptoCoin: CryptoCoinModel) {
         self.cryptoCoin = cryptoCoin
         super.init(nibName: nil, bundle: nil)
@@ -74,27 +74,25 @@ class CryptoDetailsViewController: UIViewController {
                         }
                         return nil
                     })
-
+                    
                     self?.viewModels1 = viewModel
                     DispatchQueue.main.async {
                         self?.detailsTableView.reloadData()
                     }
                 }
-
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
-
-
 }
 
 extension CryptoDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModels1.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CryptoDetailsTableViewCell.identifier, for: indexPath) as? CryptoDetailsTableViewCell else {
             fatalError()
@@ -105,11 +103,8 @@ extension CryptoDetailsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        let selectedCryptoCoin = cryptoCoins[indexPath.section]
-//        let detailsVC = CryptoDetailsViewController(cryptoCoin: selectedCryptoCoin)
-//        navigationController?.pushViewController(detailsVC, animated: true)
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 600
     }

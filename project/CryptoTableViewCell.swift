@@ -9,7 +9,7 @@ import UIKit
 
 class CryptoTableViewCell: UITableViewCell {
     static let identifier = "CryptoTableViewCell"
-        
+    
     private let cryptoImageView: UIImageView = {
         let view = UIImageView()
         view.layer.cornerRadius = 8
@@ -27,7 +27,7 @@ class CryptoTableViewCell: UITableViewCell {
     }()
     
     private let cryptoSubtitleLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.numberOfLines = 1
         label.textColor = .white
         label.font = .systemFont(ofSize: 15, weight: .regular)
@@ -35,7 +35,7 @@ class CryptoTableViewCell: UITableViewCell {
     }()
     
     private let cryptoPriceLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textAlignment = .right
         label.numberOfLines = 1
         label.textColor = .white
@@ -51,7 +51,7 @@ class CryptoTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
     }()
-  
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(cryptoImageView)
@@ -111,14 +111,14 @@ class CryptoTableViewCell: UITableViewCell {
             height: 20
         )
     }
-        
+    
     public func configure(with viewModel: CryptoTableViewCellViewModel) {
         cryptoTitleLabel.text = viewModel.cryptoTitle
         cryptoSubtitleLabel.text = viewModel.cryptoSubtitle.uppercased()
         cryptoPriceLabel.text = viewModel.cryptoPrice
         cryptoPercentageLabel.text = String(describing: viewModel.cryptoPercent.toPercentageString())
         cryptoPercentageLabel.textColor = viewModel.cryptoPercent > 0 ? .systemGreen : .red
-
+        
         
         if let data = viewModel.cryptoImageData {
             cryptoImageView.image = UIImage(data: data)
@@ -132,9 +132,9 @@ class CryptoTableViewCell: UITableViewCell {
                     guard let data = data, error == nil else {
                         return
                     }
-
+                    
                     viewModel.cryptoImageData = data
-
+                    
                     DispatchQueue.main.async {
                         self?.cryptoImageView.image = UIImage(data: data)
                     }

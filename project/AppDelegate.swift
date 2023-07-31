@@ -12,23 +12,22 @@ import FirebaseCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-            
-            FirebaseApp.configure()
-            let databaseManager = DatabaseManager.shared
-            
-            databaseManager.getUsers() { users, error in
-                if let error = error {
-                    // Handle the error here, if needed
-                    print("Error fetching users: \(error.localizedDescription)")
-                } else {
-                    // Use the retrieved users here
-                    Accounts.users = users
-                    print("NUMBER \(users.count)")
-                }
+        
+        FirebaseApp.configure()
+        let databaseManager = DatabaseManager.shared
+        
+        databaseManager.getUsers() { users, error in
+            if let error = error {
+                // Handle the error here, if needed
+                print("Error fetching users: \(error.localizedDescription)")
+            } else {
+                // Use the retrieved users here
+                Accounts.users = users
             }
-            return true
-            
         }
+        return true
+        
+    }
     
     // MARK: UISceneSession Lifecycle
     

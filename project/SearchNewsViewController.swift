@@ -11,7 +11,7 @@ import SafariServices
 final class SearchNewsViewController: UIViewController {
     
     private let searchTable: UITableView = {
-       let table = UITableView()
+        let table = UITableView()
         table.register(NewsTableViewCell.self,
                        forCellReuseIdentifier: NewsTableViewCell.identifier)
         return table
@@ -37,20 +37,12 @@ final class SearchNewsViewController: UIViewController {
     }
     
     private func createSearchBar() {
-//        navigationItem.searchController = searchVC
         searchVC.searchBar.delegate = self
         searchVC.searchBar.placeholder = "Search for news..."
         searchVC.searchBar.searchBarStyle = .minimal
         
-//        searchVC.searchBar.delegate = self
-//            searchVC.searchBar.placeholder = "Search for news..."
-//            searchVC.searchBar.searchBarStyle = .minimal
-//            searchVC.searchBar.autocapitalizationType = .none
-//            searchVC.searchBar.autocorrectionType = .no
-//            searchVC.searchBar.spellCheckingType = .no
-            
-            // Set the UISearchBar as the tableHeaderView
-            searchTable.tableHeaderView = searchVC.searchBar
+        // Set the UISearchBar as the tableHeaderView
+        searchTable.tableHeaderView = searchVC.searchBar
     }
     
     override func viewDidLayoutSubviews() {

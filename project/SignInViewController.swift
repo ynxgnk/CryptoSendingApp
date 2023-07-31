@@ -4,13 +4,13 @@
 //
 //  Created by Nazar Kopeika on 20.06.2023.
 //
-    
+
 import UIKit
 
 class SignInViewController: UIViewController {
     
     private let logoImageView: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
         imageView.layer.cornerRadius = 8
         imageView.contentMode = .scaleAspectFill
@@ -19,7 +19,7 @@ class SignInViewController: UIViewController {
     }()
     
     private let signInLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.contentMode = .center
         label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
@@ -82,14 +82,14 @@ class SignInViewController: UIViewController {
     }()
     
     private let loginButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.contentMode = .center
         button.setTitle("Login", for: .normal)
         button.backgroundColor = .systemGreen
         button.layer.cornerRadius = 8
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "background")
@@ -119,12 +119,12 @@ class SignInViewController: UIViewController {
               let id = Int(idString) else {
             return
         }
-
+        
         AuthManager.shared.signIn(email: email, password: password) { [weak self] success in
             guard success else {
                 return
             }
-
+            
             DatabaseManager.shared.getUser(email: email, id: Int64(id)) { [weak self] user in
                 if let user = user, user.id == id {
                     // ID match found, proceed with login
@@ -143,7 +143,7 @@ class SignInViewController: UIViewController {
             }
         }
     }
-  
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         logoImageView.frame = CGRect(
@@ -152,7 +152,7 @@ class SignInViewController: UIViewController {
             width: 120,
             height: 120
         )
-
+        
         signInLabel.frame = CGRect(
             x: (view.frame.size.width/2)-100,
             y: 90 + 120 + 40,
@@ -195,5 +195,5 @@ class SignInViewController: UIViewController {
             height: 30
         )
     }
-
+    
 }

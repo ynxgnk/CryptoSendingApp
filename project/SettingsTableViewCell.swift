@@ -20,7 +20,7 @@ class SettingsTableViewCell: UITableViewCell {
     }()
     
     let settingsName: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "Rate App"
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .semibold)
@@ -38,7 +38,7 @@ class SettingsTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError()
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         settingsImage.frame = CGRect(

@@ -5,7 +5,7 @@ class NewsCollectionViewCell: UICollectionViewCell {
     static let identifier = "NewsCollectionViewCell"
     
     private let newsImageView: UIImageView = {
-       let view = UIImageView()
+        let view = UIImageView()
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         view.clipsToBounds = true
@@ -14,7 +14,7 @@ class NewsCollectionViewCell: UICollectionViewCell {
     }()
     
     private let newsTitleLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 17, weight: .semibold)
         label.textColor = .white
@@ -22,7 +22,7 @@ class NewsCollectionViewCell: UICollectionViewCell {
     }()
     
     private let newsDescriptionLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.numberOfLines = 0
         label.textColor = .white
         label.font = .systemFont(ofSize: 15, weight: .regular)
@@ -110,5 +110,5 @@ class NewsCollectionViewCell: UICollectionViewCell {
             }.resume()
         }
     }
-
+    
 }

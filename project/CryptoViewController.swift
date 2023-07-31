@@ -30,7 +30,7 @@ class CryptoViewController: UIViewController {
     }()
     
     private let searchButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         return button
     }()
@@ -49,7 +49,7 @@ class CryptoViewController: UIViewController {
     }()
     
     private let cryptoLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "Live Prices"
         label.font = .systemFont(ofSize: 35, weight: .bold)
         label.textColor = .white
@@ -60,7 +60,7 @@ class CryptoViewController: UIViewController {
         let spinner = UIActivityIndicatorView()
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.hidesWhenStopped = true
-//        spinner.backgroundColor = .red
+        //        spinner.backgroundColor = .red
         return spinner
     }()
     
@@ -76,7 +76,7 @@ class CryptoViewController: UIViewController {
         cryptoTable.showsVerticalScrollIndicator = false
         cryptoTable.delegate = self
         navigationController?.navigationBar.isHidden = true // Hide the navigation bar initially
-
+        
         cryptoTable.dataSource = self
         cryptoScrollCollectionView.delegate = self
         cryptoScrollCollectionView.dataSource = self
@@ -108,7 +108,7 @@ class CryptoViewController: UIViewController {
     private var cryptoCoins = [CryptoCoinModel]()
     private var articles = [NewsTitlesModel]()
     private var selectedCryptoCoin: CryptoCoinModel?
-
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -225,9 +225,9 @@ extension CryptoViewController: UITableViewDelegate, UITableViewDataSource {
         let selectedCryptoCoin = cryptoCoins[indexPath.section]
         let detailsVC = CryptoDetailsViewController(cryptoCoin: selectedCryptoCoin)
         navigationController?.pushViewController(detailsVC, animated: true)
-
+        
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
@@ -265,20 +265,20 @@ extension CryptoViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.layer.cornerRadius = 20
         cell.backgroundColor = UIColor(named: "cellbackground")
         cell.configureNews(with: newsViewModels[indexPath.section])
-
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         selectedCryptoCoin = cryptoCoins[indexPath.row]
-
+        
         let article = articles[indexPath.row]
-
+        
         guard let url = URL(string: article.url ?? "") else {
             return
         }
-
+        
         let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
     }
@@ -286,7 +286,7 @@ extension CryptoViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = view.frame.size.width - 40
         let cellHeight = CGFloat(180)
-
+        
         return CGSize(width: cellWidth, height: cellHeight)
     }
     

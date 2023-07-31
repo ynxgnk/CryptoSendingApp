@@ -32,8 +32,6 @@
 		BA5315AB2A514BFE003A0055 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5315AA2A514BFE003A0055 /* TransactionViewController.swift */; };
 		BA5315AD2A514C18003A0055 /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5315AC2A514C18003A0055 /* TransferViewController.swift */; };
 		BA5315B02A514C35003A0055 /* Accounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5315AF2A514C35003A0055 /* Accounts.swift */; };
-		BA5315B22A514C43003A0055 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5315B12A514C43003A0055 /* Customer.swift */; };
-		BA5315B42A514C4F003A0055 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5315B32A514C4F003A0055 /* DBManager.swift */; };
 		BA5315B62A514C5B003A0055 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5315B52A514C5B003A0055 /* Transaction.swift */; };
 		BA5315B92A514D97003A0055 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5315B82A514D97003A0055 /* TransactionTableViewCell.swift */; };
 		BA5315BC2A514DB5003A0055 /* CustomerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5315BB2A514DB5003A0055 /* CustomerTableViewCell.swift */; };
@@ -88,8 +86,6 @@
 		BA5315AA2A514BFE003A0055 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		BA5315AC2A514C18003A0055 /* TransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
 		BA5315AF2A514C35003A0055 /* Accounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accounts.swift; sourceTree = "<group>"; };
-		BA5315B12A514C43003A0055 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
-		BA5315B32A514C4F003A0055 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		BA5315B52A514C5B003A0055 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		BA5315B82A514D97003A0055 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		BA5315BB2A514DB5003A0055 /* CustomerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerTableViewCell.swift; sourceTree = "<group>"; };
@@ -144,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				BA193C4A2A3F5BF9007F7223 /* ViewModels */,
-				BA193C492A3F5BF5007F7223 /* Other */,
 				BA193C472A3F5BE5007F7223 /* Views */,
 				BA193C482A3F5BF0007F7223 /* Models */,
 				BA193C462A3F5BDD007F7223 /* Controllers */,
@@ -177,13 +172,6 @@
 				BA193C512A401F22007F7223 /* CryptoCoinModel.swift */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		BA193C492A3F5BF5007F7223 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Other;
 			sourceTree = "<group>";
 		};
 		BA193C4A2A3F5BF9007F7223 /* ViewModels */ = {
@@ -332,8 +320,6 @@
 			isa = PBXGroup;
 			children = (
 				BA5315AF2A514C35003A0055 /* Accounts.swift */,
-				BA5315B12A514C43003A0055 /* Customer.swift */,
-				BA5315B32A514C4F003A0055 /* DBManager.swift */,
 				BA5315B52A514C5B003A0055 /* Transaction.swift */,
 			);
 			name = Model;
@@ -577,7 +563,6 @@
 				BA3EE11F2A3D89C400FE846F /* AppDelegate.swift in Sources */,
 				BA193C5A2A402ADB007F7223 /* CryptoDetailsViewController.swift in Sources */,
 				BAE3C4EB2A7553DE00B08AD4 /* LastTransactionViewModel.swift in Sources */,
-				BA5315B22A514C43003A0055 /* Customer.swift in Sources */,
 				BA193C3B2A3D97A6007F7223 /* NewsTableViewCell.swift in Sources */,
 				BA193C502A401ED6007F7223 /* CryptoAPICaller.swift in Sources */,
 				BA5315B92A514D97003A0055 /* TransactionTableViewCell.swift in Sources */,
@@ -602,7 +587,6 @@
 				BA5315BC2A514DB5003A0055 /* CustomerTableViewCell.swift in Sources */,
 				BA5315AD2A514C18003A0055 /* TransferViewController.swift in Sources */,
 				BA9454FD2A591D0F00B7B375 /* CryptoDetailsCollectionViewCellViewModel.swift in Sources */,
-				BA5315B42A514C4F003A0055 /* DBManager.swift in Sources */,
 				BA193C372A3D9424007F7223 /* NewsAPICaller.swift in Sources */,
 				BA193C422A3EDDFB007F7223 /* APIResponse.swift in Sources */,
 			);

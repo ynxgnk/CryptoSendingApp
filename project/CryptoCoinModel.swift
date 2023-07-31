@@ -29,7 +29,7 @@ struct CryptoCoinModel: Codable, Identifiable {
     let lastUpdated: String?
     let priceChangePercentage24HInCurrency: Double?
     let sparklineIn7D : sparklineIn7D?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, symbol, name, image
         case currentPrice = "current_price"
