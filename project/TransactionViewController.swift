@@ -26,6 +26,8 @@ class TranscationViewController: UIViewController {
         view.backgroundColor = UIColor(named: "background")
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
+
         
         fetchTransactions()
         tableView.reloadData()

@@ -94,7 +94,6 @@ public class DatabaseManager {
                    let amount = data["amount"] as? Int64 {
                     let transfer = Transction(id: id, sender: sender, receiver: receiver, amount: amount)
                     transfers.append(transfer)
-                    print("COUNT \(transfers.count)")
                 }
             }
             
@@ -125,7 +124,7 @@ public class DatabaseManager {
         }
     }
     
-    internal func getUsers(completion: @escaping ([User], Error?) -> Void) { //new , table of users is shown but without id and balance isnt updating
+    internal func getUsers(completion: @escaping ([User], Error?) -> Void) { //new, table of users is shown but without id and balance isnt updating
         database.collection(Tables.users.rawValue).getDocuments { snapshot, error in
             guard let documents = snapshot?.documents else {
                 completion([], error)

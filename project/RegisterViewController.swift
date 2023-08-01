@@ -126,7 +126,7 @@ class RegisterViewController: UIViewController {
                     UserDefaults.standard.set(name, forKey: "name")
                     UserDefaults.standard.set(id, forKey: "id")
                     
-                    print("HERE ID \(id)")
+//                    print("HERE ID \(id)")
                     
                     DispatchQueue.main.async {
                         let vc = TabBarController()

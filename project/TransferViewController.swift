@@ -119,14 +119,24 @@ class TransferViewController: UIViewController {
                 .replacingOccurrences(of: "@", with: "_")
             dbManager.transferMoney(from: selectedSenderId, to: selectedReceiverId, amount: Int64(amount) ?? 0, id: latestTransactionId) { [weak self] error in
                 self?.latestTransactionId += 1
-                let alert = UIAlertController(title: "Success!", message: "Transfered \(amount)$ from \(sender) to \(receiver)!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
-                    self?.didTapOk()
-                }))
-                self?.present(alert, animated: true, completion: nil)
+                
+                if let error = error {
+                    let alert = UIAlertController(title: "Failed!", message: "Cannot transfer \(amount)$ from \(sender) to \(receiver)!", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+                        self?.didTapOk()
+                    }))
+                    self?.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Success!", message: "Transferred \(amount)$ from \(sender) to \(receiver)!", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+                        self?.didTapOk()
+                    }))
+                    self?.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
+
     
     func didTapOk() {
         // Dismiss the current view controller
@@ -134,8 +144,6 @@ class TransferViewController: UIViewController {
             // After dismissal, present HomeViewController from the root view controller
             if let keyWindow = UIApplication.shared.keyWindow,
                let rootViewController = keyWindow.rootViewController {
-//                self.receiverLabel.reloadInputViews()
-//                self.navigationController?.pushViewController(transaction, animated: true)
             }
         }
     }

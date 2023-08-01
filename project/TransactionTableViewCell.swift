@@ -67,11 +67,11 @@ class `TransctionTableViewCell`: UITableViewCell {
             width: 300,
             height: 25
         )
-        
+
         idLabel.frame = CGRect(
             x: 10,
             y: 5,
-            width: 70,
+            width: 150,
             height: 25
         )
 
@@ -96,7 +96,7 @@ class `TransctionTableViewCell`: UITableViewCell {
         receiverLabel.text = "Receiver: \(receiver)"
         amountLabel.text = "+\(amount)$"
         senderLabel.text = "Sender: \(sender)"
-        idLabel.text = "ID: \(id)"
+        idLabel.text = "Transaction ID: \(id)"
         
     }
 }
