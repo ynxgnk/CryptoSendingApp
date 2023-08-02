@@ -10,6 +10,9 @@ import UIKit
 class `TransctionTableViewCell`: UITableViewCell {
     static let idenifier = "TransctionTableViewCell"
     
+    private var currentUserEmail: String?
+    private var currentUserId: Int64?
+    
     private let receiverLabel: UILabel = {
        let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
@@ -38,14 +41,17 @@ class `TransctionTableViewCell`: UITableViewCell {
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         return label
     }()
-    
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(receiverLabel)
         contentView.addSubview(amountLabel)
         contentView.addSubview(senderLabel)
         contentView.addSubview(idLabel)
-
+        
+        currentUserEmail = UserDefaults.standard.string(forKey: "email")?
+            .replacingOccurrences(of: ".", with: "_")
+            .replacingOccurrences(of: "@", with: "_")
     }
     
     required init?(coder: NSCoder) {
@@ -91,12 +97,20 @@ class `TransctionTableViewCell`: UITableViewCell {
         idLabel.text = nil
     }
     
-    
-    func setup(id: Int64, sender: String, receiver: String, amount: Int){
-        receiverLabel.text = "Receiver: \(receiver)"
-        amountLabel.text = "+\(amount)$"
-        senderLabel.text = "Sender: \(sender)"
-        idLabel.text = "Transaction ID: \(id)"
+    func setup(id: Int64, sender: String, receiver: String, amount: Int, currentUserId: Int64) {
+            self.currentUserId = currentUserId
+
+            let amountText: String
+
+            if sender == currentUserEmail {
+                amountText = "-\(amount)$"
+                senderLabel.text = "Receiver: \(receiver)"
+            } else {
+                senderLabel.text = "Sender: \(sender)"
+                amountText = "+\(amount)$"
+            }
+            amountLabel.text = amountText
         
+        idLabel.text = "Transaction ID: \(id)"
     }
 }

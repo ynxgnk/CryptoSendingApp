@@ -49,6 +49,8 @@ class CustomerTableViewCell: UITableViewCell {
        let button = UIButton()
         button.setTitle("Transfer", for: .normal)
         button.layer.cornerRadius = 8
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
         return button
     }()
     
@@ -56,6 +58,8 @@ class CustomerTableViewCell: UITableViewCell {
        let button = UIButton()
         button.setTitle("History", for: .normal)
         button.layer.cornerRadius = 8
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
         return button
     }()
     
@@ -71,7 +75,7 @@ class CustomerTableViewCell: UITableViewCell {
         contentView.addSubview(historyButton)
         
         sendButton.backgroundColor = UIColor(named: "background")
-        historyButton.backgroundColor = .red
+//        historyButton.backgroundColor
         
         sendButton.addTarget(self, action: #selector(didTapSendButton), for: .touchUpInside)
         historyButton.addTarget(self, action: #selector(didTapHistoryButton), for: .touchUpInside)

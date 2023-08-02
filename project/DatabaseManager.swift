@@ -212,7 +212,6 @@ public class DatabaseManager {
                 let userData: [String: Any] = [
                     "id": userId,
                     "balance": newBalance
-                    // Add other user data fields if needed
                 ]
                 
                 userReference.setData(userData) { error in

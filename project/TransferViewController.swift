@@ -16,15 +16,7 @@ class TransferViewController: UIViewController {
         field.layer.cornerRadius = 8
         return field
     }()
-    
-    private var senderLabel: UITextField = {
-        let field = UITextField()
-        field.placeholder = " Sender"
-        field.textColor = .white
-        field.layer.cornerRadius = 8
-        return field
-    }()
-    
+
     private var amountLabel: UITextField = {
         let field = UITextField()
         field.layer.cornerRadius = 8
@@ -44,35 +36,30 @@ class TransferViewController: UIViewController {
     
     var dbManager = DatabaseManager()
     var receiverPickerView = UIPickerView()
-    var senderPickerView = UIPickerView()
     var selectedReceiver: User?
-    var selectedSender: User?
     var latestTransactionId: Int64 = 0
+    
+    let senderEmail = UserDefaults.standard.string(forKey: "email")?
+        .replacingOccurrences(of: ".", with: "_")
+        .replacingOccurrences(of: "@", with: "_")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchLatestTransactionId()
         
         view.addSubview(receiverLabel)
-        view.addSubview(senderLabel)
         view.addSubview(amountLabel)
         view.addSubview(sendButton)
         view.backgroundColor = UIColor(named: "background")
         
         receiverPickerView.delegate = self
         receiverPickerView.dataSource = self
-        
-        senderPickerView.delegate = self
-        senderPickerView.dataSource = self
-        
+
         receiverLabel.inputView = receiverPickerView
-        senderLabel.inputView = senderPickerView
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        senderLabel.frame = CGRect(x: 50, y: 150, width: 300, height: 50)
-        senderLabel.backgroundColor = UIColor(named: "cellbackground")
         
         receiverLabel.frame = CGRect(x: 50, y: 220, width: 300, height: 50)
         receiverLabel.backgroundColor = UIColor(named: "cellbackground")
@@ -86,7 +73,6 @@ class TransferViewController: UIViewController {
     private func fetchLatestTransactionId() {
         dbManager.getTransfers { [weak self] transfers, error in
             guard let transfers = transfers else {
-                // Handle the error here, if needed
                 return
             }
             
@@ -100,7 +86,7 @@ class TransferViewController: UIViewController {
     
     @objc private func sendButtonPressed(_ sender: UIButton) {
         guard let receiver = receiverLabel.text, !receiver.isEmpty,
-              let sender = senderLabel.text, !sender.isEmpty,
+              let sender = senderEmail,
               let amount = amountLabel.text, !amount.isEmpty
         else {
             let alert = UIAlertController(title: "Woops", message: "Please fill all fields", preferredStyle: .alert)
@@ -110,14 +96,11 @@ class TransferViewController: UIViewController {
         }
         print("Amount: \(amount)")
         
-        if let selectedReceiver = selectedReceiver, let selectedSender = selectedSender {
+        if let selectedReceiver = selectedReceiver {
             let selectedReceiverId = selectedReceiver.email
                 .replacingOccurrences(of: ".", with: "_")
                 .replacingOccurrences(of: "@", with: "_")
-            let selectedSenderId = selectedSender.email
-                .replacingOccurrences(of: ".", with: "_")
-                .replacingOccurrences(of: "@", with: "_")
-            dbManager.transferMoney(from: selectedSenderId, to: selectedReceiverId, amount: Int64(amount) ?? 0, id: latestTransactionId) { [weak self] error in
+            dbManager.transferMoney(from: senderEmail ?? "", to: selectedReceiverId, amount: Int64(amount) ?? 0, id: latestTransactionId) { [weak self] error in
                 self?.latestTransactionId += 1
                 
                 if let error = error {
@@ -143,7 +126,7 @@ class TransferViewController: UIViewController {
         self.dismiss(animated: true) {
             // After dismissal, present HomeViewController from the root view controller
             if let keyWindow = UIApplication.shared.keyWindow,
-               let rootViewController = keyWindow.rootViewController {
+              let _ = keyWindow.rootViewController {
             }
         }
     }
@@ -173,9 +156,6 @@ extension TransferViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == receiverPickerView {
             selectedReceiver = Accounts.users[safe: row]
             receiverLabel.text = selectedReceiver?.name
-        } else if pickerView == senderPickerView {
-            selectedSender = Accounts.users[safe: row]
-            senderLabel.text = selectedSender?.name
         }
         view.endEditing(true)
     }

@@ -18,6 +18,7 @@ class TranscationViewController: UIViewController {
     
     let dbManager = DatabaseManager()
     private var transactions: [Transction] = []
+    private var currentUserId: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,21 +29,31 @@ class TranscationViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
 
+        let currentIDString = UserDefaults.standard.string(forKey: "email")
+        currentUserId = currentIDString?
+            .replacingOccurrences(of: ".", with: "_")
+            .replacingOccurrences(of: "@", with: "_") ?? "No Email"
+            
+            print("Current User ID1: \(currentUserId)")
         
         fetchTransactions()
         tableView.reloadData()
     }
     
-    private func fetchTransactions() { //default
+    private func fetchTransactions() {
         dbManager.getTransfers { [weak self] (transfers, error) in
             guard let self = self else { return }
 
             if let error = error {
-                // Handle the error if needed
                 print("Error fetching transactions: \(error)")
             } else {
-                // Update the data source, sort transactions, and reload the table view
-                self.transactions = transfers?.sorted(by: { $0.id > $1.id }) ?? []
+                self.transactions = transfers?
+                    .filter {
+                        $0.sender == String(self.currentUserId) || $0.receiver == String(self.currentUserId)
+                    }
+                    .sorted(by: { $0.id > $1.id })
+                ?? []
+                
                 self.tableView.reloadData()
             }
         }
@@ -62,20 +73,13 @@ extension TranscationViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return transactions.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TransctionTableViewCell.idenifier, for: indexPath) as! TransctionTableViewCell
         let transcation = transactions[indexPath.section]
 
-        // Get sender ID
-        // Get Receiver Id
-        if let receiver = Accounts.users.first(where: { String($0.id) == transcation.receiver }),
-           let sender = Accounts.users.first(where: { String($0.id) == transcation.sender }) {
-            cell.setup(id: transcation.id, sender: sender.name, receiver: receiver.name, amount: Int(transcation.amount))
-        } else {
-            // Handle the case where there is no matching receiver
-            cell.setup(id: transcation.id, sender: transcation.sender ?? "Unknown", receiver: transcation.receiver, amount: Int(transcation.amount))
-        }
+        // Pass the currentUserId to the cell setup
+        cell.setup(id: transcation.id, sender: transcation.sender ?? "No Sender", receiver: transcation.receiver, amount: Int(transcation.amount), currentUserId: Int64(currentUserId) ?? 0)
 
         cell.layer.cornerRadius = 20
         cell.backgroundColor = UIColor(named: "cellbackground")
@@ -103,3 +107,4 @@ extension TranscationViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+
