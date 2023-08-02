@@ -8,7 +8,7 @@
 import UIKit
 
 class TransferViewController: UIViewController {
-    
+
     private var receiverLabel: UITextField = {
         let field = UITextField()
         field.placeholder = " Receiver"
@@ -34,6 +34,7 @@ class TransferViewController: UIViewController {
         return button
     }()
     
+    var currentUserID: Int64 = 0
     var dbManager = DatabaseManager()
     var receiverPickerView = UIPickerView()
     var selectedReceiver: User?
@@ -43,19 +44,28 @@ class TransferViewController: UIViewController {
         .replacingOccurrences(of: ".", with: "_")
         .replacingOccurrences(of: "@", with: "_")
     
+    var filteredUsers: [User] = [] // Array to store filtered users
+
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchLatestTransactionId()
-        
+
         view.addSubview(receiverLabel)
         view.addSubview(amountLabel)
         view.addSubview(sendButton)
         view.backgroundColor = UIColor(named: "background")
-        
+
         receiverPickerView.delegate = self
         receiverPickerView.dataSource = self
 
         receiverLabel.inputView = receiverPickerView
+        
+        if let currentID = UserDefaults.standard.string(forKey: "id"), let id = Int64(currentID) {
+            currentUserID = id
+        }
+        
+        // Populate filteredUsers array by excluding the current user
+        filteredUsers = Accounts.users.filter { $0.id != currentUserID }
     }
     
     override func viewDidLayoutSubviews() {
@@ -120,7 +130,6 @@ class TransferViewController: UIViewController {
         }
     }
 
-    
     func didTapOk() {
         // Dismiss the current view controller
         self.dismiss(animated: true) {
@@ -145,16 +154,16 @@ extension TransferViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Accounts.users.count
+        return filteredUsers.count // Use the filtered users count instead
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Accounts.users[row].name
+        return filteredUsers[row].name // Use the filtered users
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == receiverPickerView {
-            selectedReceiver = Accounts.users[safe: row]
+            selectedReceiver = filteredUsers[safe: row]
             receiverLabel.text = selectedReceiver?.name
         }
         view.endEditing(true)

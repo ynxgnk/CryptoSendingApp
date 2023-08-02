@@ -152,7 +152,7 @@ class CustomerTableViewCell: UITableViewCell {
     }
     
     func setup(user: User) { //is working
-        nameLabel.text = "Name: \(user.name)"
+//        nameLabel.text = "Name: \(user.name)"
         emailLabel.text = "Email: \(user.email)"
         idLabel.text = "Your ID: \(user.id)"
 
