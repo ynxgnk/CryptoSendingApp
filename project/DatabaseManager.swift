@@ -250,6 +250,29 @@ public class DatabaseManager {
         }
     }
     
+    func getNextAvailableUserID(completion: @escaping (Int64) -> Void) {
+        // Query the "users" collection to get the highest existing user ID
+        database.collection(Tables.users.rawValue)
+            .order(by: "id", descending: true)
+            .limit(to: 1)
+            .getDocuments { snapshot, error in
+                guard let documents = snapshot?.documents, error == nil else {
+                    completion(0) // Default value if there's an error
+                    return
+                }
+                
+                if let data = documents.first?.data(),
+                   let highestID = data["id"] as? Int64 {
+                    let newID = highestID + 1
+                    completion(newID)
+                } else {
+                    completion(1) // Start with ID 1 if no existing users
+                }
+            }
+    }
+
+
+    
     internal func getUser(email: String, id: Int64, completion: @escaping (User?) -> Void) { //default
         let documentId = email
             .replacingOccurrences(of: ".", with: "_")

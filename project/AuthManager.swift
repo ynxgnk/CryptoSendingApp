@@ -97,4 +97,26 @@ final class AuthManager {
                 }
             }
         }
+    
+    func facebookSignUp(email: String, password: String, name: String, completion: @escaping (Bool) -> Void) {
+            // Create a new Firebase user with the provided email and password
+            auth.createUser(withEmail: email, password: password) { authResult, error in
+                if let error = error {
+                    print("Facebook sign up error: \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                
+                // Successful user creation, update the user's display name
+                let changeRequest = authResult?.user.createProfileChangeRequest()
+                changeRequest?.displayName = name
+                changeRequest?.commitChanges(completion: { profileError in
+                    if let profileError = profileError {
+                        print("Failed to update user display name: \(profileError.localizedDescription)")
+                    }
+                    
+                    completion(profileError == nil)
+                })
+            }
+        }
 }

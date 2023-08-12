@@ -220,6 +220,7 @@ class SignInViewController: UIViewController {
 
 import UIKit
 import FBSDKLoginKit
+import FirebaseDatabase
 import FirebaseAuth
 
 class SignInViewController: UIViewController {
@@ -447,33 +448,68 @@ class SignInViewController: UIViewController {
             }
         }
     }
+    
+    private func insertUserToDatabase(name: String, email: String, id: Int64) {
+        let newUser = User(name: name, email: email, profilePictureRef: nil, id: id, balance: 0)
+        DatabaseManager.shared.insert(user: newUser) { inserted in
+            if inserted {
+                UserDefaults.standard.set(email, forKey: "email")
+                UserDefaults.standard.set(id, forKey: "id")
+                
+                DispatchQueue.main.async {
+                    let vc = TabBarController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true)
+                }
+            } else {
+                print("Failed to insert user to database")
+            }
+        }
+    }
 }
 
 extension SignInViewController: LoginButtonDelegate {
-    
-    func loginButton(_ loginButton: FBSDKLoginKit.FBLoginButton, didCompleteWith result: FBSDKLoginKit.LoginManagerLoginResult?, error: Error?) {
-        let token = result?.token?.tokenString
-        
-        let request = FBSDKLoginKit.GraphRequest(graphPath: "me",
-                                                 parameters: ["fields": "email, name"],
-                                                 tokenString: token,
-                                                 version: nil,
-                                                 httpMethod: .get)
-        request.start(completion: { connection, result, error in
-            print("\(result)")
-                    DispatchQueue.main.async {
-                        UserDefaults.standard.set("email", forKey: "email")
-                        UserDefaults.standard.set("id", forKey: "id")
-                        let vc = TabBarController()
-                        vc.modalPresentationStyle = .fullScreen
-                        self.present(vc, animated: true)
+
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        if let error = error {
+            print("Facebook login error: \(error.localizedDescription)")
+            return
+        }
+
+        if let token = result?.token?.tokenString {
+            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, name, id"], tokenString: token, version: nil, httpMethod: .get)
+            request.start { connection, result, error in
+                if let error = error {
+                    print("Facebook Graph API error: \(error.localizedDescription)")
+                    return
+                }
+
+                guard let result = result as? [String: Any],
+                      let email = result["email"] as? String,
+                      let name = result["name"] as? String,
+                      let fbId = result["id"] as? String else {
+                    print("Failed to extract required user data from Facebook result")
+                    return
+                }
+
+                // Generate a new ID for the Facebook user
+                DatabaseManager.shared.getNextAvailableUserID { newID in
+                    guard newID > 0 else {
+                        print("Failed to generate a new user ID")
+                        return
                     }
-                })
+
+                    // Insert the user's data into the Firebase Realtime Database
+                    self.insertUserToDatabase(name: name, email: email, id: newID)
+                }
             }
-        
-                      
-    
+        }
+    }
+
+
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginKit.FBLoginButton) {
-        
+
     }
 }
+
+
