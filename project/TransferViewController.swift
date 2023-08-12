@@ -44,6 +44,8 @@ class TransferViewController: UIViewController {
         .replacingOccurrences(of: ".", with: "_")
         .replacingOccurrences(of: "@", with: "_")
     
+    let senderName1 = UserDefaults.standard.string(forKey: "name")
+    
     var filteredUsers: [User] = [] // Array to store filtered users
 
     override func viewDidLoad() {
@@ -96,7 +98,6 @@ class TransferViewController: UIViewController {
     
     @objc private func sendButtonPressed(_ sender: UIButton) {
         guard let receiver = receiverLabel.text, !receiver.isEmpty,
-              let sender = senderEmail,
               let amount = amountLabel.text, !amount.isEmpty
         else {
             let alert = UIAlertController(title: "Woops", message: "Please fill all fields", preferredStyle: .alert)
@@ -104,7 +105,6 @@ class TransferViewController: UIViewController {
             present(alert, animated: true, completion: nil)
             return
         }
-        print("Amount: \(amount)")
         
         if let selectedReceiver = selectedReceiver {
             let selectedReceiverId = selectedReceiver.email
@@ -113,14 +113,14 @@ class TransferViewController: UIViewController {
             dbManager.transferMoney(from: senderEmail ?? "", to: selectedReceiverId, amount: Int64(amount) ?? 0, id: latestTransactionId) { [weak self] error in
                 self?.latestTransactionId += 1
                 
-                if let error = error {
-                    let alert = UIAlertController(title: "Failed!", message: "Cannot transfer \(amount)$ from \(sender) to \(receiver)!", preferredStyle: .alert)
+                if error != nil {
+                    let alert = UIAlertController(title: "Failed!", message: "Cannot transfer \(amount)$ to \(receiver)!", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
                         self?.didTapOk()
                     }))
                     self?.present(alert, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(title: "Success!", message: "Transferred \(amount)$ from \(sender) to \(receiver)!", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Success!", message: "Transferred \(amount)$ to \(receiver)!", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
                         self?.didTapOk()
                     }))

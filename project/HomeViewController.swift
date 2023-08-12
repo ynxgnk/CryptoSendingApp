@@ -104,4 +104,8 @@ extension HomeViewController: CustomerTableViewCellDelegate {
         let vc = TranscationViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+            return false
+        }
 }

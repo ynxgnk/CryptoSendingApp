@@ -12,5 +12,7 @@ pod 'FirebaseDatabase'
 pod 'FirebaseStorage'
 pod 'SQLite.swift'
 pod 'Charts'
+pod 'FBSDKLoginKit'
+
 
 end

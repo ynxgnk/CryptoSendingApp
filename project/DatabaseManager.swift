@@ -221,6 +221,21 @@ public class DatabaseManager {
         }
     }
     
+    func userExists(with email: String, completion: @escaping (Bool) -> Void) { //tyt
+        let documentId = email
+            .replacingOccurrences(of: ".", with: "_")
+            .replacingOccurrences(of: "@", with: "_")
+
+        database.collection(Tables.users.rawValue).document(documentId).getDocument { snapshot, error in
+            guard let _ = snapshot, error == nil else {
+                completion(false) // User doesn't exist
+                return
+            }
+            
+            completion(true) // User exists
+        }
+    }
+    
     public func getUserBalance(for userId: String, completion: @escaping (Int64?, Error?) -> Void) {
         let documentId = String(userId)
         let balanceReference = database.collection(Tables.users.rawValue).document(userId)

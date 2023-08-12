@@ -638,6 +638,14 @@ PODS:
     - Charts/Core (= 4.1.0)
   - Charts/Core (4.1.0):
     - SwiftAlgorithms (~> 1.0)
+  - FBAEMKit (16.1.0):
+    - FBSDKCoreKit_Basics (= 16.1.0)
+  - FBSDKCoreKit (16.1.0):
+    - FBAEMKit (= 16.1.0)
+    - FBSDKCoreKit_Basics (= 16.1.0)
+  - FBSDKCoreKit_Basics (16.1.0)
+  - FBSDKLoginKit (16.1.0):
+    - FBSDKCoreKit (= 16.1.0)
   - FirebaseAnalytics (10.10.0):
     - FirebaseAnalytics/AdIdSupport (= 10.10.0)
     - FirebaseCore (~> 10.0)
@@ -814,6 +822,7 @@ PODS:
 
 DEPENDENCIES:
   - Charts
+  - FBSDKLoginKit
   - FirebaseAnalytics
   - FirebaseAuth
   - FirebaseDatabase
@@ -826,6 +835,10 @@ SPEC REPOS:
     - abseil
     - BoringSSL-GRPC
     - Charts
+    - FBAEMKit
+    - FBSDKCoreKit
+    - FBSDKCoreKit_Basics
+    - FBSDKLoginKit
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
     - FirebaseAuth
@@ -852,6 +865,10 @@ SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   Charts: 354f86803d11d9c35de280587fef50d1af063978
+  FBAEMKit: c7efe06720a8b15b1d25b68921ba46dee20996e0
+  FBSDKCoreKit: ca77d40d46786157b7b31ad3516f5ad9c2315339
+  FBSDKCoreKit_Basics: d39c3361379def7297bf76738cdd4fd2e0eb1a68
+  FBSDKLoginKit: 8fa1a0e3be1c9e8ae6df522844235a05cb03d835
   FirebaseAnalytics: 7bc7de519111dae802f5bc0c9c083918f8b8870d
   FirebaseAppCheckInterop: 7d3521f56872cf74a01792c0a095a30e054ff6ae
   FirebaseAuth: 5ddbe23ebc4e647469261f5c59cd12a04f37c8e6
@@ -874,6 +891,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 2992550ebf3c5b268bf4352603e3df87d2a4ed72
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: 9c5fd41cd348eb0032dadfd136d8ec97de7570ba
+PODFILE CHECKSUM: 4e1b438d83886cf691860b02d601ddbe9fd46ca0
 
 COCOAPODS: 1.12.1

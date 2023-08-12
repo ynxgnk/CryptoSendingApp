@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FBSDKLoginKit
 import FirebaseAuth
 
 final class AuthManager {
@@ -77,4 +78,23 @@ final class AuthManager {
             completion(false)
         }
     }
+    
+    func facebookSignIn(name: String, email: String, password: String, completion: @escaping (Bool) -> Void) { //tyt
+            // Проведите аутентификацию пользователя с использованием Facebook
+            // Это может включать в себя создание учетной записи в Firebase и сохранение дополнительных данных пользователя в базе данных
+            
+            // Пример:
+        auth.signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                guard error == nil, let uid = authResult?.user.uid else {
+                    completion(false)
+                    return
+                }
+
+                // Создание записи пользователя в базе данных
+            let user = User(name: name, email: email, profilePictureRef: nil, id: Int64(uid) ?? 0, balance: 0)
+                DatabaseManager.shared.insert(user: user) { success in
+                    completion(success)
+                }
+            }
+        }
 }

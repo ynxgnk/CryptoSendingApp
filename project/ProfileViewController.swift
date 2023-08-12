@@ -5,6 +5,7 @@
 //  Created by Nazar Kopeika on 21.06.2023.
 //
 
+import FBSDKLoginKit
 import UIKit
 
 class ProfileViewController: UIViewController, UINavigationControllerDelegate {
@@ -114,7 +115,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         )
         headerView.addSubview(idLabel)
         idLabel.text = "ID: \(id)"
-        //        print("ID: \(id)")
         idLabel.textAlignment = .center
         idLabel.textColor = .white
         idLabel.font = .systemFont(ofSize: 20, weight: .bold)
@@ -246,6 +246,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                         UserDefaults.standard.set(nil, forKey: "email")
                         UserDefaults.standard.set(nil, forKey: "name")
                         UserDefaults.standard.set(nil, forKey: "id")
+                        
+                        FBSDKLoginKit.LoginManager().logOut()
                         
                         let signInVC = SignInViewController()
                         signInVC.navigationItem.largeTitleDisplayMode = .always
