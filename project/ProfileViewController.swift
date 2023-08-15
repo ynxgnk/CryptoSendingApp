@@ -107,10 +107,11 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         
         //ID
         let idLabel = UILabel()
+        idLabel.contentMode = .center
         idLabel.frame = CGRect(
-            x: (view.frame.size.width/2)-50,
+            x: (view.frame.size.width/2)-150,
             y: 150+25,
-            width: 100,
+            width: 300,
             height: 20
         )
         headerView.addSubview(idLabel)
@@ -154,7 +155,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         balanceLabel.tag = 100 // Set a unique tag for the label
         headerView.addSubview(balanceLabel)
         balanceLabel.text = "Balance: \(balance) $"
-        //        print("BALANCE1: \(balance)")
         balanceLabel.textAlignment = .center
         balanceLabel.textColor = .white
         balanceLabel.font = .systemFont(ofSize: 16, weight: .bold)
@@ -237,17 +237,16 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     /// Sign Out
     @objc private func didTapSignOut() {
-        let sheet = UIAlertController(title: "Sign Out", message: "Are you sure you'd like to sing out?", preferredStyle: .actionSheet)
+        let sheet = UIAlertController(title: "Sign Out", message: "Are you sure you'd like to sign out?", preferredStyle: .actionSheet)
         sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         sheet.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { _ in
+            FBSDKLoginKit.LoginManager().logOut() // Log out from Facebook
             AuthManager.shared.signOut { [weak self] success in
                 if success {
                     DispatchQueue.main.async {
                         UserDefaults.standard.set(nil, forKey: "email")
                         UserDefaults.standard.set(nil, forKey: "name")
                         UserDefaults.standard.set(nil, forKey: "id")
-                        
-                        FBSDKLoginKit.LoginManager().logOut()
                         
                         let signInVC = SignInViewController()
                         signInVC.navigationItem.largeTitleDisplayMode = .always
@@ -262,6 +261,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         }))
         present(sheet, animated: true)
     }
+
+
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationBarDelegate {

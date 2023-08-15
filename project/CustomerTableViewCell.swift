@@ -75,7 +75,6 @@ class CustomerTableViewCell: UITableViewCell {
         contentView.addSubview(historyButton)
         
         sendButton.backgroundColor = UIColor(named: "background")
-//        historyButton.backgroundColor
         
         sendButton.addTarget(self, action: #selector(didTapSendButton), for: .touchUpInside)
         historyButton.addTarget(self, action: #selector(didTapHistoryButton), for: .touchUpInside)
@@ -107,7 +106,7 @@ class CustomerTableViewCell: UITableViewCell {
         idLabel.frame = CGRect(
             x: 10,
             y: 10,
-            width: 100,
+            width: 300,
             height: 20
         )
         
